@@ -9,3 +9,7 @@ function greeting() {
 ```
 
 [custom.html](custom.html)
+
+<script>
+alert("Hello world!");
+</script>
