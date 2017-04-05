@@ -1,15 +1,2 @@
-Hello world!
-
-# It is a good day!
-
-```javascript
-function greeting() {
-    console.log("Hi!");
-}
-```
-
-[custom.html](custom.html)
-
-<script>
-alert("Hello world!");
-</script>
+## 常用在线工具
+1. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
