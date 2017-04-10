@@ -5,6 +5,7 @@ title: Blogging Like a Hacker
 
 ## 常用在线工具
 1. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+1. [网站站长指南 - Search Console 帮助 - Google](https://support.google.com/webmasters/answer/35769)
 
 ## 教程
 1. [Jenkins Documentation](https://jenkins.io/doc/)
