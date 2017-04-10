@@ -1,3 +1,8 @@
+---
+layout: post
+title: Blogging Like a Hacker
+---
+
 ## 常用在线工具
 1. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
 
