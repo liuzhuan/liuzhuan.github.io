@@ -4,3 +4,6 @@
 ## 教程
 1. [Jenkins Documentation](https://jenkins.io/doc/)
 1. [Jenkins Tutorial](http://www.tutorialspoint.com/jenkins/)
+
+## 测试页面
+1. [seo](./test/seo.html)
