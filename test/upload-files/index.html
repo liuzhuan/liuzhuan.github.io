@@ -11,19 +11,27 @@
         <a href="https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications">Using files from web applications | MDN</a>
     </p>
     <p>
-        <input type="file" id="input" onchange="handleFiles(this.files)">
+        <input type="file" id="input" multiple>
     </p>
     <p>
         The File API makes it possible to access a FileList containing File objects representing the files selected by the user.
     </p>
 
     <script>
-        function handleFiles(files) {
-            console.log(files);
-            Array.prototype.forEach.call(files, function(file){
-                debug(file.name);
+        init();
+
+        function handleFiles(e) {
+            var filelist = this.files;
+            var numFiles = filelist.length;
+            debug('numFiles: ' + numFiles);
+            Array.prototype.forEach.call(filelist, function(file){
+                debug(file.name + ', ' + file.size + ', ' + file.type);
             });
-            
+        }
+
+        function init() {
+            var inputElement = document.querySelector('#input');
+            inputElement.addEventListener('change', handleFiles, false);
         }
 
         function debug(info) {
