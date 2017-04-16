@@ -23,3 +23,4 @@ title: Blogging Like a Hacker
 1. [cloudinary](./test/cloudinary/index.html)
     * [Direct image uploads from the browser to the cloud with jQuery](http://cloudinary.com/blog/direct_image_uploads_from_the_browser_to_the_cloud_with_jquery), 2012-08-28
     * [Direct upload made easy, from browser or mobile app to the cloud](http://cloudinary.com/blog/direct_upload_made_easy_from_browser_or_mobile_app_to_the_cloud), 2014-07-16
+1. [upload image files](./test/upload-files/index.html)
