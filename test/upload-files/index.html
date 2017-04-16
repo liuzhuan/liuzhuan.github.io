@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Test Upload Images</title>
 </head>
 <body>
-    
+    <p>
+        <a href="https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications">Using files from web applications | MDN</a>
+    </p>
+    <p>
+        <input type="file" id="input" onchange="handleFiles(this.files)">
+    </p>
+    <p>
+        The File API makes it possible to access a FileList containing File objects representing the files selected by the user.
+    </p>
+
+    <script>
+        function handleFiles(files) {
+            console.log(files);
+            Array.prototype.forEach.call(files, function(file){
+                debug(file.name);
+            });
+            
+        }
+
+        function debug(info) {
+            var panel = document.querySelector('#debug');
+            if (!panel) {
+                panel = document.createElement('div');
+                panel.setAttribute('id', 'debug');
+                document.body.appendChild(panel);
+                panel.innerHTML = '<h2>Debug Panel</h2>';
+            }
+
+            var pre = document.createElement('pre');
+            var textNode = document.createTextNode(info);
+            pre.appendChild(textNode);
+            panel.appendChild(pre);
+        }
+    </script>
 </body>
 </html>
