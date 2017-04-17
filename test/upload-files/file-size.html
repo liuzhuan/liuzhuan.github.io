@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>File(s) size</title>
+</head>
+<body onload="updateSize();">
+    <script>
+        function updateSize() {
+            var nBytes = 0;
+            var oFiles = document.querySelector('#uploadInput').files;
+            var nFiles = oFiles.length;
+
+            for (var nFileId = 0; nFileId < nFiles; nFileId++) {
+                nBytes += oFiles[nFileId].size;
+            }
+
+            var sOutput = nBytes + 'bytes';
+            for (var aMultiples = ['KiB', 'MiB', 'GiB', 'TiB', 'EiB', 'ZiB', 'YiB'], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox/= 1024, nMultiple++) {
+                sOutput = nApprox.toFixed(3) + ' ' + aMultiples[nMultiple] + ' (' + nBytes + ' bytes)';
+            }
+
+            document.querySelector('#fileNum').innerHTML = nFiles;
+            document.querySelector('#fileSize').innerHTML = sOutput;
+        }
+    </script>
+
+    <form name="uploadForm">
+        <p>
+            <input id="uploadInput" type="file" name="myFiles" onchange="updateSize();" multiple> selected files: <span id="fileNum">0</span>; total size: <span id="fileSize">0</span>
+        </p>
+        <p>
+            <input type="submit" value="Send file">
+        </p>
+    </form>
+</body>
+</html>
