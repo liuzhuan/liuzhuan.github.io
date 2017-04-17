@@ -14,7 +14,8 @@
         <a href="./file-size.html">Showing file sizes</a>
     </p>
     <p>
-        <input type="file" id="input" multiple>
+        <input type="file" id="input" multiple accept="image/*" style="display:none;">
+        <a href="#" id="fileSelect">Select some files</a>
     </p>
     <p>
         The File API makes it possible to access a FileList containing File objects representing the files selected by the user.
@@ -33,7 +34,16 @@
         }
 
         function init() {
+            var fileSelect = document.querySelector('#fileSelect');
             var inputElement = document.querySelector('#input');
+
+            fileSelect.addEventListener('click', function(e) {
+                if (inputElement) {
+                    inputElement.click();
+                }
+                e.preventDefault(); // prevent navigation to "#"
+            }, false);
+
             inputElement.addEventListener('change', handleFiles, false);
         }
 
