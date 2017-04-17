@@ -3,6 +3,11 @@ layout: default
 title: Blogging Like a Hacker
 ---
 
+<div class="output"></div>
+<script>
+    document.querySelector('.output').innerHTML = navigator.userAgent;
+</script>
+
 ## 常用在线工具
 1. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
 1. [网站站长指南 - Search Console 帮助 - Google](https://support.google.com/webmasters/answer/35769)
