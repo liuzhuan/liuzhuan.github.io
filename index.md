@@ -31,3 +31,4 @@ title: Blogging Like a Hacker
 1. [upload image files](./test/upload-files/index.html)
 1. [webuploader demo](http://fex-team.github.io/webuploader/demo.html)
 1. [ProgressEvent Demo](./test/progressevent/index.html)
+1. [jQuery plugin Demo](./test/jquery-plugin/index.html)
