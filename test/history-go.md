@@ -5,10 +5,11 @@ title: history.go(-1)
 
 <style>
 .button {
-    padding: 5px 10px;
-    border: 1px solid #CCC;
-    background: #CCC;
-    border-radius: 10px;
+    padding: 10px;
+    background: #43ac43;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
 }
 </style>
 
