@@ -34,3 +34,4 @@ title: Blogging Like a Hacker
 1. [jQuery plugin Demo](./test/jquery-plugin/index.html)
 1. [友言评论 demo](./test/uyan.md) bug!
 1. [pseudo elements](./pseudo-elements.md)
+1. [history.go](./test/history-go.md)
