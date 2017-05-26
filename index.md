@@ -8,6 +8,10 @@ title: Blogging Like a Hacker
     document.querySelector('.output').innerHTML = navigator.userAgent;
 </script>
 
+## 概念
+
+1. [什么是区块链（blockchain）？](./concepts/blockchain/README.md)
+
 ## 常用在线工具
 1. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
 1. [网站站长指南 - Search Console 帮助 - Google](https://support.google.com/webmasters/answer/35769)
