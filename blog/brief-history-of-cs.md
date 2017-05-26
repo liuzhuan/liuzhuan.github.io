@@ -6,7 +6,7 @@ title: The Brief History of Computer Science
 # The Brief History of Computer Science
 
 | Date | Events |
-| --- | --- |
+| ---: | --- |
 | 1911/06/16 | IBM was founded |
 | 1955/06/08 | Tim Berners-Lee(TimBL) was born in London, England, United Kingdom. |
 | 1961/07/04 | Brendan Eich was born in Pittsburgh, Pennsylvania, U.S. |
