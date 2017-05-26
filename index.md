@@ -8,6 +8,10 @@ title: Blogging Like a Hacker
     document.querySelector('.output').innerHTML = navigator.userAgent;
 </script>
 
+## Blog
+
+* [The brief history of computer science](./blog/brief-history-of-cs.md)
+
 ## 概念
 
 1. [什么是区块链（blockchain）？](./concepts/blockchain/README.md)
