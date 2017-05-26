@@ -19,6 +19,10 @@ A blockchain – originally block chain – is a distributed database that maint
 
 > 如何保证 block 数据不能篡改？
 
+![Block Chain Diagram](https://upload.wikimedia.org/wikipedia/commons/9/98/Blockchain.svg)
+
+> Blockchain formation. The main chain (black) consists of the longest series of blocks from the genesis block (green) to the current block. Orphan blocks (purple) exist outside of the main chain.
+
 Blockchains are secure by design and an example of a distributed computing system with high byzantine fault tolerance. Decentralized consensus can therefore be achieved with a blockchain. This makes blockchains suitable for the recording of events, medical records, and other records management activities, identity management, transaction processing, and documenting provenance.
 
 > **byzantine**: if you describe a system or process as byzantine, you are criticizing it because it seems complicated or secretive. 复杂的; 秘密的
