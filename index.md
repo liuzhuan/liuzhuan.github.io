@@ -43,3 +43,7 @@ title: Blogging Like a Hacker
 1. [友言评论 demo](./test/uyan.md) bug!
 1. [pseudo elements](./pseudo-elements.md)
 1. [history.go](./test/history-go.md)
+1. 百度百科爬虫结果
+    * [python](./spider/baike-python.html)
+    * [javascript](./spider/baike-javascript.html)
+    * [reactjs](./spider/baike-reactjs.html)
