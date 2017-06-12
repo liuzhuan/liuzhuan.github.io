@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Facebook Share Demo</title>
+    <style>
+        .fb-btn {
+            background: steelblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px auto;
+            display: block;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+        appId            : '1230743073678205',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v2.9'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "http://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+</head>
+<body>
+    <button class="fb-btn">Share to Facebook</button>
+    <h3>References</h3>
+    <ul>
+        <li><a href="https://developers.facebook.com/docs/javascript/quickstart" target="_blank">Quickstart: Facebook SDK for JavaScript</a></li>
+        <li><a href="https://developers.facebook.com/docs/sharing/reference/share-dialog?locale=zh_CN" target="_blank">分享对话框</a></li>
+    </ul>
+    <script>
+        var btn = document.querySelector('.fb-btn');
+        btn.onclick = function() {
+            FB.ui({
+                method: 'share',
+                href: 'https://developers.facebook.com/docs/',
+            }, function(response){
+                console.log(response);
+            });
+        }
+    </script>
+</body>
+</html>
