@@ -47,3 +47,4 @@ title: Blogging Like a Hacker
     * [python](./spider/baike-python.html)
     * [javascript](./spider/baike-javascript.html)
     * [reactjs](./spider/baike-reactjs.html)
+1. [Facebook Share Demo](./test/fb-share/index.html)
