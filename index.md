@@ -48,3 +48,4 @@ title: Blogging Like a Hacker
     * [javascript](./spider/baike-javascript.html)
     * [reactjs](./spider/baike-reactjs.html)
 1. [Facebook Share Demo](./test/fb-share/index.html)
+1. [ustbhuangyi-picker demo](./test/ustbhuangyi-picker/index.html)
