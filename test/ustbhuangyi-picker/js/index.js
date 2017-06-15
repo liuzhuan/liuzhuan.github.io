@@ -5,12 +5,37 @@ var first = [];
 var second = [];
 
 /** 默认选项 */
+var provinceid = 2237;
+var cityid = 2244;
+
 var selectedIndex = [0, 0];
 
 first = createProvinceList(provinces);
 
+if (provinceid) {
+    let pindex = getIndexFromList(provinceid, first);
+    selectedIndex[0] = pindex;
+}
+
+function getIndexFromList(pid, list) {
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].value == pid) {
+            return i;
+        }
+    }
+
+    return 0;
+}
+
 var pid = first[selectedIndex[0]].value;
 second = createCityList(source, pid);
+
+if (cityid) {
+    let cityindex = getIndexFromList(cityid, second);
+    selectedIndex[1] = cityindex;
+
+    render(selectedIndex);
+}
 
 function createProvinceList(obj) {
     var rawdatas = obj['CN'];
@@ -43,17 +68,7 @@ var picker = new Picker({
 });
 
 picker.on('picker.select', function(selectedVal, selectedIndex){
-    var province = first[selectedIndex[0]];
-    var city = second[selectedIndex[1]];
-    
-    var provinceName = province.text;
-    var cityName = city.text;
-
-    var provinceID = province.value;
-    var cityID = city.value;
-
-    nameEl.innerHTML = provinceName + ' ' + cityName;
-    outputEl.innerHTML = provinceID + ' ' + cityID;
+    render(selectedIndex);
 });
 
 picker.on('picker.change', function(index, selectedIndex) {
@@ -72,4 +87,18 @@ picker.on('picker.valuechange', function(selectedVal, selectedIndex) {
 
 nameEl.onclick = function() {
     picker.show();
+}
+
+function render(selectedIndex) {
+    var province = first[selectedIndex[0]];
+    var city = second[selectedIndex[1]];
+    
+    var provinceName = province.text;
+    var cityName = city.text;
+
+    var provinceID = province.value;
+    var cityID = city.value;
+
+    nameEl.innerHTML = provinceName + ' ' + cityName;
+    outputEl.innerHTML = provinceID + ' ' + cityID;
 }
