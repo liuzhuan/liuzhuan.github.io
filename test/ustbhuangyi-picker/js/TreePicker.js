@@ -22,7 +22,8 @@ class TreePicker {
             this._selectedValue = options.selectedValue.slice(0, options.numCols);
         }
         
-        this._selectedItems = this._findSelectedItems(options.selectedValue);
+        this._selectedIndex = this._findSelectedIndex(this._data, this._selectedValue);
+        this._selectedItems = this._findSelectedItems(this._selectedIndex);
 
         this.initPicker();
     }
@@ -31,6 +32,9 @@ class TreePicker {
     initPicker() {
         const selectedIndex = this._findSelectedIndex(this._data, this._selectedValue);
         const data = this._getColumnDatas(this._data, selectedIndex);
+        console.log('before picker: ', data);
+
+        if (!data) return;
 
         this.picker = new Picker({
             data: data,
@@ -59,6 +63,7 @@ class TreePicker {
     }
 
     _getColumnDatas(datas, indexes, i = 0) {
+        if (!indexes) return;
 
         var items = datas.map(item => (
             { text: item.text, value: item.value }
@@ -126,23 +131,22 @@ class TreePicker {
      */
     static parseQscArea(pdata, cdata) {
         let res = [];
-
-        // TODO: parse from pdata and cdata
-        res = [
-            {
-                text: '',
-                value: '',
-                sub: [
-                    {
-                        text: '',
-                        value: '',
-                        sub: [
-                            { text: '', value: '' }
-                        ]
-                    }
-                ]
+        // debugger;
+        var rawpdata = pdata['CN'];
+        var pkeys = Object.keys(rawpdata);
+        pkeys.forEach(function(key){
+            var item = {
+                text: rawpdata[key],
+                value: key
             }
-        ]
+
+            var cityData = cdata[key];
+            if (cityData) {
+                
+            }
+
+            res.push(item);
+        });
 
         return res;
     }

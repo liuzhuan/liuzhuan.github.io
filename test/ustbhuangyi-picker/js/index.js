@@ -3,6 +3,9 @@
 var nameEl = document.querySelector('#name');
 var outputEl = document.querySelector('#output');
 
+var data = TreePicker.parseQscArea(provinces, source);
+console.log(data);
+
 var treepicker = new TreePicker({
     data: TreePicker.parseQscArea(provinces, source),
     onselect: onTreeSelected
