@@ -1,4 +1,4 @@
-export default class TreePicker {
+class TreePicker {
     /**
      * 
      * @param {Object}   options 配置项
@@ -24,13 +24,13 @@ export default class TreePicker {
         
         this._selectedItems = this._findSelectedItems(options.selectedValue);
 
-        initPicker();
+        this.initPicker();
     }
 
     /** 初始化 Picker */
     initPicker() {
-        const selectedIndex = _findSelectedIndex(this._data, this._selectedValue);
-        const data = _getColumnDatas(this._data, selectedIndex);
+        const selectedIndex = this._findSelectedIndex(this._data, this._selectedValue);
+        const data = this._getColumnDatas(this._data, selectedIndex);
 
         this.picker = new Picker({
             data: data,
@@ -59,11 +59,16 @@ export default class TreePicker {
     }
 
     _getColumnDatas(datas, indexes, i = 0) {
+
         var items = datas.map(item => (
             { text: item.text, value: item.value }
         ));
         
-        var currentIndex = indexes[i];
+        var currentIndex = 0;
+        if (indexes && indexes.length > 0) {
+            currentIndex = indexes[i];
+        }
+        
         var currentItem = datas[currentIndex];
         
         if (!currentItem) {
@@ -89,7 +94,7 @@ export default class TreePicker {
     }
 
     /** 搜索选中的索引值 */
-    _findSelectedIndex(data, values, i = 0) {
+    _findSelectedIndex(datas, values, i = 0) {
         if (!datas) return;
         if (!values) return;
         if (values.length <= 0) return;
