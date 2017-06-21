@@ -130,23 +130,30 @@ class TreePicker {
      * @param {Object} cdata 城市数据
      */
     static parseQscArea(pdata, cdata) {
-        let res = [];
-        // debugger;
-        var rawpdata = pdata['CN'];
-        var pkeys = Object.keys(rawpdata);
-        pkeys.forEach(function(key){
-            var item = {
-                text: rawpdata[key],
-                value: key
-            }
+        let res = obj2arr(pdata['CN']);
+        res.forEach(function(item) {
+            var pid = item.value;
+            var citydata = cdata[pid];
+            console.log(citydata);
+        })
 
-            var cityData = cdata[key];
-            if (cityData) {
-                
-            }
+        function obj2arr(obj, attr = null) {
+            if (!obj) return null;
 
-            res.push(item);
-        });
+            var arr = [];
+            var keys = Object.keys(obj);
+            keys.forEach(function(key) {
+
+                var item = {
+                    text: attr ? obj[key][attr] : obj[key],
+                    value: key
+                }
+
+                arr.push(item);
+            });
+
+            return arr;
+        }
 
         return res;
     }
