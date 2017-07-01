@@ -1,5 +1,3 @@
-// import TreePicker from './TreePicker.js';
-
 var nameEl = document.querySelector('#name');
 var outputEl = document.querySelector('#output');
 
