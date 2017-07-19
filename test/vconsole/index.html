@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vConsole Demo</title>
+    <link rel="stylesheet" href="https://unpkg.com/weui@1.1.2" />
+    <style>
+        .page__hd {
+            padding: 40px;
+        }
+
+        .page__bd {
+            padding: 0 15px;
+        }
+
+        .page__title {
+            font-size: 20px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="page__hd">
+        <h1 class="page__title">vConsole Demo</h1>
+    </div>
+
+    <div class="page__bd">
+        <div id="js-ajax" class="weui-btn weui-btn_primary">Send Ajax</div>
+        <div id="js-console" class="weui-btn weui-btn_default">Console.log</div>
+    </div>
+    
+    <script src="https://unpkg.com/vconsole@2.5.2"></script>
+    <script>
+        function $(value) {
+            return document.querySelector(value);
+        }
+
+        $('#js-ajax').onclick = function() {
+            fetchData();
+        }
+
+        $('#js-console').onclick = function() {
+            console.log('Click #js-console');
+        }
+
+        function fetchData() {
+            const url = 'data.json';
+            fetch(url).then(response => response.json())
+                .then(data => console.log(data));
+        }
+    </script>
+</body>
+</html>
