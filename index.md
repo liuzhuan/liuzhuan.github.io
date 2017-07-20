@@ -50,3 +50,4 @@ title: Blogging Like a Hacker
 1. [Facebook Share Demo](./test/fb-share/index.html)
 1. [ustbhuangyi-picker demo](./test/ustbhuangyi-picker/index.html)
 1. [vConsole Demo](./test/vconsole/index.html)
+1. [Material Components for the web demo](./test/mdc-demo/index.html)
