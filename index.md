@@ -10,6 +10,7 @@ title: Blogging Like a Hacker
 
 ## Blog
 
+* [微信小程序音频相关 API 小结](./blog/weapp-voice-apis-summary.md)
 * [The brief history of computer science](./blog/brief-history-of-cs.md)
 
 ## 概念
