@@ -5,7 +5,7 @@ title: 微信小程序音频相关 API 小结
 
 # 微信小程序音频相关 API 小结
 
-![voice apis mindmap](../assets/weapp-api-voice.png)
+[![voice apis mindmap](../assets/weapp-api-voice.png)](https://liuzhuan.github.io/assets/weapp-api-voice.png)
 
 * 录音生成的文件格式为 `.silk`
 * `wx.playVoice` 只用于播放本地录音文件(`.silk`)格式
