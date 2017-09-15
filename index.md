@@ -53,3 +53,4 @@ title: Blogging Like a Hacker
 1. [vConsole Demo](./test/vconsole/index.html)
 1. [Material Components for the web demo](./test/mdc-demo/index.html)
 1. [Mobile Viewport Demo](./test/mobile-viewport/index.html)
+1. [Native ES6 Modules](./test/native-es6-module/index.html)
