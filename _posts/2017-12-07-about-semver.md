@@ -4,8 +4,6 @@ title: 语义化版本简介
 date: 2017-12-07
 ---
 
-# 语义化版本简介
-
 ```
 MAJOR.MINOR.PATCH
 
