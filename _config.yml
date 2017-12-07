@@ -7,6 +7,6 @@ url: "http://www.1zh.tech"
 github_username: liuzhuan
 
 markdown: kramdown
-theme: jekyll-theme-minimal
+theme: minima
 plugins:
   - jekyll-feed
