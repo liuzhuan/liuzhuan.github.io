@@ -1,3 +1,36 @@
+html,
 body {
-    background: #ccc;
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+nav {
+    background: #333;
+    color: white;
+}
+
+nav a:link,
+nav a:visited,
+nav a:hover,
+nav a:active {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav ul,
+footer ul {
+    overflow: hidden;
+    clear: both;
+    padding: 0;
+}
+nav li,
+footer li {
+    float: left;
+    list-style: none;
+    padding: 5px 10px;
 }
