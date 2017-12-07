@@ -1,6 +1,5 @@
 ---
-layout: default
-title: Read. Write. Code.
+layout: home
 ---
 
 ## Blogs

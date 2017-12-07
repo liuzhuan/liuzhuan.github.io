@@ -1,1 +1,12 @@
+title: Read, Write and Code
+email: liuzhuankyzy@gmail.com
+description: >-
+  阅读、书写和编码，输出是最好的学习方法。
+baseurl: ""
+url: "http://www.1zh.tech"
+github_username: liuzhuan
+
+markdown: kramdown
 theme: jekyll-theme-minimal
+plugins:
+  - jekyll-feed
