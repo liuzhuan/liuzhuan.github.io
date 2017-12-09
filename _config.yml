@@ -8,3 +8,6 @@ url: "http://www.1zh.tech"
 github_username: liuzhuan
 
 markdown: kramdown
+highlighter: rouge
+
+permalink: pretty
