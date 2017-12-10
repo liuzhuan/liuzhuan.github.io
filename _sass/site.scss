@@ -1,4 +1,5 @@
 $spacing-unit:     30px !default;
+$brand-color: #563d7c;
 
 body {
     background: white;
@@ -8,8 +9,39 @@ body {
     background: white;
 }
 
+.main-content {
+    h1 { 
+        font-size: 2em; 
+        font-weight: 600;
+        color: $brand-color;
+    }
+    h2 { 
+        font-size: 1.5em; 
+        border-bottom: 1px solid #eaecef;
+        padding-bottom: 0.3em;
+        font-weight: 600;
+    }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.2em; }
+    h5 { font-size: 1.15em; }
+    h6 { font-size: 1.1em; }
+}
+
+.main-footer {
+    background: $brand-color;
+    color: white;
+    .copyright {
+        text-align: center;
+    }
+}
+
 .bg-purple {
-    background: #563d7c;
+    background: $brand-color;
+}
+
+.meta {
+    color: #666;
+    font-size: 0.8em;
 }
 
 @import 
