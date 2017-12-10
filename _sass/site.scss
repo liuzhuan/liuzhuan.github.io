@@ -1,3 +1,5 @@
+$spacing-unit:     30px !default;
+
 body {
     background: white;
 }
@@ -9,3 +11,8 @@ body {
 .bg-purple {
     background: #563d7c;
 }
+
+@import 
+    "base",
+    "syntax-highlighting"
+;
