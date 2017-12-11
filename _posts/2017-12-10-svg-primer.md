@@ -14,8 +14,8 @@ SVG (Scalable Vector Graphics, 可缩放矢量图形)，是一种使用 XML 描�
 
 ```xml
 <svg version="1.1" baseProfile="full" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100%" height="100%" fill="red" />
-    <circle cx="150" cy="100" r="80" fill="green" />
+    <rect width="100%" height="100%" fill="#beaed7" />
+    <circle cx="150" cy="100" r="80" fill="#563d7c" />
     <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
 </svg>
 ```
@@ -26,8 +26,8 @@ SVG (Scalable Vector Graphics, 可缩放矢量图形)，是一种使用 XML 描�
      baseProfile="full"
      width="300" height="200"
      xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="red" />
-  <circle cx="150" cy="100" r="80" fill="green" />
+  <rect width="100%" height="100%" fill="#beaed7" />
+  <circle cx="150" cy="100" r="80" fill="#563d7c" />
   <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
 </svg>
 
