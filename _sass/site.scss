@@ -1,5 +1,6 @@
 $spacing-unit:     30px !default;
 $brand-color: #563d7c;
+$brand-color-light: lighten($brand-color, 40%);
 
 body {
     background: white;
@@ -25,6 +26,12 @@ body {
     h4 { font-size: 1.2em; }
     h5 { font-size: 1.15em; }
     h6 { font-size: 1.1em; }
+
+    blockquote {
+        border-left: 5px solid #CCC;
+        padding-left: 10px;
+        color: #999;
+    }
 }
 
 .main-footer {
