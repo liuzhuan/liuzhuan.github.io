@@ -76,7 +76,9 @@ svg 坐标系默认情况下 1 个单位长度对应屏幕的 1 个像素，但�
 
 ## Path 路径详解
 
-`<path>` 的 `d` 包含所有的路径命令，命令可以分为两类：大写字母表示绝对坐标，小写字母表示相对坐标。
+`<path>` 的 `d` 包含所有的路径命令。
+
+命令可以分为两类：**大写字母表示绝对坐标，小写字母表示相对坐标**。
 
 常用命令如下：
 
@@ -84,12 +86,69 @@ svg 坐标系默认情况下 1 个单位长度对应屏幕的 1 个像素，但�
 - `L`, `l`: 画直线 LineTo `L x y`
 - `H`, `h`: 画水平线 Horizontal `H x`
 - `V`, `v`: 画垂直线 Vertical `V y`
+- `Z`, `z`: 闭合路径 `Close Path` 大小写一样
+- `C`, `c`: 三次(Cubic)贝塞尔曲线 `C x1 y1, x2 y2, x y`
+- `S`, `s`: 三次贝塞尔曲线的快捷写法 `S x2 y2, x y`
+- `Q`, `q`: 二次(Quadratic)贝塞尔曲线 `Q x1 y1, x y`
+- `T`, `t`: 二次贝塞尔快捷写法 `T x y`
+- `A`, `a`: 弧线 `A rx ry x-axis-rotation large-arc-flag sweep-flag x y` SVG 中最难理解的部分。
+
+## 填充和线条样式
+
+```xml
+<line stroke-width="2" />
+<line stroke-linecap="butt | square | round" />
+<line stroke-linejoin="miter | round | bevel" />
+<line stroke-dasharray="5,10" />
+<line stroke-dashoffset="10% | 2"/>
+```
+
+使用原始命令绘制 SVG 比较繁琐，可以使用 `snap.svg` 或 `D3.js` 等第三方库，有效简化操作。
+
+## Snap.svg
+
+`Snap.svg` 相当于 SVG 版 jQuery。
+
+```javascript
+var s = Snap("#svg")
+var bigCircle = s.circle(150, 150, 100)
+bigCircle.attr({
+    fill: "#bada55",
+    stroke: "#000",
+    strokeWidth: 5
+});
+var discs = s.group(bigCircle, s.circle(200, 150, 70))
+discs.attr({
+    fill: "#fff"
+})
+```
+
+## D3.js
+
+数据驱动文档
+
+```html
+<script src="https://d3js.org/d3.v4.min.js"></script>
+```
+
+原始大小 `216.42KB`，压缩后传输体积大约 `68.40KB`。是一个比较重量级选手。
+
+如果只是使用基本形状，可以使用 `d3-shape` 库：
+
+```html
+<script src="https://d3js.org/d3-shape.v1.min.js"></script>
+```
 
 ## REF
 
 - [SVG Tutorial - MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial)
 - [An SVG Primer for Today's Browsers - w3.org](https://www.w3.org/Graphics/SVG/IG/resources/svgprimer.html)
 - [Inkscape][inkscape]
+- [Snap.svg][snap.svg]
+- [D3.js - Data Driven Document][d3js]
 
 [caniuse.svg]: https://caniuse.com/#feat=svg
 [inkscape]: https://inkscape.org/en/
+[bezier-wiki]: https://en.wikipedia.org/wiki/B%C3%A9zier_curve
+[snap.svg]: http://snapsvg.io/
+[d3js]: https://d3js.org/
