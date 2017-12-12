@@ -59,7 +59,31 @@ svg 坐标系默认情况下 1 个单位长度对应屏幕的 1 个像素，但�
 ```xml
 <rect x="10" y="10" width="100" height="100" rx="10" ry="10" stroke="black" fill="transparent" stroke-width="5" />
 <circle cx="25" cy="25" r="20" stroke="red" fill="transparent" stroke-width="1" />
+<ellipse cx="75" cy="75" rx="20" ry="5" />
+
+<line x1="10" x2="50" y1="110" y2="150" />
+<polyline points="60 110 65 120 70 115" />
+<polygon points="10 10 10 90 90 90 10 10" />
+
+<path d="M20,230 Q40,205 50,230 T90,230" />
 ```
+
+可以看出，`stroke` 是线条颜色，`fill` 是填充颜色, `stroke-width` 是线条宽度。
+
+`polyline` 和 `polygon` 类似，后者比前者多了自动连接原点的功能。
+
+`path` 是 SVG 中最通用的绘制路径，`d` 包含绘制的命令。它可以绘制所有所有形状。
+
+## Path 路径详解
+
+`<path>` 的 `d` 包含所有的路径命令，命令可以分为两类：大写字母表示绝对坐标，小写字母表示相对坐标。
+
+常用命令如下：
+
+- `M`, `m`: 移动 Move `M x y`
+- `L`, `l`: 画直线 LineTo `L x y`
+- `H`, `h`: 画水平线 Horizontal `H x`
+- `V`, `v`: 画垂直线 Vertical `V y`
 
 ## REF
 
