@@ -146,9 +146,11 @@ discs.attr({
 - [Inkscape][inkscape]
 - [Snap.svg][snap.svg]
 - [D3.js - Data Driven Document][d3js]
+- [d3-shape][d3-shape]
 
 [caniuse.svg]: https://caniuse.com/#feat=svg
 [inkscape]: https://inkscape.org/en/
 [bezier-wiki]: https://en.wikipedia.org/wiki/B%C3%A9zier_curve
 [snap.svg]: http://snapsvg.io/
 [d3js]: https://d3js.org/
+[d3-shape]: https://github.com/d3/d3-shape/blob/master/README.md#pie
