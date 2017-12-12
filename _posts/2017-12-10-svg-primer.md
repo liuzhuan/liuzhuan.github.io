@@ -139,6 +139,22 @@ discs.attr({
 <script src="https://d3js.org/d3-shape.v1.min.js"></script>
 ```
 
+## peity: jQuery 插件
+
+Peity 是一个 jQuery 插件，可以把元素内容转换为微型 `<svg>` 饼图、环形图或柱形图等。
+
+压缩版本 `3.6Kb`，gzipped 后 `1.7Kb`，轻量级选手。
+
+用法如下：
+
+```html
+<span class="pie">1/5</span>
+```
+
+```javascript
+$("span.pie").peity("pie")
+```
+
 ## REF
 
 - [SVG Tutorial - MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial)
@@ -147,6 +163,7 @@ discs.attr({
 - [Snap.svg][snap.svg]
 - [D3.js - Data Driven Document][d3js]
 - [d3-shape][d3-shape]
+- [peity][peity]
 
 [caniuse.svg]: https://caniuse.com/#feat=svg
 [inkscape]: https://inkscape.org/en/
@@ -154,3 +171,5 @@ discs.attr({
 [snap.svg]: http://snapsvg.io/
 [d3js]: https://d3js.org/
 [d3-shape]: https://github.com/d3/d3-shape/blob/master/README.md#pie
+[peity]: https://github.com/benpickles/peity
+[peity-doc]: http://benpickles.github.io/peity/
