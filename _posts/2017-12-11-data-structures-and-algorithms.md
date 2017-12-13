@@ -19,7 +19,7 @@ date: 2017-12-11
 arr.splice(idx, 0, newArr);
 
 // 数组任意位置删除元素
-arr.splice(idx, delNum);
+arr.splice(idx, delNum); // => 返回被删除的元素数组
 
 arr.reverse(); // 原地翻转
 arr.sort(); // 原地排序，按字符升序排列
@@ -35,7 +35,29 @@ arr.map(a => b)
 arr.filter(item => item > 0)
 ```
 
-BOOKMARK 2.6 P44
+## 列表
+
+列表的抽象数据类型定义
+
+```javascript
+listSize
+pos
+length()
+clear()
+contains() boolean // 判断是否在列表中
+toString()
+getElement()
+insert(item, index) boolean // 插入元素
+append(item) // 增加元素到末尾
+remove(item) boolean // 删除指定元素
+front()
+end()
+prev()
+next()
+currPos()
+moveTo()
+find(item) int // 判断是否存在某元素
+```
 
 ## REF
 
