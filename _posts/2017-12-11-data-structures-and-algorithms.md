@@ -59,6 +59,21 @@ moveTo()
 find(item) int // 判断是否存在某元素
 ```
 
+## 栈
+
+栈的相关方法和属性
+
+```javascript
+push()
+pop()
+peek()
+clear()
+length
+empty
+```
+
+BOOKMARK p63 4.2 栈的实现
+
 ## REF
 
 - [数据结构与算法JavaScript描述][data-structure-javascript] by *Michael McMillan*
