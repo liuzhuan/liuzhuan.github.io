@@ -68,11 +68,49 @@ push()
 pop()
 peek()
 clear()
+top
 length
 empty
 ```
 
-BOOKMARK p63 4.2 栈的实现
+实现原理
+
+```js
+function Stack() {
+    this.dataStore = []
+    this.top = 0
+    this.push = push
+    this.top = top
+    this.peek = peek
+}
+
+function push(item) {
+    this.dataStore[this.top++] = item
+}
+
+function pop() {
+    return this.dataStore[--this.top]
+}
+
+function peek() {
+    // when top === 0, return undefined
+    return this.dataStore[this.top - 1]
+}
+
+function length() {
+    return this.top
+}
+
+function clear() {
+    this.top = 0
+}
+```
+
+### 栈的应用场景
+
+数制间的相互转换
+
+Bookmark: P66 4.3.1
 
 ## REF
 
