@@ -8,6 +8,6 @@ date: 2017/12/14
 
 ## REF
 
-- [go中方法的接收者是值或者指针有什么区别吗？][go-pointer]
+- [Methods, Interfaces and Embedded Types in Go][go-pointer], by *William Kennedy*, 2014/05/03
 
-[go-pointer]: http://blog.csdn.net/u013790019/article/details/45397287
+[go-pointer]: https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
