@@ -1,4 +1,4 @@
 ---
 layout: home
-title: Read, Write & Code
+title: liuz's personal blog
 ---
