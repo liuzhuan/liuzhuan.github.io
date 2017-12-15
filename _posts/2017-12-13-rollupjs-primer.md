@@ -4,11 +4,11 @@ title: rollup.js 入门
 date: 2017-12-13
 ---
 
-Rollup 是一个打包器，可以把多个零碎 ES6 模块打包成一个复杂模块。与老牌打包器 webpack 相比，rollup 更适合打包库文件，而 webpack 丰富的插件和 loader 生态，更适合实际项目开发。
+Rollup 是一个 ES6 模块打包器，主力开发是 [Rich Harris][rollup-interview]。
 
-目前使用 rollup 的库有 [vue.js][vue-rollup], [react][react-rollup]。
+Rich Harris 是纽约时报的图形编辑，既做新闻，也做开发。
 
-> [angular][angular-bazel] 貌似打算使用 bazel 构建工具。
+Rollup 适合打包库文件，目前使用 rollup 构建的著名库有 [vue.js][vue-rollup]、[react][react-rollup]、D3、Three.js、Redux 等。
 
 ## 快速使用
 
@@ -37,11 +37,27 @@ Rollup 可以通过 [rollup-plugin-commonjs][rollup-plugin-commonjs] 插件引�
 
 如果希望在 Node.js 或 webpack 中直接使用，可以把 rollup 的目标格式设定为 UMD 或 CommonJS ，然后在 `package.json` 的 `main` 属性指向编译后的版本。如果 `package.json` 中还包含 `module` 字段，rollup 和 webpack 2 等支持 ES6 的工具可以直接使用 ES6 版本的代码。
 
+## 工作原理
+
+首先，Rollup 使用 Acorn 解析器读取入口文件，分析后产生抽象语法树（AST）。通过 AST 就能得到很多信息，比如模块的依赖和导出变量。
+
+如果发现依赖模块，就加载模块、读其内容、拆其 Token、产生AST。递归深入，直到汇集所有模块。
+
+每个步骤都是可插拔的，可向其中增加自定义操作，比如读取 `node_module` 文件夹，将 ES2015 编译至 ES5 等。
+
+## 与其他打包器有什么不同？
+
+首先，Rollup 打的包精炼细腻。
+
+[TO BE CONTINUE](https://survivejs.com/blog/rollup-interview/#how-does-rollup-differ-from-other-solutions-)
+
 ## REF
 
 - [rollup.js][rollup]
+- [Rollup - Next-generation ES6 module bundler - Interview with Rich Harris][rollup-interview], survivejs
 - [rollup 视频教程][rollup-video]
 - [rollup-plugin-commonjs][rollup-plugin-commonjs]
+- [acorn - github](https://github.com/ternjs/acorn)
 
 [rollup]: https://rollupjs.org/
 [rollup-video]: https://code.lengstorf.com/learn-rollup-js/
@@ -49,3 +65,4 @@ Rollup 可以通过 [rollup-plugin-commonjs][rollup-plugin-commonjs] 插件引�
 [vue-rollup]: https://github.com/vuejs/vue/blob/dev/package.json#L16-L24
 [react-rollup]: https://github.com/facebook/react/blob/master/package.json#L103
 [angular-bazel]: https://github.com/angular/angular/blob/master/docs/BAZEL.md
+[rollup-interview]: https://survivejs.com/blog/rollup-interview/
