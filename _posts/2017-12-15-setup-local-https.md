@@ -89,8 +89,8 @@ server {
 - [用Nginx实现微信小程序本地SSL请求 - zhihu][wxapp-https], by *罗含章*, 2016/11/14
 - [How to create a self-signed SSL Certificate - akadia.com][self-signed-ssl]
 - [Chrome: Invalid self signed SSL cert - “Subject Alternative Name Missing” - stackoverflow.com][invalid-ssl-cert]
-- [Chrome Deprecates Subject CN Matching][chrome-deprecate-cn], by *Eric Lawrence*, 2017/03/10
-- [How to Create a Self-Signed SAN Certificate Using OpenSSL on a NetScaler Appliance - citrix.com][self-signed-san], 2017/09/14 :+1:
+- [Chrome Deprecates Subject CN Matching][chrome-deprecates-cn], by *Eric Lawrence*, 2017/03/10
+- [How to Create a Self-Signed SAN Certificate Using OpenSSL on a NetScaler Appliance - citrix.com][self-signed-san], 2017/09/14
 - [openssl、x509、crt、cer、key、csr、ssl、tls 这些都是什么鬼?][glossary], by *杨俊明*, 2016/02/03
 
 [wxapp-https]: https://zhuanlan.zhihu.com/p/23640321
