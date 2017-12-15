@@ -62,19 +62,27 @@ DNS.3 = company.net
 openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout cert.pem -out cert.pem -config req.conf -extensions 'v3_req'
 ```
 
+**这个方法是好用的！**热烈推荐！
+
 ## 配置 nginx
 
 ```
 server {
     listen 443 ssl;
     server_name www.example.com;
-    ssl_certificate www.example.com.crt;
-    ssl_certificate_key www.example.com.key;
+    ssl_certificate cert.pem;
+    ssl_certificate_key cert.pem;
     ...
 }
 ```
 
 服务器证书（`ssl_certificate`）是一个公开文件，每个请求连接的客户端都会收到一份。私有密钥（`ssl_certificate_key`）是加密单元，需要存储在保密的地方，但要确保 nginx 主线程可访问。私有密钥一般和证书存储到同一位置。
+
+`cert.pem` 就是上一个步骤产生的证书和密钥，在一个文件中。
+
+## 配置浏览器
+
+打开 Chrome 的开发者工具下的【security】选项卡，查看当前的证书，然后下载下来，双击添加到操作系统中，修改为始终信任就可以了。
 
 ## REF
 
@@ -82,7 +90,7 @@ server {
 - [How to create a self-signed SSL Certificate - akadia.com][self-signed-ssl]
 - [Chrome: Invalid self signed SSL cert - “Subject Alternative Name Missing” - stackoverflow.com][invalid-ssl-cert]
 - [Chrome Deprecates Subject CN Matching][chrome-deprecate-cn], by *Eric Lawrence*, 2017/03/10
-- [How to Create a Self-Signed SAN Certificate Using OpenSSL on a NetScaler Appliance - citrix.com][self-signed-san], 2017/09/14
+- [How to Create a Self-Signed SAN Certificate Using OpenSSL on a NetScaler Appliance - citrix.com][self-signed-san], 2017/09/14 :+1:
 - [openssl、x509、crt、cer、key、csr、ssl、tls 这些都是什么鬼?][glossary], by *杨俊明*, 2016/02/03
 
 [wxapp-https]: https://zhuanlan.zhihu.com/p/23640321
@@ -96,3 +104,4 @@ server {
 [glossary]: http://www.cnblogs.com/yjmyzz/p/openssl-tutorial.html
 [intro-openssl]: https://users.dcc.uchile.cl/~pcamacho/tutorial/crypto/openssl/openssl_intro.html
 [secure-programming-ibm]: https://www.ibm.com/developerworks/library/l-openssl/index.html
+[openssl-san]: http://liaoph.com/openssl-san/
