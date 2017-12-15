@@ -47,9 +47,9 @@ Rollup 可以通过 [rollup-plugin-commonjs][rollup-plugin-commonjs] 插件引�
 
 ## 与其他打包器有什么不同？
 
-首先，Rollup 打的包精炼细腻。
+首先，Rollup 打的包精炼，没有多余包装。
 
-[TO BE CONTINUE](https://survivejs.com/blog/rollup-interview/#how-does-rollup-differ-from-other-solutions-)
+其次，Rollup 会剔除没用的代码，让包尽可能小。
 
 ## REF
 
