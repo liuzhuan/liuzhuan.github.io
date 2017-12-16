@@ -173,10 +173,10 @@ export default {
 
 ### Babel
 
-同时使用 Babel 和 Rollup 最简单办法是引入 `rollup-plugin-babel` 插件：
+同时使用 Babel 和 Rollup 最简单办法是引入 `rollup-plugin-babel` 和 `babel-core` 插件：
 
 ```
-npm install --save-dev rollup-plugin-babel
+npm install --save-dev rollup-plugin-babel babel-core
 ```
 
 然后更新配置文件：
@@ -223,7 +223,15 @@ Babel 须做如下配置才可工作，创建 `src/.babelrc`：
 npm install --save-dev babel-preset-env babel-plugin-external-helpers
 ```
 
-万事具备。
+万事具备。只差 ES2015 代码：
+
+```javascript
+import answer from 'the-answer'
+
+export default () => {
+    console.log(`the answer is ${answer}`)
+}
+```
 
 ## Tree-shaking
 
