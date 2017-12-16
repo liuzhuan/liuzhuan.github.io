@@ -96,11 +96,11 @@ export default {
 
 ## 高级配置
 
-Rollup 配置文件是一个标准 ES6 模块，导出一默认值。
+Rollup 配置文件是一个标准 ES6 模块，需要导出一个默认值。
 
 除了上面展示的简单配置，还可设定复杂配置参数。
 
-比如，如果要同时从多个入口打包，可以导出一个数组；如果要从一个入口，导出多个不同版本，可以将 `output` 参数设定为数组，比如：
+比如，若入口文件不止一个，模块导出值须是一个数组；若想得到一个入口文件的多个版本，须将 `output` 设为数组：
 
 ```javascript
 export default [
@@ -126,6 +126,29 @@ export default [
     }
 ]
 ```
+
+配置参数若要异步生成，亦可：
+
+```javascript
+// rollup.config.js
+import fetch from 'node-fetch'
+export default fetch('/some-remote-url')
+```
+
+再看一个 Promise ：
+
+```javascript
+export default Promise.all([
+    fetch('get-config-1')
+    fetch('get-config-2')
+])
+```
+
+## 与其他武器整合
+
+### npm 包
+
+Rollup 不知道如何读取 npm 包，不懂 `node_modules` 解析规则。
 
 ## Tree-shaking
 
