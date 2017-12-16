@@ -150,6 +150,81 @@ export default Promise.all([
 
 Rollup 不知道如何读取 npm 包，不懂 `node_modules` 解析规则。
 
+此时，我们需要 `rollup-plugin-node-resolve` 插件：
+
+```
+npm install --save-dev rollup-plugin-node-resolve
+```
+
+更新 `rollup.config.js` 以便引入它：
+
+```javascript
+import resolve from 'rollup-plugin-node-resolve'
+
+export default {
+    // ...
+    plugins: [resolve()]
+}
+```
+
+目前大部分 npm 包都是 CommonJS 规范，若要被 Rollup 使用，须转换为 ES2015 模块。此时，可用 `rollup-plugin-commonjs` 插件。
+
+注意，为避免其他插件篡改 CommonJS 模块，`rollup-plugin-commonjs` 须首先被调用。
+
+### Babel
+
+同时使用 Babel 和 Rollup 最简单办法是引入 `rollup-plugin-babel` 插件：
+
+```
+npm install --save-dev rollup-plugin-babel
+```
+
+然后更新配置文件：
+
+```javascript
+// rollup.config.js
+import resolve from 'rollup-plugin-node-resolve'
+import babel from 'rollup-plugin-babel'
+
+export default {
+    // input & output ...
+    plugins: [
+        resolve(),
+        babel({
+            exclude: 'node_modules/**'
+        })
+    ]
+}
+```
+
+Babel 须做如下配置才可工作，创建 `src/.babelrc`：
+
+```json
+{
+    "presets": [
+        [
+            "env",
+            { "modules": false }
+        ]
+    ],
+    "plugins": ["external-helpers"]
+}
+```
+
+此处有些异样须小心谨慎。首先，设定 `"modules": false` 选项，否则，Babel 会抢在 Rollup 之前将模块改为 CommonJS 。
+
+第二，使用 `external-helpers` 插件。它仅在 bundle 头部引入一次 helpers 。否则，将在每个模块引入一次，浪费。
+
+第三，`.babelrc` 置于 `src/` 目录，而非项目根目录。可依不同目的（比如测试、开发、上线）创建不同参数。
+
+最后，还需安装上述 `env` 预设值和 `external-helpers` 插件：
+
+```
+npm install --save-dev babel-preset-env babel-plugin-external-helpers
+```
+
+万事具备。
+
 ## Tree-shaking
 
 通过摇树算法，可以把无关代码“抖掉”，减小文件体积。
