@@ -1,14 +1,14 @@
 ---
 layout: post
-title: rollup.js 入门
+title: Rollup.js 入门
 date: 2017-12-13
 ---
 
-Rollup 是一个 ES6 模块打包器，主力开发是 [Rich Harris][rollup-interview]。
+Rollup 是一个 ES6 模块打包器，开发者 [Rich Harris][rollup-interview]。
 
 Rich Harris 是纽约时报的图形编辑，既做新闻，也做开发。
 
-Rollup 适合打包库文件，目前使用 rollup 构建的著名库有 [vue.js][vue-rollup]、[react][react-rollup]、D3、Three.js、Redux 等。
+Rollup 适合构建库文件，目前使用它的库有 [vue.js][vue-rollup]、[react][react-rollup]、D3、Three.js、Redux 等。
 
 ## 快速使用
 
@@ -25,6 +25,34 @@ rollup main.js --o bundle.js --f cjs
 
 # 为了兼容浏览器和 Node.js，编译为 umd 格式
 rollup main.js --o bundle.js -f umd --name "myBundle"
+```
+
+## 使用配置文件
+
+在项目根目录下新建 `rollup.config.js`，写入内容：
+
+```javascript
+// rollup.config.js
+export default {
+    input: 'src/main.js',
+    output: {
+        file: 'bundle.js',
+        format: 'cjs'
+    }
+}
+```
+
+使用 `--config` 或 `-c` 标志位，就能使用配置文件：
+
+```sh
+rollup -c
+```
+
+除了默认的 `rollup.config.js`，还能使用不同的配置文件：
+
+```
+rollup --config rollup.config.dev.js
+rollup --config rollup.config.prod.js
 ```
 
 ## Tree-shaking
