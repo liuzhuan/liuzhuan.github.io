@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 如何设置本地 HTTPS 开发环境（基于nginx）
+title: 设置本地 nginx 的 HTTPS 
 ---
 
 ## 生成自签名 SSL 证书
