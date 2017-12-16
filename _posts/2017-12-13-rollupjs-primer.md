@@ -55,6 +55,78 @@ rollup --config rollup.config.dev.js
 rollup --config rollup.config.prod.js
 ```
 
+## 使用插件
+
+插件可在关键节点改变 Rollup 的默认行为，[Rollup wiki][rollup-wiki] 页面列举许多插件。
+
+比如，`rollup-plugin-json` 允许 Rollup 导入 JSON 文件。
+
+首先，安装它：
+
+```
+npm install --save-dev rollup-plugin-json
+```
+
+更新 `main.js`：
+
+```javascript
+import { version } from './package.json'
+
+export default function() {
+    console.log('version ' + version)
+}
+```
+
+更新 `rollup.config.js`，使用 JSON 插件：
+
+```javascript
+import json from 'rollup-plugin-json'
+
+export default {
+    input: 'main.js',
+    output: {
+        file: 'bundle.js',
+        format: 'cjs'
+    },
+    plugins: [json()]
+}
+```
+
+运行 `npm run build` 就能看到结果。
+
+## 高级配置
+
+Rollup 配置文件是一个标准 ES6 模块，导出一默认值。
+
+除了上面展示的简单配置，还可设定复杂配置参数。
+
+比如，如果要同时从多个入口打包，可以导出一个数组；如果要从一个入口，导出多个不同版本，可以将 `output` 参数设定为数组，比如：
+
+```javascript
+export default [
+    {
+        input: 'main-a.js',
+        output: {
+            file: 'dist/bundle-a.js',
+            format: 'cjs'
+        }
+    },
+    {
+        input: 'main-b.js',
+        output: [
+            {
+                file: 'dist/bundle-b1.js',
+                format: 'cjs'
+            },
+            {
+                file: 'dist/bundle-b2.js',
+                format: 'es'
+            }
+        ]
+    }
+]
+```
+
 ## Tree-shaking
 
 通过摇树算法，可以把无关代码“抖掉”，减小文件体积。
@@ -94,3 +166,4 @@ Rollup 可以通过 [rollup-plugin-commonjs][rollup-plugin-commonjs] 插件引�
 [react-rollup]: https://github.com/facebook/react/blob/master/package.json#L103
 [angular-bazel]: https://github.com/angular/angular/blob/master/docs/BAZEL.md
 [rollup-interview]: https://survivejs.com/blog/rollup-interview/
+[rollup-wiki]: https://github.com/rollup/rollup/wiki/Plugins
