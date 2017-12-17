@@ -135,9 +135,16 @@ function mulBase(num, base) {
 
 递归演示。
 
+## 队列 Queue
+
+队列在队尾插入数据，队首删除数据，是一种先进先出（First-In-First-Out, FIFO）的数据结构。可用于操作系统进程池，打印任务池等。
+
+队列的构造函数代码[见这里][queue-code]。
+
 ## REF
 
 - [数据结构与算法JavaScript描述][data-structure-javascript] by *Michael McMillan*
 
 [data-structure-javascript]: https://book.douban.com/subject/25945449/
 [code]: https://github.com/liuzhuan/data-structure-algorithm-code
+[queue-code]: https://github.com/liuzhuan/data-structure-algorithm-code/blob/master/queue/Queue.js
