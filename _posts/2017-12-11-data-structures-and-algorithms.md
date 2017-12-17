@@ -10,6 +10,8 @@ date: 2017-12-11
 
 可见，数据结构和算法的重要性。
 
+文中提到的代码可以[在此下载][code]。
+
 ## 数组
 
 数组是一个存储元素的线性集合，元素可以通过索引来任意存取。常用操作如下所示：
@@ -108,12 +110,34 @@ function clear() {
 
 ### 栈的应用场景
 
-数制间的相互转换
+数制的转换
 
-Bookmark: P66 4.3.1
+```javascript
+function mulBase(num, base) {
+    var s = new Stack();
+    do {
+        s.push(num%base);
+        num = Math.floor(num/=base);
+    } while (num > 0);
+
+    var converted = '';
+    while (s.length() > 0) {
+        converted += s.pop();
+    }
+
+    return converted;
+}
+```
+
+> 用 JavaScript 原生数组也可实现该功能，此处的 `Stack` 便于描述和理解。
+
+判断回文 `isPalindrome(word)`。
+
+递归演示。
 
 ## REF
 
 - [数据结构与算法JavaScript描述][data-structure-javascript] by *Michael McMillan*
 
 [data-structure-javascript]: https://book.douban.com/subject/25945449/
+[code]: https://github.com/liuzhuan/data-structure-algorithm-code
