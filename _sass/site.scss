@@ -1,9 +1,11 @@
 $spacing-unit:     30px !default;
 $brand-color: #563d7c;
 $brand-color-light: lighten($brand-color, 40%);
+$font-stack: -apple-system, "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
 
 body {
     background: white;
+    font-family: $font-stack;
 }
 
 .container {
