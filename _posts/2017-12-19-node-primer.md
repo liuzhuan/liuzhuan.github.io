@@ -197,6 +197,18 @@ fs.close(fd, callback)
 
 /** 截短文件 */
 fs.ftruncate(fd, len, callback)
+
+/** 删除文件 */
+fs.unlink(path, callback)
+
+/** 创建目录 */
+fs.mkdir(path[, mode], callback)
+
+/** 读取目录 */
+fs.readdir(path, function(err, files){})
+
+/** 删除目录 */
+fs.rmdir(path, callback)
 ```
 
 常见的 flags 如下：
@@ -213,6 +225,20 @@ fs.ftruncate(fd, len, callback)
 - `ax`
 - `a+`
 - `ax+`
+
+## 工具模块
+
+### OS 模块
+
+### Path 模块
+
+### Net 模块
+
+### DNS 模块
+
+### Domain 模块
+
+TOREAD: https://www.tutorialspoint.com/nodejs/nodejs_utitlity_module.htm
 
 ## 术语表
 
