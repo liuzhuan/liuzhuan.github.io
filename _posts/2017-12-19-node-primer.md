@@ -65,6 +65,7 @@ var buf = new Buffer('Simply Easy Learning', 'utf-8')
 
 /** 向缓冲区写 */
 buf.write(string[, offset][, length][, encoding])
+// 向缓冲区写入字符串，若字符字数超过缓冲区长度，会被截断
 
 /** 读取缓冲区 */
 buf.toString([encoding][, start][, end])
@@ -80,9 +81,16 @@ var buffer1 = new Buffer('TutorialsPoint')
 var buffer2 = new Buffer('Simply Easy Learning')
 var buffer3 = Buffer.concat([buffer1, buffer2])
 console.log('buffer3 content: ' + buffer3.toString())
-```
 
-向缓冲区写入字符串，若字符字数超过缓冲区长度，会被截断。
+/** 比较缓冲区 */
+buf.compare(otherBuffer)
+
+/** 拷贝缓冲区 */
+buf.copy(targetBuffer[, targetStart][, sourceStart][, sourceEnd])
+
+/** 切片缓冲区 */
+buf.slice([start][, end])
+```
 
 ## 术语表
 
