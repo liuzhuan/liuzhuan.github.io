@@ -51,7 +51,38 @@ EventEmitter.listenerCount(emitter, event)
 
 纯 JavaScript 对二进制支持有限。但在 TCP 流或文件系统中，经常需要处理八位组。Node.js 因此提供 Buffer 类，专门存储原始数据，就像整型数组一样。Buffer 实例对应 v8 堆之外一块裸内存。
 
-TOREAD: https://www.tutorialspoint.com/nodejs/nodejs_buffers.htm
+Buffer 是全局类，无需导入，开箱即用。
+
+```javascript
+/** 创建缓冲区 */
+// 创建 10 个未初始化八位组
+var buf = new Buffer(10)
+// 从数组创建
+var buf = new Buffer([10, 20, 30, 40, 50])
+// 从给定字符串创建，可选编码
+var buf = new Buffer('Simply Easy Learning', 'utf-8')
+// 可选编码有 utf8, ascii, utf8, utf16le, ucs2, base64, hex
+
+/** 向缓冲区写 */
+buf.write(string[, offset][, length][, encoding])
+
+/** 读取缓冲区 */
+buf.toString([encoding][, start][, end])
+
+/** 缓冲区转换为 JSON */
+buf = new Buffer('hello')
+buf.toJSON()
+// => { type: 'Buffer', data: [ 104, 101, 108, 108, 111 ] }
+
+/** 连接缓冲区 */
+Buffer.concat(list[, totalLength])
+var buffer1 = new Buffer('TutorialsPoint')
+var buffer2 = new Buffer('Simply Easy Learning')
+var buffer3 = Buffer.concat([buffer1, buffer2])
+console.log('buffer3 content: ' + buffer3.toString())
+```
+
+向缓冲区写入字符串，若字符字数超过缓冲区长度，会被截断。
 
 ## 术语表
 
