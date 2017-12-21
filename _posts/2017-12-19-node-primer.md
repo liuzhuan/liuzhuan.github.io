@@ -90,7 +90,129 @@ buf.copy(targetBuffer[, targetStart][, sourceStart][, sourceEnd])
 
 /** 切片缓冲区 */
 buf.slice([start][, end])
+
+/** 类方法 */
+Buffer.isEncoding(encoding)
+Buffer.isBuffer(obj)
+Buffer.byteLength(string[, encoding])
+Buffer.concat(list[, totalLength])
+Buffer.compare(buf1, buf2)
 ```
+
+## 流
+
+流可以无间断读取或写入数据，有四种类型：
+
+- 可读的
+- 可写的
+- 双工的
+- 变形的：一种双工流，输出由输入计算得出。
+
+流皆为 EventEmitter 实例，可在不同阶段抛事件。常用事件如下：
+
+- `data` 有可读数据时
+- `end` 当无数据可读时
+- `error` 读写发生异常时
+- `finish` 所有数据已写入底层系统时
+
+常用 API 如下：
+
+```javascript
+/** 创建可读流 */
+var readStream = fs.createReadStream(file)
+readStream.setEncoding('utf8')
+readStream.on('data', (chunk) => data += chunk)
+readStream.on('end', () => console.log(data))
+readStream.on('error', err => console.log(err.stack))
+
+/** 创建可写流 */
+var writeStream = fs.createWriteStream('output.txt')
+writeStream.write(data, 'utf8')
+// 标记文件结束
+writeStream.end()
+
+writeStream.on('finish', () => console.log('write complete'))
+writeStream.on('error', err => console.log(err.stack))
+
+/** 管道链接流 */
+var readStream = fs.createReadStream('input.txt')
+var writeStream = fs.createWriteStream('output.txt')
+readStream.pipe(writeStream)
+
+/** 串联流 */
+fs.createReadStream('input.txt')
+    .pipe(zlib.createGzip())
+    .pipe(fs.createWriteStream('input.txt.gz'))
+```
+
+[流代码示例](https://github.com/liuzhuan/node-demo/tree/master/stream-demo)
+
+## 文件系统
+
+Node 文件处理是标准 POSIX 函数的简单封装，在 `fs` 模块定义。
+
+fs 模块每个方法都有同步和异步版本。
+
+常用 API 如下：
+
+```javascript
+var fs = require('fs')
+
+fs.readFile('input.txt', function(err, data){
+    if (err) {
+        return console.error(err)
+    }
+    console.log('Asynchronous read: ' + data.toString())
+})
+
+/** 打开文件 */
+fs.open(path, flags[, mode], callback)
+
+/** 获取文件信息 */
+fs.stat(path, function(err, stats){})
+
+// fs.Stats 函数
+stats.isFile()
+stats.isDirectory()
+stats.isBlockDevice()
+stats.isCharacterDevice()
+stats.isSymbolicLink()
+stats.isFIFO()
+stats.isSocket()
+
+/** 写文件 */
+fs.writeFile(filename, data[, options], callback)
+
+/** 读取文件 */
+fs.read(fd, buffer, offset, length, position, callback)
+// fd: 文件描述符，fs.open() 返回
+// buffer: 储存数据的缓冲区
+// offset: 写入数据位于缓冲区的偏移量
+// length: 写入字节的数目
+// position: 从文件哪个位置开始读取
+// callback: 回调函数，形参有三：err, bytesRead, buffer
+
+/** 关闭文件 */
+fs.close(fd, callback)
+
+/** 截短文件 */
+fs.ftruncate(fd, len, callback)
+```
+
+常见的 flags 如下：
+
+- `r` 读
+- `r+` 读写 
+- `rs` 同步读
+- `rs+` 同步读写
+- `w` 写
+- `wx` 若文件已存在则失败
+- `w+` 读写
+- `wx+`
+- `a` 增加
+- `ax`
+- `a+`
+- `ax+`
 
 ## 术语表
 
@@ -101,6 +223,8 @@ buf.slice([start][, end])
 - 八位组 octet
 - 堆 heap
 - 裸内存 raw memory
+- 流 stream
+- 双工的 duplex
 
 ## REF
 
