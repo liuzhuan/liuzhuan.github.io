@@ -49,7 +49,9 @@ EventEmitter.listenerCount(emitter, event)
 
 ## 缓冲区 Buffer
 
-纯 JavaScript 对二进制支持有限。但在 TCP 流或文件系统中，经常需要处理八位组。Node.js 因此提供 Buffer 类，专门存储原始数据，就像整型数组一样。Buffer 实例对应 v8 堆外的一块裸内存。
+纯 JavaScript 对二进制支持有限。但在 TCP 流或文件系统中，经常需要处理八位组。Node.js 因此提供 Buffer 类，专门存储原始数据，就像整型数组一样。Buffer 实例对应 v8 堆之外一块裸内存。
+
+TOREAD: https://www.tutorialspoint.com/nodejs/nodejs_buffers.htm
 
 ## 术语表
 
