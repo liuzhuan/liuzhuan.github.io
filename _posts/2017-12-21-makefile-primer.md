@@ -8,6 +8,26 @@ date: 2017-12-21
 
 `Makefiles` 配合 `make` 实用程序，可自动化构建管理软件项目。
 
+## `make` 
+
+在一个大型项目中，`make` 工具可自动推断出哪些源文件需重新编译，并调用对应的编译命令。
+
+```sh
+# 默认读取当前目录的 makefile
+make
+# 指定某一 makefile
+make -f MyMakefile
+```
+
+## Makefile
+
+`Makefile` 指导 make 如何编译。
+
+```
+target: dependencies
+[tab] system command
+```
+
 ## REF
 
 - [Makefiles - Mrbook's Stuff][mrbook]
