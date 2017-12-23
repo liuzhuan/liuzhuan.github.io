@@ -8,6 +8,8 @@ Shell 无处不在，异常强大，是每个开发人员必备技能。
 
 写脚本很简单，但是写一个运行正常、稳定可靠的脚本并非易事，需要扎实的基础知识。
 
+This document only covers the **Bourne shell** syntax.
+
 ## 内建命令
 
 ```sh
@@ -44,6 +46,50 @@ echo "control-V control-G"
 ```
 echo "^G"
 ```
+
+## Shell Script Basics
+
+It is often easy to write a script, but it can be more challenging to write a script that consistently works well.
+
+There are two different set of shell script syntax: the **Bourne shell** syntax and the **C shell** syntax. The Bourne shell syntax is more flexible and thus more widely used.
+
+Bourne-compatible shells includes: `sh`, `bash`, `zsh`, `ksh`.
+
+### Shell Variables and Printing
+
+```sh
+#!/bin/sh
+
+echo "Hello, world!"
+```
+
+`#!/bin/sh` is known as an **interpreter line**.
+
+Let's use a few variables:
+
+```sh
+#!/bin/sh
+
+FIRST_ARGUMENT="$1"
+echo "Hello, world $FIRST_ARGUMENT!"
+```
+
+The variable `$1` contains the first argument passed to the shell script.
+
+If you dereference a variable, you precede it with a dollor sign `$`.
+
+### Using arguments And Variables That Contain Spaces
+
+Using quotation marks is particularly important when working with variables that contain filenames or paths. For example, type the following commands:
+
+```sh
+mkdir "/tmp/My Folder"
+FILENAME="/tmp/My Folder"
+ls "$FILENAME"
+ls $FILENAME
+```
+
+Notice that the shell misinterprets the second `ls` command as being an attempt to list the files in `/tmp/My` and the files in `Folder` 
 
 ## REF
 
