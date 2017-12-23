@@ -56,7 +56,56 @@ Docker is available in two editions: **Community Edition (CE)** and **Enterprise
 
 Docker CE has two update channels, **stable** and **edge**. **Stable** gives you reliable updates every quarter, and **edge** gives you new features every month.
 
-TOREAD: https://docs.docker.com/engine/installation/
+### Uninstall old versions
+
+```
+sudo apt-get remove docker docker-engine docker.io
+```
+
+### Install using the repository
+
+```sh
+# update the apt package index
+sudo apt-get update
+
+# install packages to allow apt to use a repository over HTTPS
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+# Add Docker's official GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# verify key with the fingerprint `9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88`
+sudo apt-key fingerprint 0EBFCD88
+
+# setup stable repository
+sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+
+# install the latest version of Docker CE
+sudo apt-get install docker-ce
+
+# List the available Docker version
+apt-cache madison docker-ce
+
+# install the specific version
+sudo apt-get install docker-ce=<VERSION>
+
+# verify docker CE is installed correctly
+sudo docker run hello-world
+```
+
+The `docker` group is created but no users are added to it. You need to use `sudo` to run Docker commands.
+
+## Read Stack
+
+- [install docker ce on ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#upgrade-docker-ce)
+- [get started](https://docs.docker.com/get-started/#conclusion)
 
 ## REF
 
@@ -64,8 +113,10 @@ TOREAD: https://docs.docker.com/engine/installation/
 - [Docker Docs][docs]
 - [Docker Cloud][cloud]
 - [Install Docker][install]
+    - [Get Docker CE for Ubuntu][ubuntu-ce]
 
 [docker]: https://www.docker.com/
 [docs]: https://docs.docker.com/
 [cloud]: https://cloud.docker.com/
 [install]: https://docs.docker.com/engine/installation/
+[ubuntu-ce]: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#os-requirements
