@@ -136,7 +136,7 @@ sudo rm -rf /var/lib/docker
 
 ## Read Stack
 
-- [install docker ce on ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#upgrade-docker-ce)
+- [Post-installation steps for Linux][postinstall]
 - [get started](https://docs.docker.com/get-started/#conclusion)
 
 ## REF
