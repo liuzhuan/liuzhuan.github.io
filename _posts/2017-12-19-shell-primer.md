@@ -91,8 +91,31 @@ ls $FILENAME
 
 Notice that the shell misinterprets the second `ls` command as being an attempt to list the files in `/tmp/My` and the files in `Folder` 
 
+### Handling Quotation Marks in Strings
+
+```sh
+MYSTRING="The word of the day is \"sedentary\"."
+```
+
+Shell scripts also allow the use of single quote marks. Variables between single quotes are not replaced by their contents.
+
+```
+name='monica'
+echo "$name" # monica
+echo '$name' # $name
+```
+
+### Exporting Shell Variables
+
+The exported variables are commonly known as **environment variables**. The most famous environment variable is `PATH` variable.
+
+## Read Stack
+
+- [Using the export Buitlin][basics]
+
 ## REF
 
 - [Shell Scripting Primer - apple.com][apple-shell-primer]
 
 [apple-shell-primer]: https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Introduction/Introduction.html
+[basics]: https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/shell_scripts/shell_scripts.html

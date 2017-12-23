@@ -14,6 +14,7 @@ title: The Brief History of Computer Science
 | 1988 | The first direct IP connection between Europe and North America was made and Berners-Lee began to openly discuss the possibility of a web-like system at CERN. |
 | 1989/03 | TimBL made a proposal for an information management system. |
 | 1989/11 | TimBL implemented the first successful communication between a HTTP client and server via the Internet |
+| 1991 | Linux kernal is created by Linus |
 | 1993 | NCSA released NCSA Mosaic, the first popular graphical Web browser. |
 | 1994 | Mosaic Communications was founded in Mountain View, California and employed many of the origial NCSA Mosaic authors to create Mosaic Netscape. |
 | 1995/12/04 | JavaScript was born, designed by Brendan Eich. |

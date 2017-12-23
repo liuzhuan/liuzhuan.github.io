@@ -105,6 +105,8 @@ sudo docker run hello-world
 
 > For Ubuntu 17.10 user, if you install as the above commands, you may get the error: "E: Package 'docker-ce' has no installation candidate", you could do this: `sudo vim /etc/apt/sources.list`, changing `stable` into `ege`, and try to install again.
 
+> When run `sudo docker run hello-world`, error is throwed: `Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 127.0.0.53:53: server misbehaving`. Why?
+
 The `docker` group is created but no users are added to it. You need to use `sudo` to run Docker commands.
 
 ## Post-installation steps for Linux
