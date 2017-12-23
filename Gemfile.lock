@@ -51,10 +51,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffi (~> 1.9.18)
   jekyll (~> 3.6.2)
   jekyll-feed (~> 0.6)
   minima (~> 2.0)
   tzinfo-data
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
