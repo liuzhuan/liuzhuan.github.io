@@ -142,7 +142,7 @@ echo $MYVAR
 MYVAR=7 ./printmyvar.sh
 ```
 
-## Deleting Shell Variables
+### Deleting Shell Variables
 
 To delete the variable entirely, use the `unset` builtin. For example:
 
@@ -152,9 +152,69 @@ unset MYVAR
 echo "MYVAR is \"$MYVAR\""
 ```
 
+## Shell Input and Output
+
+The Bourne shell provides a number of ways to read and write files, display text, and get information from the user, including `echo`, `printf`, `read`, `cat`, pipes, and redirection.
+
+### Shell Script Input and Output Using printf and read
+
+```sh
+#!/bin/sh
+
+printf "What is your name? -> "
+read NAME
+echo "Hello, $NAME. Nice to meet you."
+```
+
+The `printf` command does not automatically add a newline to the end of the line, handy for prompts.
+
+The `read` command takes a line of input and separates it into a series of arguments.
+
+You can modify the behavior of the `read` command by modifying the shell variable `IFS` (short for internal field separators). For example:
+
+```sh
+#!/bin/sh
+
+printf "Type three numbers separated by 'q'. -> "
+IFS="q"
+read NUMBER1 NUMBER2 NUMBER3
+echo "You said: $NUMBER1, $NUMBER2, $NUMBER3"
+```
+
+You run this script and enter `1q3q57q65`, the script replies with `You said: 1, 3, 57q65`.
+
+### Bulk I/O Using the `cat` Command
+
+By combining `cat` with `<<`, you can send a large quantity of text to a file. For example:
+
+```sh
+cat > myprogram.c << EOF
+#include <stdio.h>
+int main(int argc, char * argv[]) {
+    // ...
+}
+EOF
+```
+
+### Pipes and Redirection
+
+The true power of shell scripting lies in the ability to read and write files and chain multiple program together in interesting ways.
+
+Each program in a UNIX-based or UNIX-like system has three basic file descriptors: standard input (`stdin`), standard output (`stdout`), and standard error (`stderr`).
+
+Basic File Redirection
+
+```sh
+# create a new file
+echo "a single line of text" > MyFile
+
+# append another line of text
+echo "another line of text" >> MyFile
+```
+
 ## Read Stack
 
-- [Using the export Buitlin][basics]
+- [Shell Input and Output][io]
 
 ## REF
 
@@ -162,3 +222,4 @@ echo "MYVAR is \"$MYVAR\""
 
 [apple-shell-primer]: https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/Introduction/Introduction.html
 [basics]: https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/shell_scripts/shell_scripts.html
+[io]: https://developer.apple.com/library/content/documentation/OpenSource/Conceptual/ShellScripting/ShellInputandOutput/ShellInputandOutput.html
