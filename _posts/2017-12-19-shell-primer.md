@@ -97,7 +97,7 @@ Notice that the shell misinterprets the second `ls` command as being an attempt 
 MYSTRING="The word of the day is \"sedentary\"."
 ```
 
-Shell scripts also allow the use of single quote marks. Variables between single quotes are not replaced by their contents.
+Shell scripts also allow the use of single quote marks. **Variables between single quotes are not replaced by their contents**.
 
 ```
 name='monica'
@@ -107,7 +107,7 @@ echo '$name' # $name
 
 ### Exporting Shell Variables
 
-The exported variables are commonly known as **environment variables**. The most famous environment variable is `PATH` variable.
+The exported variables are commonly known as `environment variables`. The most famous environment variable is `PATH` variable.
 
 ## Read Stack
 
