@@ -8,7 +8,7 @@ Shell 无处不在，异常强大，是每个开发人员必备技能。
 
 写脚本很简单，但是写一个运行正常、稳定可靠的脚本并非易事，需要扎实的基础知识。
 
-This document only covers the **Bourne shell** syntax.
+本文仅包含 **Bourne shell** 语法。
 
 ## 内建命令
 
@@ -47,15 +47,13 @@ echo "control-V control-G"
 echo "^G"
 ```
 
-## Shell Script Basics
+## Shell 脚本基础
 
-It is often easy to write a script, but it can be more challenging to write a script that consistently works well.
+shell 脚本分两派： **Bourne shell** 派和 **C shell** 派。Bourne shell 派更灵活，故应用范围更广。
 
-There are two different set of shell script syntax: the **Bourne shell** syntax and the **C shell** syntax. The Bourne shell syntax is more flexible and thus more widely used.
+Bourne 家族包括： `sh`, `bash`, `zsh`, `ksh`。
 
-Bourne-compatible shells includes: `sh`, `bash`, `zsh`, `ksh`.
-
-### Shell Variables and Printing
+### Shell 变量及输出
 
 ```sh
 #!/bin/sh
@@ -63,9 +61,9 @@ Bourne-compatible shells includes: `sh`, `bash`, `zsh`, `ksh`.
 echo "Hello, world!"
 ```
 
-`#!/bin/sh` is known as an **interpreter line**.
+`#!/bin/sh` 名为 **interpreter line**，用来指定当前脚本文件的解析器。
 
-Let's use a few variables:
+以下是变量的用法：
 
 ```sh
 #!/bin/sh
@@ -74,7 +72,7 @@ FIRST_ARGUMENT="$1"
 echo "Hello, world $FIRST_ARGUMENT!"
 ```
 
-The variable `$1` contains the first argument passed to the shell script.
+变量 `$1` 包含传入 shell 脚本的首个实参。
 
 If you dereference a variable, you precede it with a dollor sign `$`.
 
