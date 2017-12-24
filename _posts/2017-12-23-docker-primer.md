@@ -1,12 +1,10 @@
 ---
 layout: post
-title: Docker Primer
+title: Docker 入门
 date: 2017-12-23
 ---
 
-First, [sign up][cloud] for a Docker ID.
-
-## Concepts
+## 概念
 
 An **image** is a lightweight, stand-alone, executable package that includes everything needed to run a piece of software, including the code, a runtime, libraries, environment variables, and config files.
 
