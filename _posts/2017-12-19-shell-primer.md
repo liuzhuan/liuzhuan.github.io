@@ -99,7 +99,7 @@ MYSTRING="The word of the day is \"sedentary\"."
 
 Shell scripts also allow the use of single quote marks. **Variables between single quotes are not replaced by their contents**.
 
-```
+```sh
 name='monica'
 echo "$name" # monica
 echo '$name' # $name
@@ -108,6 +108,49 @@ echo '$name' # $name
 ### Exporting Shell Variables
 
 The exported variables are commonly known as `environment variables`. The most famous environment variable is `PATH` variable.
+
+### Using the `export` Buitlin
+
+Generally speaking, the first time you assign a value to an environment variable, the Bourne shell creates a new, *local* copy of this shell variable that is specific to your script. Any tool executed from your script is passed the original value inherited from whatever script, tool, or shell that launched it.
+
+To guarantee that your modifications to a shell variable are passed to any script or tool that your shell script calls, you *must* use the `export` builtin.
+
+```sh
+export PATH="/usr/local/bin:$PATH"
+
+# or
+PATH="/usr/local/bin:$PATH"
+export PATH
+```
+
+You can use `printenv` command to obtain a complete list of defined variables and the `grep` to see if it is in the list. For example:
+
+```sh
+printenv | grep -c '^USER'
+```
+
+### Overriding Environment Variables for Child Processes
+
+```sh
+#!/bin/sh
+
+# printmyvar.sh
+echo $MYVAR
+```
+
+```sh
+MYVAR=7 ./printmyvar.sh
+```
+
+## Deleting Shell Variables
+
+To delete the variable entirely, use the `unset` builtin. For example:
+
+```sh
+MYVAR="this is a test"
+unset MYVAR
+echo "MYVAR is \"$MYVAR\""
+```
 
 ## Read Stack
 
