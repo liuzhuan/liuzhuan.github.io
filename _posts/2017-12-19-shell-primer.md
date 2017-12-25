@@ -210,6 +210,22 @@ echo "a single line of text" > MyFile
 echo "another line of text" >> MyFile
 ```
 
+## 文件和目录操作
+
+查找文件 find
+
+```sh
+find [路径] [选项] [操作]
+
+# 查找当前目录下 t 开头，权限是 744 的文件
+find . -name 't*' -perm 744 -print
+
+# 查找
+find /etc -type f -name "rc*" -exec ls -l {} \; 
+```
+
+## 正则表达式
+
 ## Read Stack
 
 - [Shell Input and Output][io]
