@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML2Canvas DEMO</title>
+    <style>
+        .btn {
+            background: #43ac43;
+            padding: 10px 15px;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .btn-container {
+            margin: 10px 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>html2canvas 测试 demo</h1>
+    <div class="target-container js-container">
+        <div id="capture" style="padding: 10px; background: #f5da55; width: 550px; height: 400px;">
+            <img src="avatar.jpg" style="width:100px;height:100px;" />
+            <h4 style="color: #000;">Hello html2Canvas!</h4>
+        </div>
+    </div>
+    
+    <div class="btn-container">
+        <a href="javascript:void(0);" class="btn js-capture">截图</a>
+
+        <a href="javascript:void(0);" class="btn js-hide">隐藏</a>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        var target = document.querySelector('#capture')
+        var container = document.querySelector('.js-container')
+
+        var btn = document.querySelector('.js-capture')
+        btn.onclick = function() {
+            capture(target)
+        }
+
+        var hideBtn = document.querySelector('.js-hide')
+        var visible = true
+        hideBtn.onclick = function() {
+            visible = !visible
+            container.style.display = visible ? 'block' : 'none'
+        }
+
+        function capture(target) {
+            html2canvas(target).then(canvas => {
+                console.log(canvas, '[canvas]')
+                document.body.appendChild(canvas)
+            })
+        }
+    </script>
+</body>
+</html>
