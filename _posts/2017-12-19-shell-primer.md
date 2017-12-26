@@ -226,6 +226,10 @@ find /etc -type f -name "rc*" -exec ls -l {} \;
 
 ## 正则表达式
 
+POSIX 标准将正则表达式分为两类：基本的正则表达式和扩展的正则表达式。
+
+基本的正则表达式包括：`*`, `.`, `^`, `$`, `[]`, `\`, `\<\>`, `\{n\}`, `\{n,\}`, `\{n,m\}`
+
 ## Read Stack
 
 - [Shell Input and Output][io]
