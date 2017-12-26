@@ -11,4 +11,4 @@ date: 2017-12-26
 - [html2canvas - Screenshots with JavaScript][home]
 
 [home]: https://html2canvas.hertzen.com/
-[demo]: ./test/html2canvas-demo/index.html
+[demo]: /test/html2canvas-demo/index.html
