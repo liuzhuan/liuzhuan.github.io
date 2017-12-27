@@ -19,6 +19,12 @@ location / {
 }
 ```
 
+在需要截图的图片标签中设置 `crossorigin="Anonymous"`，比如：
+
+```html
+<img src="http://static.example.com/a.jpg" crossorigin="Anonymous">
+```
+
 截图时传入 `useCORS: true`: 
 
 ```javascript
@@ -35,6 +41,8 @@ html2canvas(target, options)
 ## REF
 
 - [html2canvas - Screenshots with JavaScript][home]
+- [启用了 CORS 的图片][cors]
 
 [home]: https://html2canvas.hertzen.com/
 [demo]: /test/html2canvas-demo/index.html
+[cors]: https://developer.mozilla.org/zh-CN/docs/Web/HTML/CORS_enabled_image
