@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Shell 快捷方式
+title: Shell 常用快捷输入命令
 date: 2017-12-26
 ---
 
