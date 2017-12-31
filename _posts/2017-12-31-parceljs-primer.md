@@ -41,6 +41,20 @@ Parcel 可使用任何类型文件作为入口，但最好还是使用 HTML 或 
 console.log('hello world!')
 ```
 
+Parcel 内置热更新机制，只需运行:
+
+```sh
+parcel index.html
+```
+
+在浏览器中打开 `http://localhost:1234/` 即可浏览。也可使用 `-p <port number>` 覆盖默认端口。
+
+若有自己服务器，可使用 `watch` 模式，文件更换时依然自动热更新，但不启动本地服务器：
+
+```sh
+parcel watch index.html
+```
+
 ## REF
 
 - [Parcel 官方网站][home]
