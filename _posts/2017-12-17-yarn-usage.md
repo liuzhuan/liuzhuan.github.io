@@ -38,6 +38,10 @@ yarn remove <package>
 # 安装所有依赖项
 yarn
 yarn install
+
+# 全局安装
+yarn global add <package> [--prefix]
+yarn global add create-react-app --prefix /usr/local
 ```
 
 ## REF
@@ -45,7 +49,9 @@ yarn install
 - [Yarn 官网][home]
 - [Yarn 安装][install]
 - [Yarn Usage][usage]
+- [yarn global 全局安装][global]
 
 [home]: https://yarnpkg.com/zh-Hans/
 [install]: https://yarnpkg.com/en/docs/install
 [usage]: https://yarnpkg.com/en/docs/usage
+[global]: https://yarnpkg.com/en/docs/cli/global
