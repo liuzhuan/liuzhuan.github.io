@@ -61,6 +61,15 @@ body {
         color: $brand-color-light;
         font-size: 14px;
     }
+
+    img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 540px;
+        display: block;
+        margin: 0 auto;
+    }
 }
 
 .main-footer {
