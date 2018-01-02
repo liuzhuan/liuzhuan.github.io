@@ -3,36 +3,11 @@ layout: post
 title: 设置本地 nginx 的 HTTPS 
 ---
 
-## 生成自签名 SSL 证书
+> 以下方法参考 [citrix][self-signed-san]。
 
-```sh
-# 1. 生成 Private Key
-openssl genrsa -des3 -out server.key 1024
+## 创建密钥
 
-# 2. 生成CSR (Certificate Signing Request) 
-openssl req -new -key server.key -out server.csr
-# 然后根据提示依次输入信息，域名不要填错
-
-# 3. 移除 Passphrase
-cp server.key http://server.key.org
-openssl rsa -in http://server.key.org -out server.key 
-
-# 4.生成自签名证书
-openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-
-# 完成了以上4步后，将 server.crt 和 server.key 移到你想要存放证书的地方。
-```
-
-按照以上步骤生成 `server.key` 和 `server.crt`，在 Chrome 中依然报错：
-
-```
-Subject Alternative Name missing
-The certificate for this site does not contain a Subject Alternative Name extension containing a domain name or IP address.
-```
-
-按照 [citrix][self-signed-san] 的方式试试：
-
-创建 openssl 配置文件 `req.conf`
+首先，进入 nginx 配置目录，创建 openssl 配置文件 `req.conf`，其中的 `CN`, `DNS.1`, `DNS.2` 等需要替换为自己的域名：
 
 ```
 [req]
@@ -56,13 +31,11 @@ DNS.2 = company.com
 DNS.3 = company.net
 ```
 
-执行如下命令创建证书：
+接着，执行如下命令，创建证书：
 
 ```
 openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout cert.pem -out cert.pem -config req.conf -extensions 'v3_req'
 ```
-
-**这个方法是好用的！**热烈推荐！
 
 ## 配置 nginx
 
