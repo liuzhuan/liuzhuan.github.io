@@ -48,9 +48,32 @@ iOS 11 的 WebKit 包含一个 [CSS 函数][env]：`env()`，以及[四个变量
 }
 ```
 
+不支持 `env()` 的浏览器会忽略它。因此，每条 `env()` 样式声明最好考虑兼容性。
+
 > iOS 11 最早的函数名为 `constant()`，自打 Safari Technology Preview 41 及 iOS 11.2 beta 开始，`constant()` 遭弃用，替换为 `env()`。若有必要，可利用 CSS 回退机制使用两者，其他情况下应优先使用 `env()`。
 
-TO BE CONTINUE
+## 使用 `min()` 和 `max()` 整合
+
+> 本小节的特性存在于 Safari Technology Preview 41 和 iOS 11.2 beta 版中。
+
+如果网站设计采用了安全区域规范，就很难同时设定最小内边距。在上面例子中，如果把 12px 左内边距替换为 `env(safe-area-inset-left)`，当手机恢复竖直状态时，安全区域左边距会变为 0，文字就会紧贴屏幕左边界。
+
+[![no margins](https://webkit.org/wp-content/uploads/no-margins.png)](https://webkit.org/demos/safe-area-insets/3-safe-area-constants.html)
+
+为了解决这个问题，我们可以将边距设定为默认边距和安全区域边距两者的较大值。通过全新的 [CSS 函数 `min()` 和 `max()`][math] 可以实现。
+
+在本例中，我们需使用 `max()`：
+
+```css
+@supports(padding: max(0px)) {
+    .post {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+    }
+}
+```
+
+To Be Continue
 
 ## REF
 
@@ -64,3 +87,5 @@ TO BE CONTINUE
 [uikit]: https://developer.apple.com/documentation/uikit/uiview/positioning_content_relative_to_the_safe_area
 [env]: https://github.com/w3c/csswg-drafts/pull/1817
 [props]: https://github.com/w3c/csswg-drafts/pull/1819
+[math]: https://drafts.csswg.org/css-values/#calc-notation
+[]: https://drafts.csswg.org/css-variables/#invalid-variables
