@@ -45,7 +45,10 @@ server {
     server_name www.example.com;
     ssl_certificate cert.pem;
     ssl_certificate_key cert.pem;
-    ...
+    location / {
+        root /Users/example/hello/world;
+        index index.html index.htm;
+    }
 }
 ```
 
