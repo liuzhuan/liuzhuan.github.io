@@ -73,7 +73,11 @@ iOS 11 的 WebKit 包含一个 [CSS 函数][env]：`env()`，以及[四个变量
 }
 ```
 
-To Be Continue
+> ⚠️ 注意：需要使用 `@supports` 检测 `min` 和 `max` 是否可用。
+
+在上面例子中，当手机处于竖直状态时，`env(safe-area-inset-left)` 返回 0px，此时 `max()` 函数得到 12px。在水平状态下，由于传感器外壳的存在，`env(safe-area-inset-left)` 会变得较大，从而被 `max()` 函数返回。这样，重要内容始终可见。
+
+[![max safe areas insets](https://webkit.org/wp-content/uploads/max-safe-areas-insets.png)](https://webkit.org/demos/safe-area-insets/4-min-max.html)
 
 ## REF
 
@@ -88,4 +92,4 @@ To Be Continue
 [env]: https://github.com/w3c/csswg-drafts/pull/1817
 [props]: https://github.com/w3c/csswg-drafts/pull/1819
 [math]: https://drafts.csswg.org/css-values/#calc-notation
-[]: https://drafts.csswg.org/css-variables/#invalid-variables
+[invalid]: https://drafts.csswg.org/css-variables/#invalid-variables
