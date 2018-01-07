@@ -2,6 +2,7 @@
 layout: post
 title: Hello Jekyll
 date: 2017-12-08
+math: true
 ---
 
 今天终于在 Github 上成功搭建起 Jekyll ，虽然很丑，但是因为是自己定制的丑，还是很开心。
@@ -26,12 +27,22 @@ sudo apt install jekyll
 
 可以使用 `bundle show <theme>` 查看主题所在的文件夹。比如：`bundle show minima`。
 
+## 使用数学公式
+
+Inline math: $$2^3=8$$
+
+$$
+\int_m^n{(a + b)}dt = c
+$$
+
 ## REF
 
 - [jekyll homepage][jekyll]
 - [Creating and Hosting a Personal Site on GitHub][guides]
+- [Jekyll 中使用 KaTex][katex]
 
 [jekyll]: https://jekyllrb.com/
 [jekyll-theme]: https://jekyllrb.com/docs/themes/
 [bundler]: http://bundler.io/
 [guides]: http://jmcglone.com/guides/github-pages/
+[katex]: https://frankindev.com/2017/02/08/using-katex-in-jekyll/
