@@ -55,16 +55,58 @@ gitbook ls-remote
 gitbook build ./ --log=debug --debug
 ```
 
-To Be Continue
+## 配置
+
+配置可以使用 `book.json`。比如：
+
+```json
+{
+    "root": "./docs"
+}
+```
+
+## 使用数学公式
+
+为了在 GitBook 中使用数学公式，可以使用 KaTex 插件。首先在 `book.json` 添加如下：
+
+```json
+{
+    "plugins": ["katex"]
+}
+```
+
+然后运行：`gitbook install`。
+
+嵌入方法包括行内公式和块级公式，如下：
+
+```
+Inline math: $$\int_{-\infty}^\intfy g(x) dx$$
+
+Block math:
+
+$$
+\int_{-\infty}^\intfy g(x) dx
+$$
+
+或使用模版语法：
+
+{% math %}\int_{-\infty}^\infty g(x) dx{% endblock %}
+```
 
 ## REF
 
 - [GitBook on GitHub][github]
 - [GitBook.com][gitbook]
 - [Setup and Installation of GitBook][setup]
+- [plugin-katex: Math typesetting using KaTex][katex]
+- [Directory Structure][docs]
+- [GitBook Configuration][config]
 
 [github]: https://github.com/GitbookIO/gitbook
 [gitbook]: https://www.gitbook.com/
 [js]: https://www.gitbook.com/book/gitbookio/javascript/details
 [examples]: https://github.com/GitbookIO/gitbook/blob/master/docs/examples.md
 [setup]: https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md
+[katex]: https://github.com/GitbookIO/plugin-katex
+[docs]: https://github.com/GitbookIO/gitbook/blob/master/docs/structure.md
+[config]: https://github.com/GitbookIO/gitbook/blob/master/docs/config.md
