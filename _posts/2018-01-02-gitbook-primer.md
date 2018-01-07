@@ -87,10 +87,6 @@ Block math:
 $$
 \int_{-\infty}^\intfy g(x) dx
 $$
-
-或使用模版语法：
-
-{% math %}\int_{-\infty}^\infty g(x) dx{% endblock %}
 ```
 
 ## REF
