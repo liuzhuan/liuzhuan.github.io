@@ -8,6 +8,10 @@ parcel，字面含义指“包裹，小包”。在前端领域指一款“极�
 
 它利用多核处理提供极快速度，且无需任何配置。
 
+我们已经有 webpack 和 Rollup, 什么场景下使用 Parcel?
+
+[Indrek Lasn][freecodecamp] 认为，Parcel 适合中小型项目（代码行数小于 15k），webpack 适合大型企业级项目，而 Rollup 适合开发 npm package。
+
 ## 快速开始
 
 首先使用 Yarn 或 npm 安装：
@@ -55,13 +59,65 @@ parcel index.html
 parcel watch index.html
 ```
 
+## SCSS
+
+只需安装 `node-sass` 即可：
+
+```sh
+npm i node-sass && touch styles.scss
+```
+
+然后编写样式文件，并在 js 文件中导入：
+
+styles.scss
+
+```scss
+body {
+    background: steelblue;
+    color: white;
+}
+```
+
+index.js
+
+```javascript
+import './styles.scss'
+
+document.write('hmr + hmr + hmr')
+```
+
+## 生产构建
+
+只需在 `package.json` 中增加 `build` 选项：
+
+```diff
+"scripts": {
+    "start": "parcel index.html",    
++   "build": "parcel build index.js"
+}
+```
+
+> 构建目标分为为 html 和 js，两者有什么不同？
+
+当然，也可以指定一个输出路径：
+
+```
+parcel build index.js -d build/output
+```
+
+## React
+
+[To Be Continue][freecodecamp]
+
 ## REF
 
 - [Parcel 官方网站][home]
 - [Parcel github 页][github]
 - [🚀 快速开始][started]
+- [Everything You Need To Know About Parcel: The Blazing Fast Web App Bundler][freecodecamp], by Indrek Lasn, 2017/12/17
 
 [home]: https://parceljs.org/
 [github]: https://github.com/parcel-bundler/parcel
 [devongovett]: https://github.com/devongovett
 [started]: https://parceljs.org/getting_started.html
+[freecodecamp]: https://medium.freecodecamp.org/all-you-need-to-know-about-parcel-dbe151b70082
