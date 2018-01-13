@@ -6,11 +6,35 @@ date: 2017-12-17
 
 Yarn 是 Facebook 出品的打包器，其优势在于快、稳。
 
+## 安装
+
 在 macOS 安装可用 Homebrew :
 
 ```sh
 brew install yarn
 ```
+
+在 Ubuntu 上安装方式如下：
+
+```sh
+# configure repository
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+# add yarn
+sudo apt-get update && sudo apt-get install yarn
+```
+
+## 配置
+
+yarn 安装的全局包路径，可以由 `yarn global bin` 获得。需将其加入个人配置文件中：
+
+```sh
+# add the following line into .profile, .bashrc, .zshrc etc.
+export PATH="$PATH:`yarn global bin`"
+```
+
+## 命令
 
 其常用命令如下：
 
