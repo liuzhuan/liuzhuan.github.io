@@ -3,8 +3,10 @@ layout: default
 ---
 
 <h1>{{page.title}}</h1>
-<p class="meta">{{ page.date | date_to_string }}</p>
+<p class="meta">作者：刘专，日期：{{ page.date | date: "%Y 年 %m 月 %d 日" }}</p>
 
 <div class="post">
     {{ content }}
 </div>
+
+{% include copyright.html %}
