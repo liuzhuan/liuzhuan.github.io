@@ -5,6 +5,8 @@ date: 2018-02-04
 math: true
 ---
 
+<img src="/imgs/grokking-algorithms.jpg" class="book-cover">
+
 《图解算法》作者是 *Aditya Y. Bhargava*，内容浅显易懂，他的个人博客 [adit.io][adit] 干货内容不少，有丰富插图，十分有趣。本书在亚马逊有 [kindle 版][amazon]。
 
 本书代码使用 Python 2.7。
