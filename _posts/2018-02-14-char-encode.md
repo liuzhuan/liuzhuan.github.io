@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [转载] 网页编码就是那点事
+title: 【转】网页编码就是那点事
 date: 2018-02-14
 math: true
 ---
