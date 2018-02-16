@@ -74,6 +74,14 @@ body {
         display: block;
         margin: 0 auto;
     }
+
+    figcaption {
+        text-align: center;
+        color: #999;
+        font-size: 0.8em;
+        line-height: 2.6em;
+        font-weight: 200;
+    }
 }
 
 .main-footer {
