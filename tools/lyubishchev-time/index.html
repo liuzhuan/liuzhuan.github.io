@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>柳比歇夫时间管理小工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>柳比歇夫时间管理小工具</h1>
+    <p>没有后端，数据储存在前端 localStorage。</p>
+    <div class="input-container">
+        <input type="text">
+        <button>增加</button>
+    </div>
+    <div id="app">
+        <ul>
+            <li v-for="item in log">
+                {{ item.time }} - {{ item.label }}
+            </li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
