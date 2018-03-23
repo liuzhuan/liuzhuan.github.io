@@ -8,21 +8,21 @@ JavaScript 单线程，非阻塞，异步，并发的运行时
 
 拥有一个调用栈（`call stack`），一个事件循环（`event loop`），一个回调队列（`callback queue`），一些其他的 api 等。
 
-![JavaScript Frameworks](./assets/eventloop/frameworks.jpeg)
+![JavaScript Frameworks](/assets/eventloop/frameworks.jpeg)
 
 V8 引擎包括一个堆 heap 和一个栈 stack。堆用于内存分配，栈用于执行上下文。
 
-![v8](./assets/eventloop/v8.jpeg)
+![v8](/assets/eventloop/v8.jpeg)
 
 ## 调用栈
 
 单线程 == 单调用栈 == 一次执行一个事务
 
-![callstack](./assets/eventloop/callstack.jpeg)
+![callstack](/assets/eventloop/callstack.jpeg)
 
 如果错误的使用递归，会造成爆栈。
 
-![callstack overflow](./assets/eventloop/callstack-overflow.jpeg)
+![callstack overflow](/assets/eventloop/callstack-overflow.jpeg)
 
 ## 阻塞
 
@@ -38,7 +38,7 @@ V8 引擎包括一个堆 heap 和一个栈 stack。堆用于内存分配，栈�
 
 JavaScript 生活在单线程的世界，但是它还有很多兄弟线程，用来执行 `setTimeout`, `ajax` 之类的异步调用。在浏览器这个大家庭，JavaScript，网络 API 和事件循环一起合作，共同完成交互。
 
-![demo](./assets/eventloop/living-demo.jpeg)
+![demo](/assets/eventloop/living-demo.jpeg)
 
 ## 高级技巧
 
