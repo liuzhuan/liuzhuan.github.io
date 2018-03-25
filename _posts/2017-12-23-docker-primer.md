@@ -112,13 +112,84 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 $ docker pull ubuntu:14.04
 ```
 
+> 对于中国区用户，可以增加 `https://registry.docker-cn.com` 作为镜像网站。详见 [Docker 中国][mirror]。
+
 镜像文件一般由若干层（layer）组成。
+
+严格讲，镜像的仓库名中应该添加注册服务器地址。默认使用官方的 `registry.hub.docker.com` 地址。若要使用其他仓库，需要显示声明。
+
+比如，从网易蜂巢的镜像源下载 ubuntu:14.04：
+
+```sh
+$ docker pull hub.c.163.com/public/ubuntu:14.04
+```
+
+下载镜像到本地后，就可以随时使用该镜像了。比如：
+
+```sh
+# -it 指示 Docker 分配一个伪终端（pseudo-TTY），链接到容器的标准输入
+$ docker run -it ubuntu:14.04 bash
+
+$ ping localhost
+$ exit
+```
+
+### 查看镜像信息
+
+使用 `docker images` 命令可以列出本地主机上已有的镜像信息。
+
+```sh
+$ docker images
+```
+
+### 添加标签
+
+可以使用 `docker tag` 为本地镜像增加新的标签。
+
+```sh
+$ docker tag ubuntu:latest myubuntu:latest
+```
+
+### 查看详细信息
+
+使用 `docker inspect` 可以获取镜像的详细信息。
+
+### 查看镜像历史
+
+使用 `docker history` 列出各层的创建信息。
+
+### 搜寻镜像
+
+使用 `docker search` 可以搜寻远端仓库中共享的镜像。比如：
+
+```sh
+# 搜索时可以增加过滤条件，比如自动构建，并且评价分数至少3颗星
+$ docker search --filter is-automated=true --filter stars=3 nginx
+```
+
+### 删除镜像
+
+使用 `docker rmi` 可以删除镜像。比如：
+
+```sh
+$ docker rmi ubuntu:latest
+```
+
+## 创建镜像
+
+创建镜像的主要有三种：
+
+- 基于已有镜像的容器创建
+- 基于本地模板导入
+- 基于 `Dockerfile` 创建
 
 （未完待续。。。）
 
 ## REF
 
 - [Docker 技术入门与实战（第2版）][book]，杨保华、戴王剑、曹亚仑编著，2017年3月出版，机械工业出版社
+- [Docker 入门教程][docker-ryf]，阮一峰，2018/02/09
+- [Docker 微服务教程][docker-ryf-micro], 阮一峰，2018/02/13
 - [Docker Homepage][docker]
 - [Docker Docs][docs]
 - [Install Docker for Mac][install-docker-mac]
@@ -132,3 +203,6 @@ $ docker pull ubuntu:14.04
 [hub]: https://hub.docker.com
 [docker-for-mac]: https://docs.docker.com/docker-for-mac/
 [install-docker-mac]: https://docs.docker.com/docker-for-mac/install/
+[docker-ryf]: http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html
+[docker-ryf-micro]: http://www.ruanyifeng.com/blog/2018/02/docker-wordpress-tutorial.html
+[mirror]: https://www.docker-cn.com/registry-mirror
