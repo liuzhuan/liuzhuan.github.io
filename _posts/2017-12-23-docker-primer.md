@@ -54,6 +54,68 @@ Docker for Mac 是一款 Docker 社区版应用。它的安装包囊括了 Mac �
 
 在官网[下载页面][install-docker-mac]下载安装即可。
 
+验证是否安装成功，可以执行如下命令：
+
+```sh
+$ docker version
+
+Client:
+ Version:	17.12.0-ce
+ API version:	1.35
+ Go version:	go1.9.2
+ Git commit:	c97c6d6
+ Built:	Wed Dec 27 20:03:51 2017
+ OS/Arch:	darwin/amd64
+
+Server:
+ Engine:
+  Version:	17.12.0-ce
+  API version:	1.35 (minimum version 1.12)
+  Go version:	go1.9.2
+  Git commit:	c97c6d6
+  Built:	Wed Dec 27 20:12:29 2017
+  OS/Arch:	linux/amd64
+  Experimental:	true
+```
+
+若能出现 `Client` 和 `Server` 信息，则说明安装成功。
+
+下面启动一个 nginx 容器，检查能正确获取镜像并运行：
+
+```sh
+# --detach, -d      后台运行容器，并打印容器 ID
+# --publish, -p     将容器端口发布到主机（host）
+# --name            给容器一个名称
+$ docker run -d -p 80:80 --name webserver nginx
+```
+
+> 各参数具体含义可以参考[文档][cli-run]。
+
+然后使用 [`docker ps`][cli-ps] 查看当前运行的容器：
+
+```sh
+$ docker ps
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+08f00d7e9e3a        nginx               "nginx -g 'daemon of…"   2 minutes ago       Up 2 minutes        0.0.0.0:80->80/tcp   webserver
+```
+
+## 使用 Docker 镜像
+
+### 获取镜像
+
+可以使用 `docker pull` 命令直接从 Docker Hub 镜像源下载镜像。该命令的格式为 `docker pull [OPTIONS] NAME[:TAG|@DIGEST]`。其中，`NAME` 是镜像仓库的名称，`TAG` 是镜像的标签（通常表示版本信息）。
+
+例如获取一个 Ubuntu 14.04 系统的基础镜像可以使用如下命令：
+
+```sh
+$ docker pull ubuntu:14.04
+```
+
+镜像文件一般由若干层（layer）组成。
+
+（未完待续。。。）
+
 ## REF
 
 - [Docker 技术入门与实战（第2版）][book]，杨保华、戴王剑、曹亚仑编著，2017年3月出版，机械工业出版社
@@ -64,6 +126,8 @@ Docker for Mac 是一款 Docker 社区版应用。它的安装包囊括了 Mac �
 
 [docker]: https://www.docker.com/
 [docs]: https://docs.docker.com/
+[cli-run]: https://docs.docker.com/engine/reference/commandline/run/
+[cli-ps]: https://docs.docker.com/engine/reference/commandline/ps/
 [book]: https://book.douban.com/subject/28489095/
 [hub]: https://hub.docker.com
 [docker-for-mac]: https://docs.docker.com/docker-for-mac/
