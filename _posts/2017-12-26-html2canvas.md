@@ -14,15 +14,22 @@ date: 2017-12-26
 
 ```
 location / {
-    add_header 'Access-Control-Allow-Origin' 'https://m2.qschou.com' always;
+    add_header 'Access-Control-Allow-Origin' 'https://m.example.com' always;
     ...
 }
 ```
 
-在需要截图的图片标签中设置 `crossorigin="Anonymous"`，比如：
+在需要截图的图片标签中设置 `crossOrigin="Anonymous"`，比如：
 
-```html
-<img src="http://static.example.com/a.jpg" crossorigin="Anonymous">
+```js
+const img = new Image()
+img.crossOrigin = 'Anonymous'
+img.onload = function() {
+    const width = img.width
+    const height = img.height
+    // do something...
+}
+img.src = 'https://static.example.com/a.jpg'
 ```
 
 截图时传入 `useCORS: true`: 
