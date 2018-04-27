@@ -14,9 +14,53 @@ date: 2018-03-21
 
 打印堆栈。
 
+```js
+function outer() {
+    inner()
+}
+
+function inner() {
+    console.trace()
+}
+
+outer()
+```
+
+输出内容：
+
+```
+inner @ trace-demo:6
+outer @ trace-demo:2
+(anonymous) @ trace-demo:9
+```
+
 ## 2. `console.time()` && `console.timeEnd()`
 
-掐时间。
+掐时间，可以为不同时间段设置不同的标签。
+
+```js
+function loop(num) {
+    var res = num
+    for (var i = 0; i < num; i++) {
+        res = res * 2 
+    }
+}
+
+console.time('loop1')
+loop(100)
+console.timeEnd('loop1')
+
+console.time('loop2')
+loop(100000)
+console.timeEnd('loop2')
+```
+
+输出内容如下：
+
+```js
+loop1: 0.06982421875ms
+loop2: 1.057861328125ms
+```
 
 ## 3. `console.memory`
 
