@@ -473,7 +473,7 @@ classic writable stream 很简单，只需要定义 `.write(buf)`, `.end(buf)` �
     - [Getting Started][started]
     - [Recipes][recipes]
     - [Articles][articles]
-- [Stream | Node.js Documentation][api]
+- [Stream - Node.js Documentation][api]
 
 [gulpjs]: https://gulpjs.com
 [started]: https://github.com/gulpjs/gulp/blob/v3.9.1/docs/getting-started.md
