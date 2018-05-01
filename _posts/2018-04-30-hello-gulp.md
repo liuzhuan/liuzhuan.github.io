@@ -463,7 +463,13 @@ classic writable stream
 
 classic writable stream 很简单，只需要定义 `.write(buf)`, `.end(buf)` 和 `.destroy()` 即可。
 
-未完待续。。。
+## 编写 `gulpfile.js`
+
+// TODO:
+
+## 编写插件
+
+// TODO:
 
 ## REF
 
@@ -473,6 +479,7 @@ classic writable stream 很简单，只需要定义 `.write(buf)`, `.end(buf)` �
     - [Getting Started][started]
     - [Recipes][recipes]
     - [Articles][articles]
+    - [Writing a plugin][plugin]
 - [Stream - Node.js Documentation][api]
 
 [gulpjs]: https://gulpjs.com
@@ -483,3 +490,4 @@ classic writable stream 很简单，只需要定义 `.write(buf)`, `.end(buf)` �
 [handbook]: https://github.com/substack/stream-handbook
 [api]: https://nodejs.org/dist/latest/docs/api/stream.html
 [through]: https://www.npmjs.com/package/through
+[plugin]: https://github.com/gulpjs/gulp/blob/v3.9.1/docs/writing-a-plugin/README.md
