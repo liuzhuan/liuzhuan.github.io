@@ -20,7 +20,11 @@ Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 �
 
 Mint UI，基于 Vue.js 的移动端组件，同样来自饿了么前端团队。
 
-To Be Continue
+## [Cube UI](https://didi.github.io/cube-ui/#/zh-CN)
+
+> 基于 Vue.js 实现的精致移动端组件库
+
+未完待续。。。
 
 ## REF
 
@@ -34,6 +38,7 @@ To Be Continue
 - [muse-ui][muse]
 - [N3-componenets][n3]
 - [awesome-vue][awesome]
+- [Cube UI][cube-ui]
 
 [mint.github]: https://github.com/ElemeFE/mint-ui
 [mint]: http://mint-ui.github.io/#!/zh-cn
@@ -45,3 +50,4 @@ To Be Continue
 [awesome]: https://github.com/vuejs/awesome-vue
 [vux]: https://vux.li/#/
 [vux.github]: https://github.com/airyland/vux
+[cube-ui]: https://github.com/didi/cube-ui
