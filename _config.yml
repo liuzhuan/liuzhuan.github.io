@@ -1,10 +1,10 @@
-title: liuz's personal blog
-name: liuz's blog
+title: 刘专的博客
+name: 刘专
 email: liuzhuankyzy@gmail.com
 description: >-
   阅读、书写和编码，输出是最好的学习方法。
 baseurl: ""
-url: "http://www.1zh.tech"
+url: "https://www.1zh.tech"
 github_username: liuzhuan
 
 markdown: kramdown
