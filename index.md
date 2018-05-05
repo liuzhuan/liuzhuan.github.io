@@ -1,4 +1,4 @@
 ---
 layout: home
-title: liuz's personal blog
+title: 刘专的博客
 ---
