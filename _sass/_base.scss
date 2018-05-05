@@ -1,6 +1,6 @@
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
-ul, ol, dl, figure,
+ul, ol, dl, figure, table,
 %vertical-rhythm {
   margin-bottom: $spacing-unit / 2;
 }
@@ -16,4 +16,13 @@ ul, ol, dl, figure,
   a {
     color: inherit;
   }
+}
+
+td, th {
+  padding: 4px 10px;
+  border: 1px solid #CCC;
+}
+
+th {
+  background: #DDD;
 }
