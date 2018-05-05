@@ -5,6 +5,8 @@ description: >-
   阅读、书写和编码，输出是最好的学习方法。
 baseurl: ""
 url: "https://www.1zh.tech"
+plugins:
+  - jekyll-sitemap
 github_username: liuzhuan
 
 markdown: kramdown

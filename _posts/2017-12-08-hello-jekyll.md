@@ -21,7 +21,9 @@ gem install jekyll bundler
 sudo apt install jekyll
 ```
 
-> [bundler][bundler] provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
+## bundler
+
+[bundler][bundler] provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
 
 ## 主题 theme
 
@@ -35,6 +37,19 @@ $$
 \int_m^n{(a + b)}dt = c
 $$
 
+## 使用网站地图
+
+[jekyll-sitemap][sitemap] 可以自动创建网站地址。用法如下：
+
+1. 在 Gemfile 增加 `gem 'jekyll-sitemap'`，然后运行 `bundle`
+2. 在网站 `_config.yml` 中增加如下内容：
+
+```yml
+...
+plugins:
+    - jekyll-sitemap
+```
+
 ## REF
 
 - [jekyll homepage][jekyll]
@@ -46,3 +61,4 @@ $$
 [bundler]: http://bundler.io/
 [guides]: http://jmcglone.com/guides/github-pages/
 [katex]: https://frankindev.com/2017/02/08/using-katex-in-jekyll/
+[sitemap]: https://github.com/jekyll/jekyll-sitemap
