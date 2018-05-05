@@ -135,11 +135,38 @@ a3 === a4
 
 正则表达式标示位表示高层的模式匹配规则。
 
+| 字符 | 含义       |
+| --- | ---------- |
+| `i` | 不区分大小写 |
+| `g` | 全局搜索模式 |
+| `m` | 多行搜索模式 |
+
 ### ES6+ 新增语法
 
 TODO
 
 ## String 的函数
+
+### search()
+
+String 支持正则的函数有四种，最简单的是 `search()`，它返回字符串中匹配正则的第一个字符的索引值，或者没有匹配时，返回 -1。
+
+```js
+"JavaScript".search(/script/i)
+// => 4
+```
+
+如果 `search` 的参数不是正则表达式类型，会被 `RegExp` 构造函数转换为正则表达式。`search` 不支持全局搜索，会忽略 `g` 标识符。
+
+### replace()
+
+TODO
+
+### match()
+
+TODO
+
+### split()
 
 TODO
 
@@ -149,9 +176,15 @@ TODO
 
 ### RegExp 属性
 
+每个 RegExp 有五个属性。
+
 TODO
 
 ### RegExp 方法
+
+exec()
+
+test()
 
 TODO
 
