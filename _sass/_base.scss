@@ -26,3 +26,16 @@ td, th {
 th {
   background: #DDD;
 }
+
+#markdown-toc {
+  line-height: 1.6;
+  list-style-type: none;
+  padding: 10px 20px;
+  background: #EEE;
+  max-width: 300px;
+
+  ul {
+    line-height: 1.2;
+    list-style-type: disc;
+  }
+}

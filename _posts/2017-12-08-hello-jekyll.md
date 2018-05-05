@@ -5,11 +5,14 @@ date: 2017-12-08
 math: true
 ---
 
+* TOC
+{:toc}
+
 今天终于在 Github 上成功搭建起 Jekyll ，虽然很丑，但是因为是自己定制的丑，还是很开心。
 
 以后会慢慢美化这个博客，将更多的知识输出出来。
 
-## Install
+## 安装
 
 ```sh
 # in ubuntu you need install ruby before you get gem
@@ -25,11 +28,11 @@ sudo apt install jekyll
 
 [bundler][bundler] provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed.
 
-## 主题 theme
+## 主题
 
 可以使用 `bundle show <theme>` 查看主题所在的文件夹。比如：`bundle show minima`。
 
-## 使用数学公式
+## 数学公式
 
 Inline math: $$2^3=8$$
 
@@ -37,7 +40,7 @@ $$
 \int_m^n{(a + b)}dt = c
 $$
 
-## 使用网站地图
+## 网站地图
 
 [jekyll-sitemap][sitemap] 可以自动创建网站地址。用法如下：
 
@@ -48,6 +51,15 @@ $$
 ...
 plugins:
     - jekyll-sitemap
+```
+
+## 目录
+
+如果 Jekyll 使用了 kramdown 引擎，那么会很容易。根据 *Sean Buscay* 的[博客][toc]，只需要在待插入目录的地方加入以下代码即可：
+
+```
+* TOC
+{:toc}
 ```
 
 ## REF
@@ -62,3 +74,4 @@ plugins:
 [guides]: http://jmcglone.com/guides/github-pages/
 [katex]: https://frankindev.com/2017/02/08/using-katex-in-jekyll/
 [sitemap]: https://github.com/jekyll/jekyll-sitemap
+[toc]: http://www.seanbuscay.com/blog/jekyll-toc-markdown/
