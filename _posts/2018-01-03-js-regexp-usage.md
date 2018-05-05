@@ -12,6 +12,40 @@ date: 2018-01-03
 
 ## 基本语法
 
+JavaScript 使用 `RegExp` 类代表正则表达式。`String` 和 `RegExp` 皆有许多函数，用于模式匹配和查找替换。
+
+我们通常使用正则表达式的字面量语法，比如 `/s$/`。需要注意的是，于字符串字面量不同，每个正则表达式字面量都是重新生成的，即拥有相同值的正则表达式字面量不是严格相等的。可以通过以下代码验证：
+
+```js
+var a1 = /a/
+var a2 = /a/
+a1 === a2
+// ==> false
+
+var a3 = 'a'
+var a4 = 'a'
+a3 === a4
+// ==> true
+```
+
+正则表达式字面量字符（Literal Characters）
+
+| 字符      | 匹配的值                                                       |
+| -------- | ------------------------------------------------------------- |
+| `\0`     | `NUL` 字符（`\u0000`）                                         |
+| `\t`     | Tab（`\u0009`）                                                |
+| `\n`     | 换行（`\u000A`）                                               |
+| `\v`     | 垂直 Tab（`\u000B`）                                           |
+| `\f`     | Form Feed（`\u000C`）                                          |
+| `\r`     | 回车（`\u000D`）                                               |
+| `\xnn`   | 十六进制数字 `nn` 表示的拉丁字符；比如 `\x0A` 相当于 `\n`           |
+| `\uxxxx` | 十六进制数字 `xxxx` 表示的 Unicode 字符；比如 `\u0009` 相当于 `\t` |
+| `\cX`    | 控制字符 `^X`；比如，`\cJ` 相当于换行符 `\n`                      |
+
+TODO
+
+### ES6+ 新增语法
+
 TODO
 
 ## API
@@ -40,12 +74,14 @@ TODO
 
 ## REF
 
+- [JavaScript 权威指南（第6版）][definitive] by *David Flanagan*，第10章《Pattern Matching with Regular Expressions》
 - [正则表达式介绍及常见用法][aliyun]，周兆熊，2016/07/25
-- [Regular Expression Language - Quick Reference - microsoft][ms], 2017/03/30
 - [String.prototype.match() - MDN][string.match]
 - [Regular expression - wikipedia][wiki]
+- [New regular expression features - exploring es6][es6], by *Dr. Axel Rauschmayer*
 
 [aliyun]: https://yq.aliyun.com/articles/254339
-[ms]: https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference
 [wiki]: https://en.wikipedia.org/wiki/Regular_expression
 [string.match]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match
+[definitive]: https://book.douban.com/subject/5303032/
+[es6]: http://exploringjs.com/es6/ch_regexp.html
