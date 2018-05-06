@@ -160,7 +160,58 @@ String 支持正则的函数有四种，最简单的是 `search()`，它返回�
 
 ### replace()
 
-TODO
+`replace()` 用来查找替换。它的函数签名如下：
+
+```js
+string.replace(regexp, replacement)
+```
+
+`regexp` 表示待匹配的正则表达式，`replacement` 是替换后的字符串或者函数。
+
+对于未指定 `g` 标志位的正则表达式，它只替换第一个发现的匹配字符串。
+
+```js
+'hello world hello regexp'.replace(/hello/, '你好')
+// => "你好 world hello regexp"
+```
+
+如果正则表达式有 `g` 标志位，`replace()` 会替换所有的匹配字符：
+
+```js
+'hello world hello regexp'.replace(/hello/g, '你好')
+// => "你好 world 你好 regexp"
+```
+
+`replace()` 的功能不止于此。对于捕获到的匹配群组，可以使用 `$1`、`$2` 等分别指代第一个群组文本，第二个群组文本等。因此可以在 `replacement` 使用 `$1` 等实现部分字串替换。
+
+比如，我们想将 `{{ hello }} is great!` 中的双花括号替换为单花括号，可以这么做：
+
+```js
+'{{ hello }} is great!'.replace(/\{\{(.*?)\}\}/, '{$1}')
+```
+
+`replacement` 可以出现的特殊字符小结如下：
+
+| 字符                    | 在 replacement 的含义           |
+| ---------------------- | ------------------------------ |
+| `$1`, `$2`, ..., `$99` | 匹配正则的群组子串，从第1个到第99个 |
+| `$&`                   | 匹配正则的字符串                 |
+| <code class="hightlighter-rouge">$`</code> | 匹配字符串左侧的字符串 |
+| `$'`                   | 匹配字符串右侧的字符串            |
+| `$$`                   | 美元符号字面量                   |
+
+ECMAScript v3 规定，`replacement` 参数还可以是函数，每次匹配后都会执行，函数返回的结果会当作替换文本。
+
+函数的第一个参数表示匹配的字符串，后面的参数是匹配的群组子串，数量从零到多个不等，下一个参数是匹配子串在原字符串的位置索引，最后一个参数是字符串本身。
+
+如果要将所有单词变为首字母大写：
+
+```js
+text.replace(/\b\w+\b/g, function(word) {
+    return word.substring(0, 1).toUpperCase() + 
+        word.substring(1)
+})
+```
 
 ### match()
 
