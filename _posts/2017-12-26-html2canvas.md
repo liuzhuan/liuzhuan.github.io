@@ -45,6 +45,12 @@ html2canvas(target, options)
     })
 ```
 
+### useCORS
+
+当设定 `{ useCORS: true }` 后，html2canvas 到底做了什么操作？
+
+TODO
+
 ## REF
 
 - [html2canvas - Screenshots with JavaScript][home]
