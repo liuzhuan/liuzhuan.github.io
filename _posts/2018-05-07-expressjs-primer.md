@@ -161,6 +161,21 @@ app.listen(3000)
 
 ### 模式匹配的路由
 
+可以使用正则表达式限制 URL 参数范围。比如，id 需要设定为 5 个长度的数字。可以如此定义：
+
+```js
+var express = require('express')
+var app = express()
+
+app.get('/things/:id([0-9]{5})', function(req, res){
+   res.send('id: ' + req.params.id)
+})
+
+app.listen(3000)
+```
+
+如果路由没有匹配
+
 TODO
 
 ## 中间件
