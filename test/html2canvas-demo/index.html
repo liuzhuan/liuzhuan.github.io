@@ -32,7 +32,9 @@
         <!-- start [capture] -->
         <div id="capture" style="padding: 10px; background: #f5da55; width: 550px; height: 400px;">
             <h4 style="color: #000;">Hello html2Canvas!</h4>
-            <img src="https://static2.qschou.com/img/v7/home/index_v7_3/transmigration.jpeg">
+            <img src="https://thumb.qschou.com/files/qschou.com/project/7277fda2ef1-f260-4bb5-a88d-f9c15caf406e15256181947772041670009ea9f8238044afcae9a3f66bb46fdaa2.jpg@!home.png">
+            <p>The second image</p>
+            <img src="https://thumb.qschou.com/files/qschou.com/project/7277fda2ef1-f260-4bb5-a88d-f9c15caf406e15256181947772041670009ea9f8238044afcae9a3f66bb46fdaa2.jpg@!home.png">
         </div>
         <!-- end [capture] -->
     </div>
@@ -47,8 +49,10 @@
 
         const allImgs = getAllCapturedImage('#capture')
         Array.prototype.forEach.call(allImgs, function(item) {
-            loadImage(item.src).then(src => {
-                item.src = src
+            loadImage(item.src).then(img => {
+                const parent = item.parentNode
+                parent.insertBefore(img, item)
+                parent.removeChild(item)
             })
         })
 
@@ -58,7 +62,7 @@
         }
 
         function capture(target) {
-            html2canvas(target, {useCORS: true}).then(canvas => {
+            html2canvas(target, { useCORS: true }).then(canvas => {
                 console.log(canvas, '[canvas]')
                 document.body.appendChild(canvas)
             })
@@ -70,11 +74,11 @@
         }
 
         function loadImage(src) {
-            return new Promise((resovle, reject) => {
+            return new Promise((resolve, reject) => {
                 const img = new Image()
                 img.crossOrigin = 'Anonymous'
                 img.onload = function() {
-                    resolve(src)
+                    resolve(img)
                 }
                 img.src = src
             })
