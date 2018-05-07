@@ -1,0 +1,15 @@
+{
+  "name": "html2canvas-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "anywhere"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "anywhere": "^1.5.0"
+  }
+}

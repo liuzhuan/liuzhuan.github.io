@@ -18,8 +18,7 @@
         }
 
         #capture img {
-            width: 100px;
-            height: 100px;
+            max-width: 300px;
         }
 
         a {
@@ -46,15 +45,38 @@
     <script>
         var target = document.querySelector('#capture')
 
+        const allImgs = getAllCapturedImage('#capture')
+        Array.prototype.forEach.call(allImgs, function(item) {
+            loadImage(item.src).then(src => {
+                item.src = src
+            })
+        })
+
         var btn = document.querySelector('.js-capture')
         btn.onclick = function() {
             capture(target)
         }
 
         function capture(target) {
-            html2canvas(target).then(canvas => {
+            html2canvas(target, {useCORS: true}).then(canvas => {
                 console.log(canvas, '[canvas]')
                 document.body.appendChild(canvas)
+            })
+        }
+
+        function getAllCapturedImage(container) {
+            const imgs = document.querySelectorAll(container + ' img')
+            return imgs
+        }
+
+        function loadImage(src) {
+            return new Promise((resovle, reject) => {
+                const img = new Image()
+                img.crossOrigin = 'Anonymous'
+                img.onload = function() {
+                    resolve(src)
+                }
+                img.src = src
             })
         }
     </script>
