@@ -292,19 +292,162 @@ app.get('/user/:id', function (req, res, next) {
 
 ### 路由级别中间件
 
-TODO
+路由级别中间件同应用级别类似，所不同的是，它绑定到 `express.Router()` 实例上。
+
+```js
+var router = express.Router()
+```
+
+通过 `router.use()` 和 `router.METHOD()` 函数加载路由级别中间件。
+
+以下代码复制了应用级别中间件的中间件系统，使用了路由中间件：
+
+```js
+var app = express()
+var router = express.Router()
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, function (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+})
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get('/user/:id', function (req, res, next) {
+  // if the user ID is 0, skip to the next router
+  if (req.params.id === '0') next('route')
+  // otherwise pass control to the next middleware function in this stack
+  else next()
+}, function (req, res, next) {
+  // render a regular page
+  res.render('regular')
+})
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', function (req, res, next) {
+  console.log(req.params.id)
+  res.render('special')
+})
+
+// mount the router on the app
+app.use('/', router)
+```
+
+如果要跳过 router 实例的所有剩余中间件函数，可以通过调用 `next('router')` 将控制权移出 router。
+
+下面例子展示了可以处理 `/user/:id` 路径 GET 请求的中间件子栈（`sub-stack`）。
+
+```js
+var app = express()
+var router = express.Router()
+
+// predicate the router with a check and bail out when needed
+router.use(function (req, res, next) {
+  if (!req.headers['x-auth']) return next('router')
+  next()
+})
+
+router.get('/', function (req, res) {
+  res.send('hello, user!')
+})
+
+// use the router and 401 anything falling through
+app.use('/admin', router, function (req, res) {
+  res.sendStatus(401)
+})
+```
 
 ### 错误处理中间件
 
-TODO
+> 错误处理中间件总是会包含 4 个参数。你必须提供 4 个参数，才可以被认定为错误处理中间件。即使你不需要 `next` 对象，也必须提供以便维持正确的函数签名。否则，`next` 对象将被当作普通中间件函数对待，从而无法成功处理错误。
+
+定义错误处理中间件函数和其他中间件函数类似，只是变成了 4 个形参。比如：
+
+```js
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+```
 
 ### 内置中间件
 
-TODO
+从 4.x 版本开始，Express 不再依赖 [Connect][connect]。之前包含在 Express 内的中间件函数现在抽离为独立模块。
+
+Express 目前拥有如下内置中间件函数：
+
+- `express.static` 产生 HTML 文件，图像等静态文件
+- `express.json` 解析带有 JSON 负载的请求。注意，**4.16.0+ 有效**
+- `express.urlencoded` 解析带有 URL 编码的负载请求。注意：**4.16.0+ 有效**
 
 ### 第三方中间件
 
-TODO
+使用第三方中间件可以为 Express 应用扩展功能。常用的中间件列表[见此][middlewares]。
+
+以下代码演示如何安装和加载 `cookie-parser`：
+
+```sh
+$ npm install cookie-parser
+```
+
+```js
+var express = require('express')
+var app = express()
+var cookieParser = require('cookie-parser')
+
+// load the cookie-parsing middleware
+app.use(cookieParser())
+```
+
+`body-parser` 使用方法如下：
+
+```js
+var bodyParser = require('body-parser')
+
+// To parse URL encoded data
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// To parse json data
+app.use(bodyParser.json())
+```
+
+### 中间件执行顺序
+
+中间件的执行顺序很重要，它和代码书写位置以及路由匹配情况相关。
+
+比如，下面的例子展示了如何在路由前和路由后使用中间件。同时，路由处理函数本身也可以作为中间件：
+
+```js
+var express = require('express')
+var app = express()
+
+// First middleware before response is sent
+app.use(function(req, res, next){
+   console.log("Start")
+   next()
+})
+
+// Route handler
+app.get('/', function(req, res, next){
+   res.send("Middle")
+   next()
+})
+
+app.use('/', function(req, res){
+   console.log('End')
+})
+
+app.listen(3000)
+```
 
 ## 模板
 
@@ -367,3 +510,5 @@ TODO
 [tj]: https://github.com/tj
 [nodemon]: https://nodemon.io/
 [using-middleware]: http://expressjs.com/en/guide/using-middleware.html
+[connect]: https://github.com/senchalabs/connect
+[middlewares]: http://expressjs.com/en/resources/middleware.html
