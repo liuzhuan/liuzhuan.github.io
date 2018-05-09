@@ -174,11 +174,135 @@ app.get('/things/:id([0-9]{5})', function(req, res){
 app.listen(3000)
 ```
 
-如果路由没有匹配
+如果路由没有匹配，会得到响应信息 `"Cannot GET <your-request-route>"`。这个报错信息可以使用 `*` 通配符路由代替：
+
+```js
+var express = require('express')
+var app = express()
+
+// Other routes here
+app.get('*', function(req, res){
+   res.send('Sorry, this is an invalid URL.')
+})
+
+app.listen(3000)
+```
+
+⚠️ 注意，**通配符 `*` 路由需要放置在其他所有路由之后**，因为 Express 匹配路由的顺序是从前往后，如果将其放在前面，会拦截其后的路由。
+
+## 中间件
+
+中间件函数指的是可以访问请求对象（`req`）、响应对象（`res`）和下一个中间件函数（常用 `next` 表示）的一类函数。
+
+中间件函数可以执行任务：
+
+- 运行任意代码
+- 修改请求和响应对象
+- 结束请求-响应循环
+- 调用函数栈的下一个中间件函数
+
+如果当前中间件函数没有终结请求-响应循环，它必须调用 `next()` 将控制权移交下一个中间件函数。否则，请求将被闲置。
+
+Express 应用可以使用如下类型的中间件函数：
+
+- 应用级别中间件
+- 路由级别中间件
+- 错误处理中间件
+- 内置中间件
+- 第三方中间件
+
+### 应用级别中间件
+
+可以通过 `app.use()` 或 `app.METHOD()` 函数，将应用级别中间件绑定至某一 app 实例，其中的 `METHOD` 指的是 HTTP 请求方法（比如 GET、PUT 或 POST）的小写形式。
+
+比如，如下中间件函数会在每个请求到来时执行：
+
+```js
+var app = express()
+
+app.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
+```
+
+以下的中间件函数绑定在 `/user/:id` 路径上。任意请求方法都可以触发该中间件函数：
+
+```js
+app.use('/user/:id', function (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
+
+以下代码显示了路由和相应的处理函数（中间件系统）：
+
+```js
+app.get('/user/:id', function (req, res, next) {
+  res.send('USER')
+})
+```
+
+以下代码显示了在某一个路由上加载一系列中间件函数。
+
+```js
+app.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, function (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+})
+```
+
+路由处理器允许我们对同一路由定义多个路由。下面例子为 `/user/:id` 路径定义了两个 GET 请求。第二个路由不会触发任何错误，但永远不会被执行，因为第一个路由中断了请求-响应循环。
+
+```js
+app.get('/user/:id', function (req, res, next) {
+  console.log('ID:', req.params.id)
+  next()
+}, function (req, res, next) {
+  res.send('User Info')
+})
+
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', function (req, res, next) {
+  res.end(req.params.id)
+})
+```
+
+为了跳过中间件栈剩余的中间件函数，可以调用 `next('route')` 将控制权转交给下一个路由。⚠️ 注意，`next('route')` 只适用于 `app.METHOD()` 或 `router.METHOD()` 加载的中间件函数。
+
+```js
+app.get('/user/:id', function (req, res, next) {
+  // if the user ID is 0, skip to the next route
+  if (req.params.id === '0') next('route')
+  // otherwise pass the control to the next middleware function in this stack
+  else next()
+}, function (req, res, next) {
+  // render a regular page
+  res.render('regular')
+})
+
+// handler for the /user/:id path, which renders a special page
+app.get('/user/:id', function (req, res, next) {
+  res.render('special')
+})
+```
+
+### 路由级别中间件
 
 TODO
 
-## 中间件
+### 错误处理中间件
+
+TODO
+
+### 内置中间件
+
+TODO
+
+### 第三方中间件
 
 TODO
 
@@ -242,3 +366,4 @@ TODO
 [tutorialspoint]: https://www.tutorialspoint.com/expressjs/index.htm
 [tj]: https://github.com/tj
 [nodemon]: https://nodemon.io/
+[using-middleware]: http://expressjs.com/en/guide/using-middleware.html
