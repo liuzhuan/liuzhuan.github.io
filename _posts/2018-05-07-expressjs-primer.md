@@ -451,6 +451,40 @@ app.listen(3000)
 
 ## 模板
 
+Pug 是 Express 的一个模版引擎。它的功能强大，特性包括过滤器、包含、继承、插值等。
+
+### 安装
+
+```sh
+$ npm install --save pug
+```
+
+Pug 安装完成，就可以将它设定为应用的模板引擎。无需 `require` 它，只需将如下代码加入到 `index.js` 文件：
+
+```js
+app.set('view engine', 'pug')
+app.set('views','./views')
+```
+
+创建文件夹 `views/`，在其中创建文件 `first_view.pug`，输入如下数据：
+
+```pug
+doctype html
+html
+    head
+        title = "Hello Pug"
+    body
+        p.greetings#people Hello World!
+```
+
+为了运行该页面，需要增加如下路由：
+
+```js
+app.get('/first_template', function(req, res){
+   res.render('first_view')
+})
+```
+
 TODO
 
 ## 静态文件
