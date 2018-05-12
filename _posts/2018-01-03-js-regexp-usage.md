@@ -212,11 +212,55 @@ text.replace(/\b\w+\b/g, function(word) {
 
 ### match()
 
-TODO
+`match()` 是最通用的字符串正则表达式函数。它只有一个参数（正则表达式类型），返回值是一个数组，包含了匹配结果。
+
+如果正则表达式含有 `g` 标志位，数组中会返回所有匹配的结果。如果没有匹配项，则返回 `null`。比如：
+
+```js
+'1 plus 2 equals 3'.match(/\d+/g)
+// => ['1', '2', '3']
+
+'hello world'.match(/\d+/g)
+// => null
+```
+
+如果正则表达式没有 `g` 标志位，`match()` 将不进行全局搜索；它仅搜索第一个匹配项。尽管没有全局搜索，它依然返回一个数组。数组第一个元素是匹配的字符串部分，后面依次是群组匹配的子串。
+
+因此，如果 `match()` 返回一个数组 `a`，那么 `a[0]` 包含完整的匹配，`a[1]` 包含第一个群组匹配的子串。依次类推。
+
+与 `replace()` 做个类比，`a[n]` 的内容和 `$n` 一样。
+
+比如，以下的例子用于解析 URL：
+
+```js
+var url = /(\w+):\/\/([\w.]+)\/(\S*)/
+var text = 'Visit my blog at http://www.example.com/~david'
+var result = text.match(url)
+if (result) {
+    var fullurl = result[0]
+    var protocol = result[1]
+    var host = result[2]
+    var path = result[3]
+
+    console.log(fullurl)    // => http://www.example.com/~david
+    console.log(protocol)   // => http
+    console.log(host)       // => www.example.com
+    console.log(path)       // => ~david
+}
+```
+
+⚠️ 注意，将非全局搜索的正则表达式（即不设置 `g` 标志位）传递给 `match()` 函数，相当于把该字符串传递给 `RegExp` 的 `exec()` 方法。返回的数组均有 `index` 和 `input` 两个属性。其中的 `index` 表示匹配子串在原串的位置索引，`input` 就是原始字符串。
 
 ### split()
 
-TODO
+将字符串按照给定的模式拆分为多个字符串。比如：
+
+```js
+'1, 2, 3, 4, 5'.split(/\s*,\s*/)
+// => ['1', '2', '3', '4', '5']
+```
+
+TODO: split 还有其他特性，参见犀牛书附录详解。
 
 ## RegExp 对象
 
