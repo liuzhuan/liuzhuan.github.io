@@ -180,10 +180,11 @@ string.replace(regexp, replacement)
 
 `replace()` 的功能不止于此。对于捕获到的匹配群组，可以使用 `$1`、`$2` 等分别指代第一个群组文本，第二个群组文本等。因此可以在 `replacement` 使用 `$1` 等实现部分字串替换。
 
-比如，我们想将 `" hello " is great!` 中的双引号替换为方括号，可以这么做：
+比如，我们想将 `"hello" is "great"!` 中的双引号替换为方括号，可以这么做：
 
 ```js
 '"hello" is "great"!'.replace(/"([^"]+)"/g, '[$1]')
+// => '[hello] is [great]!'
 ```
 
 `replacement` 可以出现的特殊字符小结如下：
