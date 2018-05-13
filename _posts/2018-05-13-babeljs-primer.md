@@ -23,6 +23,10 @@ $ npm install --save-dev babel-cli babel-preset-env
 }
 ```
 
+## Polyfill
+
+由于 Babel 只转译新语法（比如箭头函数），为了使用新引入的全局属性（比如 Promise）或新的原生方法（比如），可以使用 babel-polyfill。
+
 ## REF
 
 - [Babel - The compiler for writing next generation JavaScript][home]

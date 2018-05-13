@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" stroke="#BEAED7" fill="#FFFFFF" cx="22" cy="22" r="21"></circle>
+        <path d="M22.3895439,17.0978401 L22.4757535,17 L22.5,17.0176112 L22.5242465,17 L22.6104561,17.0978401 L23,17.3807824 L22.9298821,17.4603599 L30.7903014,26.3812286 L31,26.6192176 L30.4757535,27 L30.266055,26.762011 L22.5,17.9482374 L14.733945,26.762011 L14.5242465,27 L14,26.6192176 L14.2096986,26.3812286 L21.609743,17.982844 L22.0701179,17.4603599 L22,17.3807824 L22.3895439,17.0978401 Z M13.36,15 L13,15 L13,14 L13.36,14 L30.64,14 L31,14 L31,15 L30.64,15 L13.36,15 Z M22,19.2916667 L22,19 L23,19 L23,19.2916667 L23,32.7083333 L23,33 L22,33 L22,32.7083333 L22,19.2916667 Z" id="Combined-Shape" stroke="#563D7C" stroke-linecap="square"></path>
+    </g>
+</svg>
