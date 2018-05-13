@@ -273,19 +273,58 @@ text.split(/<[^>]*>/)
 
 ## RegExp 对象
 
-TODO
+RegExp 对象除了字面量，还可以由构造函数 `RegExp()` 产生。
+
+构造函数可以接收两个参数，第一个参数是字符串，用来表示模式。第二个是标志位，可选的值有 `g`、`i`、`m`，或三者的任意组合。
+
+因为字符串和正则表达式都用 `\` 表示转译。因此如果要在正则表达式中出现反斜线，需要在第一个参数中写两个，比如：
+
+```js
+var zipcode = new RegExp('\\d{5}', 'g')
+```
+
+如果正则表达式需要动态生成，就必须使用构造函数动态生成。比如，搜索用户输入的内容，就只能使用构造函数的形式。
 
 ### RegExp 属性
 
 每个 RegExp 有五个属性。
 
-TODO
+| 属性名        | 含义                                                     |
+| ------------ | ------------------------------------------------------- |
+| `source`     | 包含正则表达式的字符串。只读                                 |
+| `global`     | `g` 标志位是否设定为真。只读                                |
+| `ignoreCase` | `i` 标志位是否设定为真。只读                                |
+| `multiline`  | `m` 标志位是否设定为真。只读                                |
+| `lastIndex`  | 表示下一次正则匹配开始的位置。可读写。仅对设定 `g` 标志位正则生效 |
+
+`lastIndex` 在 `exec()` 和 `test()` 方法中使用，下面有详细介绍。
 
 ### RegExp 方法
 
-exec()
+#### exec()
 
-TODO: exec() 函数详解
+`exec()` 是 RegExp 对象一个重要的方法，同 `String.prototype.match()` 类似，用于在字符串中查找匹配。
+
+如果没有匹配项，返回 null。如果有一个匹配项，返回的数组内容和字符串的 `match()` 方法（未设定 `g` 标志位）返回值相同。第一个元素表示匹配的字符串，第二个元素表示匹配的第一个群组子串，依次类推。另外，`index` 属性表示匹配的位置索引，`input` 表示输入的待匹配字符串。
+
+⚠️ 注意，与 `match()` 不同，`exec()` 无论 `g` 设定与否，返回值的类型均相同，每次只返回一个匹配值，并返回该值的详细信息。
+
+若调用 `exec()` 的正则表达式的 `g` 标志位为真，会将该正则表达式对象的 `lastIndex` 设定为匹配字符串的下一个索引位置。当同一个正则表达式第二次执行 `exec()` 方法时，它会从 `lastIndex` 表示的位置开始查找匹配。如果 `exec()` 没有找到匹配值，会将 `lastIndex` 重置为 0 。
+
+这个特性可以让我们循环调用 `exec()`，查找所有的匹配值。比如：
+
+```js
+var pattern = /Java/g
+var text = 'JavaScript is more fun than Java!'
+var result
+while (result = pattern.exec(text)) {
+    alert('Matched ' + result[0] + 
+        ' at position ' + result.index +
+        '; next search begins at ' + pattern.lastIndex)
+}
+// => Matched Java at position 0; next search begins at 4
+// => Matched Java at position 28; next search begins at 32
+```
 
 在 [download-git-repo](https://github.com/liuzhuan/download-git-repo/blob/v1.0.2/index.js#L57-L59) 中有如下用法：
 
@@ -300,9 +339,19 @@ function normalize(repo) {
 
 用于从字符串中提取各部分信息。
 
-test()
+#### test()
 
-TODO
+`test()` 方法就相对简单很多，它接收一个字符串参数，如果该字符串包含匹配项，就返回 `true`，否则返回 `false`。比如：
+
+```js
+var pattern = /java/i
+pattern.test('JavaScript')
+// => true
+```
+
+执行 `test()`，相当于执行 `exec()`，然后检测结果是否不为 `null`。由于这种对等关系，在全局正则表达式中，`test()` 的行为和 `exec()` 一样。
+
+和 `exec()` 和 `test()` 不同，字符串方法 `search()`、`replace()` 和 `match()` 不使用 `lastIndex` 属性。字符串方法会将 `lastIndex` 重置为 0。
 
 ## 工具
 
