@@ -23,6 +23,8 @@ $ npm install --save-dev babel-cli babel-preset-env
 }
 ```
 
+[视频页面][videos] 有很多高质量视频，可以仔细观摩学习。
+
 ## Polyfill
 
 由于 Babel 只转译新语法（比如箭头函数），为了使用新的全局属性（比如 Promise）或原生方法（比如 `String.padStart`），可以使用 babel-polyfill。该 polyfill 用到了 [core-js][core-js] 和 [regenerator][regenerator]。
@@ -53,18 +55,27 @@ $ npm install --save-dev babel-preset-react
 
 ## 插件系统
 
-Babel 本身就是由插件构成。
+Babel 本身就是由插件构成。它是一个编译器，从高层结构上看，它对代码的处理可以分为 3 个阶段：解析（parsing）、转换（transforming）和输出（generation）。
 
-TODO
+Babel 默认情况下没有任何作用，可以用伪代码表示为：`const babel = code => code;`，即解析代码，然后将输入的代码原封不动输出。
+
+需要为 Babel 配备不同的插件，它才可以有效工作（这些插件改变第二阶段的工作内容，即 transforming）。
+
+TODO：解释什么是 presets?
 
 ## REF
 
 - [Babel - The compiler for writing next generation JavaScript][home]
 - [Polyfill - Babel][polyfill-usage]
 - [babel-handbook][babel-handbook] by *James Kyle*
+- [Videos - Babel][videos]
+- [Plugins - Babel][plugins]
 
 [home]: https://babeljs.io/
 [core-js]: https://github.com/zloirock/core-js
 [regenerator]: https://facebook.github.io/regenerator/
 [polyfill-usage]: https://babeljs.io/docs/usage/polyfill
 [babel-handbook]: https://github.com/jamiebuilds/babel-handbook
+[videos]: https://babeljs.io/docs/community/videos/
+[plugins]: https://babeljs.io/docs/plugins/
+[tiny-compiler]: https://github.com/jamiebuilds/the-super-tiny-compiler
