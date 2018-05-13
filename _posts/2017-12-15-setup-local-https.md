@@ -31,6 +31,14 @@ DNS.2 = company.com
 DNS.3 = company.net
 ```
 
+如果域名较多，且都隶属于同一个主域名，可以将 `DNS.1`、`DNS.2` 等简化为 `*.example.com`。即：
+
+```
+...
+[alt_names]
+DNS.1 = *.example.com
+```
+
 接着，执行如下命令，创建证书：
 
 ```
