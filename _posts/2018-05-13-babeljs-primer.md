@@ -51,14 +51,20 @@ $ npm install --save-dev babel-preset-react
 
 将 `"react"` 加入到 `.babelrc` 文件的 presets 数组。
 
+## 插件系统
+
+Babel 本身就是由插件构成。
+
 TODO
 
 ## REF
 
 - [Babel - The compiler for writing next generation JavaScript][home]
 - [Polyfill - Babel][polyfill-usage]
+- [babel-handbook][babel-handbook] by *James Kyle*
 
 [home]: https://babeljs.io/
 [core-js]: https://github.com/zloirock/core-js
 [regenerator]: https://facebook.github.io/regenerator/
 [polyfill-usage]: https://babeljs.io/docs/usage/polyfill
+[babel-handbook]: https://github.com/jamiebuilds/babel-handbook
