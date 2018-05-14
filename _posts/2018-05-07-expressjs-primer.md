@@ -485,17 +485,160 @@ app.get('/first_template', function(req, res){
 })
 ```
 
-TODO
+如上代码会转换为：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello Pug</title>
+  </head>
+  
+  <body>
+    <p class="greetings" id="people">Hello World!</p>
+  </body>
+</html>
+```
+
+### 给模板传递数值
+
+当渲染 pug 模板时，可以从路由处理函数中向模板传递数值。比如：
+
+```js
+var express = require('express')
+var app = express()
+
+app.get('/dynamic_view', function(req, res){
+  res.render('dynamic', {
+    name: "TutorialsPoint", 
+    url:"http://www.tutorialspoint.com"
+  })
+})
+
+app.listen(3000)
+```
+
+然后在 `views/` 目录创建文件 `dynamic.pug`。代码如下：
+
+```pug
+html
+  head
+    title = name
+  body
+    h1=name
+    a(href = url) URL
+```
 
 ## 静态文件
 
-TODO
+创建 `public/` 目录。Express 默认不支持静态文件，需要使用如下代码开启：
+
+```js
+app.use(express.static('public'))
+```
+
+### 多个静态目录
+
+使用如下代码可以开启多个静态资源目录。
+
+```js
+var express = require('express')
+var app = express()
+
+app.use(express.static('public'))
+app.use(express.static('images'))
+
+app.listen(3000)
+```
+
+### 虚拟路径前缀
+
+可以为静态文件增加路径前缀。假如你要提供一个类似 `/static` 的路径前缀，需要在 `index.js` 中包含如下代码：
+
+```js
+var express = require('express')
+var app = express()
+
+app.use('/static', express.static('public'))
+
+app.listen(3000)
+```
+
+现在，如果你要访问 `public/` 目录下的 `main.js` 文件，可以使用如下标签：
+
+```html
+<script src = "/static/main.js" />
+```
 
 ## 表单数据
 
-TODO
+表单是网络的重要组成部分。为了使用表单，需要安装 `body-parser`（用于解析 JSON 和 url-encoded 数据）和 `multer`（用于解析 `multipart/form` 数据）中间件。
+
+首先安装 `body-parser` 和 `multer`：
+
+```sh
+$ npm install --save body-parser multer
+```
+
+将 `index.js` 替换为如下代码：
+
+```js
+var express = require('express')
+var bodyParser = require('body-parser')
+var multer = require('multer')
+
+var upload = multer()
+var app = express()
+
+app.get('/', function(req, res){
+  res.render('form')
+})
+
+app.set('view engine', 'pug')
+app.set('views', './views')
+
+// for parsing application/json
+app.use(bodyParser.json()) 
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+// for parsing multipart/form-data
+app.use(upload.array())
+
+app.use(express.static('public'))
+
+app.post('/', function(req, res){
+  console.log(req.body)
+  res.send('recieved your request!')
+})
+
+app.listen(3000)
+```
+
+创建文件 `form.pug`：
+
+```pug
+doctype html
+html
+  head
+    title Form Tester
+  body
+    form(action = "/", method = "POST")
+      div
+        label(for = "say") Say:
+        input(name = "say" value = "Hi")
+      br
+      div
+        label(for = "to") To:
+        input(name = "to" value = "Express forms")
+      br
+      button(type = "submit") Send my greetings
+```
+
+`req.body` 包含所有的请求数据。
 
 ## 数据库
+
+我们一直在接收数据，但却没有地方持久存储。
 
 TODO
 
