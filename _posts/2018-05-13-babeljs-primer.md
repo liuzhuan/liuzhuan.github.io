@@ -23,7 +23,7 @@ $ npm install --save-dev babel-cli babel-preset-env
 }
 ```
 
-[视频页面][videos] 有很多高质量视频，可以仔细观摩学习。
+[视频页面][videos]有很多高质量视频，可以仔细观摩学习。
 
 ## Polyfill
 

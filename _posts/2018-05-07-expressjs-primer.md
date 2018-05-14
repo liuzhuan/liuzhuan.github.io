@@ -638,11 +638,47 @@ html
 
 ## 数据库
 
-我们一直在接收数据，但却没有地方持久存储。
+服务端接收到数据，下一步是用数据库将其持久保存。在此我们使用一种 NoSQL 数据库 MongoDB。
 
-TODO
+TODO：MongoDB 详细操作
 
 ## Cookie
+
+Cookie 是一种服务端设置的小型数据文件，可以储存到客户端。它可以用来保持状态管理、个性化设置和跟踪用户等。
+
+为了在 Express 中使用 cookie，我们需要安装 `cookie-parser` 中间件。使用如下代码安装：
+
+```sh
+$ npm install --save cookie-parser
+```
+
+然后，就可以在 index.js 中引入：
+
+```js
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
+```
+
+`cookie-parser` 可以解析请求头中的 Cookie 字段，并将其作为 `req.cookies` 属性储存。
+
+为了设置新的 cookie，我们可以定义一个新路由：
+
+```js
+var express = require('express')
+var app = express()
+
+app.get('/', function(req, res){
+  res.cookie('name', 'express').send('cookie set')
+})
+
+app.listen(3000)
+```
+
+为了验证 cookie 是否设置成功，可以打开浏览器，然后在开发者工具中输入：
+
+```js
+document.cookie
+```
 
 TODO
 
