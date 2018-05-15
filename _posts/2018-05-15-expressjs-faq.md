@@ -7,7 +7,7 @@ date: 2018-05-15
 * TOC
 {:toc}
 
-## express 里 `http.createServer` 和 `app.listen` 有什么区别？
+## `https.createServer` 和 `app.listen` 的区别是什么？
 
 ```js
 var express = require('express')
@@ -27,7 +27,7 @@ http.createServer(app).listen(80)
 
 两者都可以实现服务器监听，他们之间的区别是什么？
 
-可以参见 express 的[源文件][app.listen]：
+为了回答这个问题，需要阅读 express 的[源文件][app.listen]：
 
 ```js
 /**
