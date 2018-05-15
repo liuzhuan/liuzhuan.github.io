@@ -11,6 +11,8 @@ date: 2017/12/14
 
 [The Go Programming Language][go-lang] 适合入门阅读。
 
+2007 年 9 月，*Robert Griesemer*、*Rob Pike* 和 *Ken Thompson* 开始构思 Go 语言。2009 年 11 月公布。
+
 ## 指针
 
 go 会对方法的依附对象做自动转换，转换为函数定义时需要的类型。
