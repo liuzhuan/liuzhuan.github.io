@@ -4,6 +4,13 @@ title: Golang 入门
 date: 2017/12/14
 ---
 
+* TOC
+{:toc}
+
+> Go is an open source programming language that makes it easy to build simple, reliable, and efficient software
+
+[The Go Programming Language][go-lang] 适合入门阅读。
+
 ## 指针
 
 go 会对方法的依附对象做自动转换，转换为函数定义时需要的类型。
@@ -44,6 +51,8 @@ After Change2, n:0xc42000e268, i:42
 
 ## REF
 
+- [The Go Programming Language][go-lang] by *Alan A. A. Donovan* & *Brian W. Kernighan*, 2015/10/26
 - [Methods, Interfaces and Embedded Types in Go][go-pointer], by *William Kennedy*, 2014/05/03
 
 [go-pointer]: https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
+[go-lang]: http://www.gopl.io
