@@ -7,7 +7,7 @@ date: 2018-05-15
 * TOC
 {:toc}
 
-## `https.createServer` 和 `app.listen` 的区别是什么？
+## `http.createServer` 和 `app.listen` 的区别是什么？
 
 ```js
 var express = require('express')
@@ -59,7 +59,7 @@ app.listen = function listen() {
 
 可以看出，`app.listen` 其实是 `http.createServer()` 的简单封装，如果只是使用 http 服务器，`app.listen()` 就够用了。
 
-但是如果你要用 https 服务器，就要使用 `https.createServer()` 手动创建服务器。
+但是如果你要监听 https 端口（或同时监听 http 80 端口和 https 443 端口），就要使用 `https.createServer()` 手动创建服务器，并将 `express()` 生成的应用当作参数传递进去。
 
 ## REF
 
