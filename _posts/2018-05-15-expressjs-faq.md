@@ -57,6 +57,10 @@ app.listen = function listen() {
 };
 ```
 
+可以看出，`app.listen` 其实是 `http.createServer()` 的简单封装，如果只是使用 http 服务器，`app.listen()` 就够用了。
+
+但是如果你要用 https 服务器，就要使用 `https.createServer()` 手动创建服务器。
+
 ## REF
 
 - [express 里 http.createServer 和 app.listen 有什么区别？][express.listen]
