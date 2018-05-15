@@ -45,7 +45,7 @@ gulp.task('default', function() {
 
 ## 理解 stream（流）
 
-Gulp 基于 Node.js 的 stream 对数据做各种转换，因此要掌握 Gulp，就一定要了解 [Node.js 的 Stream](./2018-05-15-node-stream.md)。
+Gulp 基于 Node.js 的 stream 对数据做各种转换，因此要掌握 Gulp，就一定要了解 [Node.js 的 Stream](https://www.1zh.tech/2018/05/15/node-stream/)。
 
 ## 编写 `gulpfile.js`
 

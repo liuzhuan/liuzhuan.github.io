@@ -97,7 +97,7 @@ b.pipe(c)
 c.pipe(d)
 ```
 
-### **readable stream**
+### readable stream
 
 readable stream 产生的数据可以当作 writable, transform 或 duplex stream 的输入数据：
 
@@ -252,7 +252,7 @@ Buffer [ 102, 10, 103 ]
 Buffer [ 104, 105, 10 ]
 ```
 
-### **writable stream**
+### writable stream
 
 ```js
 src.pipe(writableStream)
@@ -315,13 +315,13 @@ $ node writing1.js
 
 如果需要知道缓冲区何时清空，可以监听 `drain` 事件。
 
-### **transform**
+### transform
 
 Transform stream 是一种 duplex 流（可读可写）。区别在于，transform stream 的输出由输入决定。
 
 transform stream 有时也被称作“through stream”。
 
-### **duplex**
+### duplex
 
 duplex stream 是一种可读可写流，可以进行双向通信，就像电话一样发送和接收数据。rpc 通信就是一种 duplex stream。其格式如下所示：
 
@@ -329,7 +329,7 @@ duplex stream 是一种可读可写流，可以进行双向通信，就像电话
 a.pipe(b).pipe(a)
 ```
 
-### **classic stream**
+### classic stream
 
 classic stream 是出现在 node 0.4 版本的旧版 API。
 
