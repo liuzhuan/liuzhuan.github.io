@@ -55,6 +55,12 @@ Gulp 基于 Node.js 的 stream 对数据做各种转换，因此要掌握 Gulp�
 
 // TODO:
 
+## 源码阅读
+
+gulp.js 的依赖图如下：
+
+![gulp dependencies tree](/imgs/gulp-dep.png)
+
 ## REF
 
 - [Gulp 基础与原理][jerryc] by *JerryC*, 2017-02-28
