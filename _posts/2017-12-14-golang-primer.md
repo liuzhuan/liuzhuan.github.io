@@ -9,7 +9,7 @@ date: 2017/12/14
 
 > Go is an open source programming language that makes it easy to build simple, reliable, and efficient software
 
-[The Go Programming Language][go-lang] 适合入门阅读。
+[The Go Programming Language][go-lang] 适合入门阅读。本文是该书的一个读书笔记。
 
 2007 年 9 月，*Robert Griesemer*、*Rob Pike* 和 *Ken Thompson* 开始构思 Go 语言。2009 年 11 月公布。
 
@@ -21,59 +21,82 @@ Go 的另一祖先，灵感来自贝尔实验室的 *Tony Hoare* 于 1978 年发
 
 ## Go 语言项目
 
-编程语言反映了语言设计者对编程哲学的反思。
+编程语言反映了语言设计者对编程哲学的反思。Go 的编程哲学是简洁很重要。
 
-[Rob Pike][rob] 说过，“软件的复杂性是乘数级相关的”，通过增加一个部分的复杂性来修复问题，通常将慢慢的增加其他部分的复杂性。通过增加功能和选项的配置是修复问题的最快途径，但是这很容易让人忘记简洁的内涵，即使从长远来看，简洁依然是好软件的关键因素。
+## 入门
 
-简洁的设计需要在工作开始的时候舍弃不必要的想法，并且在软件的生命周期内严格区别好的改变或坏的改变。只有通过简洁的设计，才能让一个系统保持稳定、安全和持续的进化。
-
-Go 项目包括编程语言本身，附带了相关的工具和标准库，以及关于简洁编程哲学的宣言。
-
-TODO
-
-## 指针
-
-go 会对方法的依附对象做自动转换，转换为函数定义时需要的类型。
+### Hello World
 
 ```go
-type Int int
-func (m Int) Change() {
-    fmt.Println("Inside Change, m:", m)
-    m = 42
-}
+// helloworld.go
+package main
 
-func (m *Int) Change2() {
-    fmt.Println("Inside Change2, m:", m)
-    *m = 42
-}
+import "fmt"
 
 func main() {
-    var i Int = 3
-    n := &i
-
-    n.Change()
-    fmt.Printf("After Change, n:%v, i:%v\n\n", n, i)
-
-    n.Change2()
-    fmt.Printf("After Change2, n:%v, i:%v\n", n, i)
+    fmt.Println("Hello, 世界")
 }
 ```
 
-输入结果如下：
+编译程序：
 
+```sh
+$ go run helloworld.go
 ```
-Inside Change, m: 3
-After Change, n:0xc42000e268, i:3
 
-Inside Change2, m: 0xc42000e268
-After Change2, n:0xc42000e268, i:42
-```
+// TODO
+
+## 程序结构
+
+// TODO
+
+## 基础数据类型
+
+// TODO
+
+## 复合数据类型
+
+// TODO
+
+## 函数
+
+// TODO
+
+## 方法
+
+// TODO
+
+## 接口
+
+// TODO
+
+## Goroutines 和 Channels
+
+// TODO
+
+## 共享变量并发
+
+// TODO
+
+## 包和工具
+
+// TODO
+
+## 测试
+
+// TODO
+
+## 反射
+
+// TODO
+
+## 底层编程
+
+// TODO
 
 ## REF
 
 - [The Go Programming Language][go-lang] by *Alan A. A. Donovan* & *Brian W. Kernighan*, 2015/10/26
-- [Methods, Interfaces and Embedded Types in Go][go-pointer], by *William Kennedy*, 2014/05/03
 
-[go-pointer]: https://www.goinggo.net/2014/05/methods-interfaces-and-embedded-types.html
 [go-lang]: http://www.gopl.io
 [rob]: http://genius.cat-v.org/rob-pike/
