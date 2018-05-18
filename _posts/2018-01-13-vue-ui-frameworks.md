@@ -826,6 +826,76 @@ font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Micros
 </script>
 ```
 
+indeterminate 状态
+
+`indeterminate` 属性用以表示 checkbox 的不确定状态，一般用于实现全选的效果
+
+```html
+<template>
+    <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+    <div style="margin: 15px 0;"></div>
+    <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+        <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+    </el-checkbox-group>
+</template>
+
+<script>
+    const cityOptions = ['上海', '北京', '广州', '深圳'];
+    export default {
+        data() {
+            return {
+                checkAll: false,
+                checkedCities: ['上海', '北京'],
+                cities: cityOptions,
+                isIndeterminate: true
+            };
+        },
+        methods: {
+            handleCheckAllChange(val) {
+                this.checkedCities = val ? cityOptions : [];
+                this.isIndeterminate = false;
+            },
+            handleCheckedCitiesChange(value) {
+                let checkedCount = value.length;
+                this.checkAll = checkedCount === this.cities.length;
+                this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+            }
+        }
+    };
+</script>
+```
+
+可选项目数量的限制
+
+```html
+<template>
+    <el-checkbox-group 
+        v-model="checkedCities1"
+        :min="1"
+        :max="2">
+        <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+    </el-checkbox-group>
+</template>
+
+<script>
+    const cityOptions = ['上海', '北京', '广州', '深圳'];
+    export default {
+        data() {
+            return {
+                checkedCities1: ['上海', '北京'],
+                cities: cityOptions
+            };
+        }
+    };
+</script>
+```
+
+按钮样式
+
+只需要把 `el-checkbox` 元素替换为 `el-checkbox-button` 元素即可。此外，Element 还提供了 `size` 属性。
+
+带有边框略
+
 TODO
  
 ## Mint-UI
