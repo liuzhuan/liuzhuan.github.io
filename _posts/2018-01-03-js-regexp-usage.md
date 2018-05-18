@@ -357,9 +357,8 @@ pattern.test('JavaScript')
 
 工欲善其事，必先利其器。正则表达式晦涩难懂，好的工具可以让你事半功倍。
 
-- [regexr.com](https://regexr.com/) by gskinner, 实时在线高亮正则表达式匹配元素
-
-TODO
+- [regexr.com](https://regexr.com/) by *gskinner* 实时在线高亮正则表达式匹配元素
+- [Regulex](https://jex.im/regulex/) by *jex* 正则表达式可视化工具，方便理解复杂正则表达式
 
 ## REF
 
