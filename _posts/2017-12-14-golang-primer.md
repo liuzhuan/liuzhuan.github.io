@@ -38,13 +38,39 @@ func main() {
 }
 ```
 
-编译程序：
+Go 是编译语言。Go 工具链将源码及其依赖编译为原生机器码。这些工具可以通过 `go` 及其子命令获得。最简单的子命令是 `run`。
 
 ```sh
 $ go run helloworld.go
 ```
 
-// TODO
+如果想把编译结果保留，可以使用 `go build`：
+
+```sh
+$ go build helloworld.go
+```
+
+这会产生一个 `hellworld` 可执行二进制文件。使用 `go1.8 darwin/amd64` 编译后的文件大约 1.6 MB。
+
+如果想下载依赖项，可以使用 `go get` 命令。比如，下载 *The Go Programming Language* 的实例代码：
+
+```sh
+$ go get gopl.io/ch1/helloworld
+```
+
+Go 代码本身由 package 构成。一个 pacakge 由单个目录下的多个 `.go` 源文件构成。每个源码以 `package` 声明开头，声明了当前文件所属的包，然后是它引入的多个依赖项，然后是文件的源码。
+
+Go 源码拥有超过 100 个 pacakge，用来执行常见任务，比如输入输出，排序和处理文本。比如，`fmt` package 可以格式化输出输入。`Println` 是 `fmt` 的一个基本输出函数。
+
+package `main` 比较特殊，它定义独立可执行程序，而非库。package main 中的 `main` 函数也有特殊地址，它是程序的入口。
+
+我们必须告知编译器，当前源码需要哪些 package。这是 `import` 声明的职责。
+
+你必须精确指明引入的 package。过多或过少都不可编译。这种严格要求可以防止在程序发展过程中引入不必要的包。
+
+`import` 声明必须在 `package` 声明之后。
+
+// TODO http://www.gopl.io/ch1.pdf 22/59
 
 ## 程序结构
 
