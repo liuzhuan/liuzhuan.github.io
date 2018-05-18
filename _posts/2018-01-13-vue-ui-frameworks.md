@@ -5,7 +5,7 @@ date: 2018-01-13
 ---
 
 * TOC
-  {:toc}
+{:toc}
 
 前端开发，UI 先行。目前 Vue 系 UI 框架很多，知名的有 vux, element, mint 等。本文略作比较。
 
