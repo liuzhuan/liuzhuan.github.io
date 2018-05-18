@@ -411,7 +411,419 @@ Row 组件提供 `gutter` 属性来指定每一栏之间的间隔，默认间隔
 
 分栏偏移
 
+通过指定 col 组件的 offset 属性可以指定分栏偏移的栏数
+
 ```html
+<el-row :gutter="20">
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-row :gutter="20">
+    <el-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="6" :offset="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-row :gutter="20">
+    <el-col :span="12" :offset="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+```
+
+对齐方式
+
+通过 flex 布局来对分栏进行灵活的对齐。
+
+```html
+<el-row type="flex" class="row-bg">
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-row type="flex" class="row-bg" justify="center">
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-row type="flex" class="row-bg" justify="end">
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-row type="flex" class="row-bg" justify="space-between">
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-row type="flex" class="row-bg" justify="space-around">
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+```
+
+响应式布局
+
+参照 Bootstrap 的响应式设计，预设了五个响应尺寸：xs、sm、md、lg 和 xl。
+
+```html
+<el-row :gutter="10">
+    <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple-light"></div></el-col>
+    <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple"></div></el-col>
+    <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple-light"></div></el-col>
+</el-row>
+```
+
+基于断点的隐藏类
+
+Element 额外提供了一系列类名，用于在某些条件下隐藏元素。如果需要，自行引入以下文件：
+
+```js
+import 'element-ui/lib/theme-chalk/display.css'
+```
+
+包含的类名及其含义为：
+
+- `hidden-xs-only` - 当视口在 xs 尺寸时隐藏
+- `hidden-sm-only` - 当视口在 sm 尺寸时隐藏
+- `hidden-sm-and-down` - 当视口在 sm 及以下尺寸时隐藏
+- `hidden-sm-and-up` - 当视口在 sm 及以上尺寸时隐藏
+- `hidden-md-only` - 当视口在 md 尺寸时隐藏
+- `hidden-md-and-down` - 当视口在 md 及以下尺寸时隐藏
+- `hidden-md-and-up` - 当视口在 md 及以上尺寸时隐藏
+- `hidden-lg-only` - 当视口在 lg 尺寸时隐藏
+- `hidden-lg-and-down` - 当视口在 lg 及以下尺寸时隐藏
+- `hidden-lg-and-up` - 当视口在 lg 及以上尺寸时隐藏
+- `hidden-xl-only` - 当视口在 xl 尺寸时隐藏
+
+### Container 布局容器
+
+用于布局的容器组件，方便快速搭建页面的基本结构。
+
+`<el-container>`：外层容器。当子元素中包含 `<el-header>` 或 `<el-footer>` 时，全部子元素会垂直上下排列，否则会水平左右排列。
+
+`<el-header>`：顶栏容器。
+
+`<el-aside>`：侧边栏容器。
+
+`<el-main>`：主要区域容器。
+
+`<el-footer>`：底栏容器。
+
+### Color 色彩
+
+Element 使用一套特定的调色板来规定颜色，为产品提供一致的外观视觉感受。调色板包括的颜色有：
+
+- 主色
+- 辅助色 Success, Warning, Danger, Info
+- 中性色
+    - 主要文字、常规文字、次要文字、占位文字
+    - 一级边框、二级边框、三级边框、四级边框
+
+### 字体
+
+```css
+font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+```
+
+字体使用规范
+
+| 标题级别   | 字号字重                 |
+| --------- | ---------------------- |
+| 主标题     | 20px Extra large       |
+| 标题       | 18px large             |
+| 小标题     | 16px Medium            |
+| 正文      | 14px Small             |
+| 正文（小） | 13px Extra Small       |
+| 辅助文字   | 12px Extra Extra Small |
+
+### Icon 图标
+
+直接通过设置类名为 `el-icon-iconName` 来使用即可。
+
+```html
+<i class="el-icon-edit"></i>
+<i class="el-icon-share"></i>
+<i class="el-icon-delete"></i>
+<el-button type="primary" icon="el-icon-search">搜索</el-button>
+```
+
+### Button 按钮
+
+使用 `type`、`plain`、`round`、`circle` 属性来定义 Button 的样式。
+
+```html
+<el-row>
+    <el-button>默认按钮</el-button>
+    <el-button type="primary">主要按钮</el-button>
+    <el-button type="success">成功按钮</el-button>
+    <el-button type="info">信息按钮</el-button>
+    <el-button type="warning">警告按钮</el-button>
+    <el-button type="danger">危险按钮</el-button>
+</el-row>
+
+<el-row>
+    <el-button plain>朴素按钮</el-button>
+    <el-button type="primary" plain>主要按钮</el-button>
+    <el-button type="success" plain>成功按钮</el-button>
+    <el-button type="info" plain>信息按钮</el-button>
+    <el-button type="warning" plain>警告按钮</el-button>
+    <el-button type="danger" plain>危险按钮</el-button>
+</el-row>
+
+<el-row>
+    <el-button round>圆角按钮</el-button>
+    <el-button type="primary" round>主要按钮</el-button>
+    <el-button type="success" round>成功按钮</el-button>
+    <el-button type="info" round>信息按钮</el-button>
+    <el-button type="warning" round>警告按钮</el-button>
+    <el-button type="danger" round>危险按钮</el-button>   
+</el-row>
+
+<el-row>
+    <el-button icon="el-icon-search" circle></el-button>
+    <el-button type="primary" icon="el-icon-edit" circle></el-button>
+    <el-button type="success" icon="el-icon-check" circle></el-button>
+    <el-button type="info" icon="el-icon-message" circle></el-button>
+    <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+    <el-button type="danger" icon="el-icon-delete" circle></el-button>
+</el-row>
+```
+
+禁用状态
+
+```html
+<el-row>
+    <el-button disabled>默认按钮</el-button>
+    <el-button type="primary" disabled>主要按钮</el-button>
+    <el-button type="success" disabled>成功按钮</el-button>
+    <el-button type="info" disabled>信息按钮</el-button>
+    <el-button type="warning" disabled>警告按钮</el-button>
+    <el-button type="danger" disabled>危险按钮</el-button>
+</el-row>
+
+<el-row>
+    <el-button plain disabled>朴素按钮</el-button>
+    <el-button type="primary" plain disabled>主要按钮</el-button>
+    <el-button type="success" plain disabled>成功按钮</el-button>
+    <el-button type="info" plain disabled>信息按钮</el-button>
+    <el-button type="warning" plain disabled>警告按钮</el-button>
+    <el-button type="danger" plain disabled>危险按钮</el-button>
+</el-row>
+```
+
+文字按钮
+
+```html
+<el-button type="text">文字按钮</el-button>
+<el-button type="text" disabled>文字按钮</el-button>
+```
+
+图标按钮
+
+```html
+<el-button type="primary" icon="el-icon-edit"></el-button>
+<el-button type="primary" icon="el-icon-share"></el-button>
+<el-button type="primary" icon="el-icon-delete"></el-button>
+<el-button type="primary" icon="el-icon-search">搜索</el-button>
+<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+```
+
+按钮组
+
+```html
+<el-button-group>
+    <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
+    <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+</el-button-group>
+<el-button-group>
+    <el-button type="primary" icon="el-icon-edit"></el-button>
+    <el-button type="primary" icon="el-icon-share"></el-button>
+    <el-button type="primary" icon="el-icon-delete"></el-button>
+</el-button-group>
+```
+
+加载中
+
+```html
+<el-button type="primary" :loading="true"></el-button>
+```
+
+不同尺寸
+
+```html
+<el-row>
+    <el-button>默认按钮</el-button>
+    <el-button size="medium">中等按钮</el-button>
+    <el-button size="small">小型按钮</el-button>
+    <el-button size="mini">超小按钮</el-button>
+</el-row>
+<el-row>
+    <el-button round>默认按钮</el-button>
+    <el-button size="medium" round>中等按钮</el-button>
+    <el-button size="small" round>小型按钮</el-button>
+    <el-button size="mini" round>超小按钮</el-button>
+</el-row>
+```
+
+### Radio 单选框
+
+由于选项默认可见，不宜过多，若选项过多，建议使用 Select 选择器。
+
+```html
+<template>
+    <el-radio v-model="radio" label="1">备选项</el-radio>
+    <el-radio v-model="radio" label="2">备选项</el-radio>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio: '1'
+      };
+    }
+  }
+</script>
+```
+
+禁用状态
+
+```html
+<template>
+    <el-radio disabled v-model="radio1" label="禁用">备选项</el-radio>
+    <el-radio disabled v-model="radio1" label="选中且禁用">备选项</el-radio>
+</template>
+```
+
+单选框组
+
+```html
+<template>
+    <el-radio-group v-model="radio2">
+        <el-radio :label="3">备选项</el-radio>
+        <el-radio :label="6">备选项</el-radio>
+        <el-radio :label="9">备选项</el-radio>
+    </el-radio-group>
+</template>
+
+<script>
+    export default {
+        data () {
+            return {
+                radio2: 3
+            };
+        }
+    }
+</script>
+```
+
+按钮样式
+
+```html
+<template>
+    <div>
+        <el-radio-group v-model="radio3">
+            <el-radio-button label="上海"></el-radio-button>
+            <el-radio-button label="北京"></el-radio-button>
+            <el-radio-button label="广州"></el-radio-button>
+            <el-radio-button label="深圳"></el-radio-button>
+        </el-radio-group>
+    </div>
+    <div style="margin-top: 20px">
+        <el-radio-group v-model="radio4" size="medium">
+            <el-radio-button label="上海" ></el-radio-button>
+            <el-radio-button label="北京"></el-radio-button>
+            <el-radio-button label="广州"></el-radio-button>
+            <el-radio-button label="深圳"></el-radio-button>
+        </el-radio-group>
+    </div>
+    <div style="margin-top: 20px">
+        <el-radio-group v-model="radio5" size="small">
+            <el-radio-button label="上海"></el-radio-button>
+            <el-radio-button label="北京" disabled ></el-radio-button>
+            <el-radio-button label="广州"></el-radio-button>
+            <el-radio-button label="深圳"></el-radio-button>
+        </el-radio-group>
+    </div>
+    <div style="margin-top: 20px">
+        <el-radio-group v-model="radio6" disabled size="mini">
+            <el-radio-button label="上海"></el-radio-button>
+            <el-radio-button label="北京"></el-radio-button>
+            <el-radio-button label="广州"></el-radio-button>
+            <el-radio-button label="深圳"></el-radio-button>
+        </el-radio-group>
+    </div>
+</template>
+```
+
+带有边框
+
+```html
+<template>
+    <div>
+        <el-radio v-model="radio7" label="1" border>备选项1</el-radio>
+        <el-radio v-model="radio7" label="2" border>备选项2</el-radio>
+    </div>
+    <div style="margin-top: 20px">
+        <el-radio v-model="radio8" label="1" border size="medium">备选项1</el-radio>
+        <el-radio v-model="radio8" label="2" border size="medium">备选项2</el-radio>
+    </div>
+    <div style="margin-top: 20px">
+        <el-radio-group v-model="radio9" size="small">
+            <el-radio label="1" border>备选项1</el-radio>
+            <el-radio label="2" border disabled>备选项2</el-radio>
+        </el-radio-group>
+    </div>
+    <div style="margin-top: 20px">
+        <el-radio-group v-model="radio10" size="mini" disabled>
+            <el-radio label="1" border>备选项1</el-radio>
+            <el-radio label="2" border>备选项2</el-radio>
+        </el-radio-group>
+    </div>
+</template>
+```
+
+### Checkbox 多选框
+
+```html
+<template>
+    <!-- `checked` 为 true 或 false -->
+    <el-checkbox v-model="checked">备选项</el-checkbox>
+</template>
+<script>
+    export default {
+        data() {
+            return {
+                checked: true
+            };
+        }
+    };
+</script>
+```
+
+禁用状态略
+
+多选框组
+
+```html
+<template>
+  <el-checkbox-group v-model="checkList">
+    <el-checkbox label="复选框 A"></el-checkbox>
+    <el-checkbox label="复选框 B"></el-checkbox>
+    <el-checkbox label="复选框 C"></el-checkbox>
+    <el-checkbox label="禁用" disabled></el-checkbox>
+    <el-checkbox label="选中且禁用" disabled></el-checkbox>
+  </el-checkbox-group>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        checkList: ['选中且禁用','复选框 A']
+      };
+    }
+  };
+</script>
 ```
 
 TODO
