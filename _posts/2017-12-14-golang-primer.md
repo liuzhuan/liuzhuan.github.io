@@ -68,7 +68,9 @@ package `main` 比较特殊，它定义独立可执行程序，而非库。packa
 
 你必须精确指明引入的 package。过多或过少都不可编译。这种严格要求可以防止在程序发展过程中引入不必要的包。
 
-`import` 声明必须在 `package` 声明之后。
+`import` 声明必须在 `package` 声明之后。接着是函数、变量、常量和类型的声明（关键字分别是 `func`、`var`、`const`、`type`）
+
+Go 极其重视代码格式化。
 
 // TODO http://www.gopl.io/ch1.pdf 22/59
 
