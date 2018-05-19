@@ -185,6 +185,128 @@ func main() {
 }
 ```
 
+如果你不在乎格式，只是想看看输出内容，可以直接使用：
+
+```go
+fmt.Println(os.Args[1:])
+```
+
+输出结果和 `strings.Join()` 结果大体相同，只不过两侧增加了方括号。
+
+如果要同时输出 `os.Args[0]`，可以使用：
+
+```go
+// Echo4 print its command-line arguments
+package main
+
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	fmt.Println(strings.Join(os.Args[:], " "))
+}
+```
+
+此时，如果执行 `go run echo4.go hello world`，则可能输出如下内容：
+
+```sh
+/var/folders/7q/tpp7ng255nndwwh9pnhl1jyc0000gn/T/go-build153488329/command-line-arguments/_obj/exe/echo4 hello world
+```
+
+可以看到 `go run` 会在临时文件夹生成可执行文件并运行。
+
+如果先执行 `go build echo4.go` 生成可执行文件 `echo4`，然后执行 `./echo4 hello world`，则输出：
+
+```sh
+./echo4 hello world
+```
+
+若要打印命令行参数的索引和数值，每个一行，可以这么写：
+
+```go
+// echo5.go
+// Print index and value of arguments
+// one per line
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    for index, value := range os.Args[1:] {
+        fmt.Println(index, "=", value)
+    }
+}
+```
+
+如果要计算 `strings.Join()` 高效率版本和低效率版本的执行效率差异，如何衡量？
+
+可以使用 `time` package。其计算时间的方法如下：
+
+```go
+t0 := time.Now()
+expensiveCall()
+t1 := time.Now()
+diff := t1.Sub(t0)
+fmt.Printf("The call took %v to run.\n", diff)
+```
+
+因此，两个版本的执行效率差异可以如此评价：
+
+```go
+// echo6.go
+// time benchmark
+package main
+
+import (
+    "fmt"
+    "os"
+    "strings"
+    "time"
+)
+
+func main() {
+    s, sep := "", ""
+
+    t0 := time.Now()
+    for _, value := range os.Args[1:] {
+        s += sep + value
+        sep = " "
+    }
+    fmt.Println(s)
+    t1 := time.Now()
+    fmt.Printf("loop uses %v to run.\n", t1.Sub(t0))
+
+    t0 = time.Now()
+    fmt.Println(strings.Join(os.Args[1:], " "))
+    t1 = time.Now()
+    fmt.Printf("strings.Join() uses %v to run.\n", t1.Sub(t0))
+}
+```
+
+运行一下查看执行结果：
+
+```sh
+$ go run echo6.go 1 2 3 ... 40
+1 2 3 ... 40
+loop uses 40µs to run.
+1 2 3 ... 40
+strings.Join() usss 4µs to run.
+```
+
+### 搜索重复行
+
+我们将编写一个名为 `dup` 的程序，用来查找相邻的重复行。
+
+第一个版本会打印出现重复的行及其重复次数。这个应用介绍了 `if` 语句，`map` 数据类型和 `bufio` package。
+
+
+
 // TODO http://www.gopl.io/ch1.pdf 27/59
 
 ## 程序结构
