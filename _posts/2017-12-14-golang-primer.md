@@ -305,9 +305,146 @@ strings.Join() usss 4µs to run.
 
 第一个版本会打印出现重复的行及其重复次数。这个应用介绍了 `if` 语句，`map` 数据类型和 `bufio` package。
 
+```go
+// Dup1 prints the text of each line that appears more than
+// once in the standard input, preceded by its count
+package main
 
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
-// TODO http://www.gopl.io/ch1.pdf 27/59
+func main() {
+	counts := make(map[string]int)
+	input := bufio.NewScanner(os.Stdin)
+	for input.Scan() {
+		counts[input.Text()]++
+	}
+	// NOTE: ignoring potential errors from input.Err()
+	for line, n := range counts {
+		if n > 1 {
+			fmt.Printf("%d\t%s\n", n, line)
+		}
+	}
+}
+```
+
+`map` 可以存储键值对，它的存储、检索、测试时间都是恒定的。key 可以是任意类型，只要求它们可以使用 `==` 比较。通常 key 为字符类型。内建函数 `make` 创建一个空 map。
+
+每次 dup 读取一行文本，line 数据被当作 map 的 key。
+
+`bufio` package 让输入输出简洁高效。它的重要作用之一是它的 `Scanner` 类型，可以读取输入，并将其拆分为行或单词。它是处理行数据的最简单方法。
+
+scanner 从标准输入读取数据。每次调用 `input.Scan()` 都会读取下一行，并且剔除结尾换行符；结果可以通过 `input.Text()` 读取。只要有数据，`Scan` 函数就会返回 `true`。
+
+`fmt.Printf` 函数用来格式化输出。第一个参数是格式化字符串。以下列出了常用的转化格式符号：
+
+| verbs            | 含义                            |
+| ---------------- | ------------------------------ |
+| `%d`             | 十进制整数                       |
+| `%x`, `%o`, `%b` | 整数，十六进制、八进制、二进制      |
+| `%f`, `%g`, `%e` | 浮点数                          |
+| `%t`             | 布尔值：`true` 或 `false`        |
+| `%c`             | rune（Unicode 码点）            |
+| `%s`             | 字符串                          |
+| `%q`             | 引号字符串 `"abc"` 或 rune `'c'` |
+| `%v`             | 任意类型的自然格式                |
+| `%T`             | 任意类型                        |
+| `%%`             | 百分号字面量                     |
+
+依惯例，所有以 `f` 结尾的格式化函数，比如 `log.Printf` 和 `fmt.ErrorF`，都会使用 `fmt.Printf` 的格式化规则。以 `ln` 结尾的格式化函数仿效 `fmt.Println` 的规则，末尾插入换行符。
+
+许多程序不仅从标准输入获取数据，还可以读取文件内容。下面版本的 `dup` 除了标准输入外，还可以处理一系列文件名称，使用 `os.Open` 打开文件：
+
+```go
+// Dup2 prints the count and text of lines that appear more than once
+// in the input. It reads from stdin or from a list of named files
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func main() {
+	counts := make(map[string]int)
+	files := os.Args[1:]
+	if len(files) == 0 {
+		countLines(os.Stdin, counts)
+	} else {
+		for _, arg := range files {
+			f, err := os.Open(arg)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "dup2: %v\n", err)
+				continue
+			}
+			countLines(f, counts)
+			f.Close()
+		}
+	}
+	for line, n := range counts {
+		if n > 1 {
+			fmt.Printf("%d\t%s\n", n, line)
+		}
+	}
+}
+
+func countLines(f *os.File, counts map[string]int) {
+	input := bufio.NewScanner(f)
+	for input.Scan() {
+		counts[input.Text()]++
+	}
+}
+```
+
+`os.Open` 函数返回两个值，第一个是打开的文件（`*os.File`），用在后续的 `Scanner` 中。
+
+第二个返回值是内建的 `error` 类型。如果 `err` 等于内建的特殊值 `nil`，说明文件被正确打开。`Close` 函数可以关闭文件，释放资源。
+
+如果 `err` 不等于 `nil`，说明出现问题。error 对象中包含具体报错原因。
+
+map 是对 `make` 创建的数据结构的引用。当 map 传递给一个函数，函数将接收到引用的一个副本，因此被调用函数对于 map 底层数据当任何改变，都可以通过调用函数的 map 引用感知。在本例中，`countLines` 对于 map 的所有改变，都可以在 `main` 中看到。
+
+以上版本的 dup 处于“流”模式。另一种方案是将文件整体读入内存，然后统一处理。下个版本 `dep3`，使用 `ReadFile`（位于 `io/ioutil` package）读取整个文件，`strings.Split` 将字符串拆分为子串。
+
+我们对 `dep3` 做了简化，只读取文件：
+
+```go
+// Dup3
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strings"
+)
+
+func main() {
+	counts := make(map[string]int)
+	for _, filename := range os.Args[1:] {
+		data, err := ioutil.ReadFile(filename)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "dup3: %v\n", err)
+			continue
+		}
+		for _, line := range strings.Split(string(data), "\n") {
+			counts[line]++
+		}
+	}
+
+	for line, n := range counts {
+		if n > 1 {
+			fmt.Printf("%d\t%s\n", n, line)
+		}
+	}
+}
+```
+
+// TODO http://www.gopl.io/ch1.pdf 31/59
 
 ## 程序结构
 
