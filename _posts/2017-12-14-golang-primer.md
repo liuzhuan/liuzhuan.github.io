@@ -185,7 +185,7 @@ func main() {
 }
 ```
 
-// TODO http://www.gopl.io/ch1.pdf 22/59
+// TODO http://www.gopl.io/ch1.pdf 27/59
 
 ## 程序结构
 
