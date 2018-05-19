@@ -113,6 +113,78 @@ func main() {
 
 `var` 语句声明了两个变量 `s` 和 `sep`，类型是 `string`。变量可以在声明时初始化。如果没有显示初始化，则被默认初始化为当前类型的**零值**，对于数字类型是 0，对于字符串类型是 `""`。
 
+循环变量 `i` 在 for 循环的第一部分声明。`:=` 用作**简短变量声明**（*short variable declaration*），它通过初始值推导变量类型。
+
+for 循环是 Go 仅有的循环结构。它有多种形式，比如：
+
+```go
+for initialization; condition; post {
+    // zero or more statements
+}
+```
+
+for 循环中无需圆括号，但是花括号却是必需，且左花括号须和循环条件位于一行。
+
+for 循环中的初始化语句、判断条件、后置操作都是可选的。如果没有初始化和后置操作，分号也可省略，此时变为传统的 while 循环：
+
+```go
+// a traditional "while" loop
+for condition {
+    // ...
+}
+```
+
+如果条件判断也省略，即为无限循环：
+
+```go
+// a traditional infinite loop
+for {
+    // ...
+}
+```
+
+for 循环的另一种形式是遍历一个数值范围，比如字符串或 slice。为了演示这种用法，我们可以改写 echo 程序如下：
+
+```go
+// Echo2 prints its command-line arguments
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	s, sep := "", ""
+	for _, arg := range os.Args[1:] {
+		s += sep + arg
+		sep = " "
+	}
+	fmt.Println(s)
+}
+```
+
+每次循环迭代中，`range` 产生一对数值：当前索引值和当前元素。在本例中，我们不需要索引，但是 `range` 语法一定要产生索引，而且如果声明了变量但却不使用，Go 编译器会抱怨。
+
+为了解决语法和业务逻辑不可调和的矛盾，可以使用“空虚变量”（*blank identifier*），即 `_`。其实就是用来糊弄 Go 编译器的。
+
+在上面的循环中，每次都会产生新字符串。如果循环数量级很大，将影响执行效率。更简单有效的解决方案是使用 strings package 的 `Join` 函数。
+
+```go
+// Echo3 print its command-line arguments
+package main
+
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	fmt.Println(strings.Join(os.Args[1:], " "))
+}
+```
+
 // TODO http://www.gopl.io/ch1.pdf 22/59
 
 ## 程序结构
