@@ -70,7 +70,48 @@ package `main` 比较特殊，它定义独立可执行程序，而非库。packa
 
 `import` 声明必须在 `package` 声明之后。接着是函数、变量、常量和类型的声明（关键字分别是 `func`、`var`、`const`、`type`）
 
-Go 极其重视代码格式化。
+Go 代码风格相当强硬。`gofmt` 工具将代码改写为标准风格。`go fmt` 会使用 `gofmt` 对包内所有源文件处理。强制颁发官方风格，不仅消除了愚蠢琐碎的代码风格争辩（例如，分号党 VS. 无分号党），而且可以很容易编写自动化源码转译工具。
+
+可以配置文本编辑器，当保存文件时，自动执行 `gofmt`，这样代码始终符合规范。另有一个社区工具 `goimports`，可以管理 import 声明的增删。可以通过以下工具获取：
+
+```sh
+$ go get golang.org/x/tools/cmd/goimports
+```
+
+### 命令行参数
+
+大部分程序处理输入，产生输出。这就是计算的本质。输入可有多种，可以是用户输入、文件、网络链接、其他程序的输出等。下面介绍几种常见输入。
+
+`os` package 提供了一些函数，用来处理操作系统相关的操作。命令行相关函数位于 `os.Args`。
+
+`os.Args` 变量是一个字符串切片（`slice`）。Slices 是 Go 的一个基础概念。可以把 slice 想象为一个具有动态长度的序列 s，可以通过 `s[i]` 访问当个序列元素，也可以通过 `s[m:n]` 访问序列的一段连续的范围。元素个数可以通过 `len(s)` 获得。
+
+`os.Args` 的第一个参数 `os.Args[0]` 是命令本身。其他元素是命令行参数，可以通过 `os.Args[1:len(os.Args)]` 获取。如果省略 `n`，就会默认取值 `len(s)`，因此可以简化为 `os.Args[1:]`
+
+下面是 Unix `echo` 命令的简单实现，可以输出命令行参数。该程序引用两个 package，使用了一个括号列表。引用顺序不重要，因为 `gofmt` 会按照字母顺序重新排列。
+
+```go
+// Echo1 prints its command-line arguments
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	var s, sep string
+	for i := 1; i < len(os.Args); i++ {
+		s += sep + os.Args[i]
+		sep = " "
+	}
+	fmt.Println(s)
+}
+```
+
+注释以 `//` 开头，直至行尾。
+
+`var` 语句声明了两个变量 `s` 和 `sep`，类型是 `string`。变量可以在声明时初始化。如果没有显示初始化，则被默认初始化为当前类型的**零值**，对于数字类型是 0，对于字符串类型是 `""`。
 
 // TODO http://www.gopl.io/ch1.pdf 22/59
 
