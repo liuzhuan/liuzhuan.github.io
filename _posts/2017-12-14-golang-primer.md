@@ -814,7 +814,76 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 待解决。
 
-// TODO http://www.gopl.io/ch1.pdf 33/59
+### 零星问题
+
+Go 还有很多内容我们尚未提及，下面做个粗略介绍。
+
+**流程控制：** `switch` 语句是一个多路选择控制语句，以下是简单例子：
+
+```go
+// Switch use switch to make multi-way branch
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+func main() {
+	heads, tails := 0, 0
+	for i := 0; i < 10; i++ {
+		switch coinflip() {
+		case "heads":
+			heads++
+		case "tails":
+			tails++
+		default:
+			fmt.Println("landed on edge!")
+		}
+	}
+	fmt.Printf("heads: %d, tails: %d\n", heads, tails)
+}
+
+func coinflip() string {
+	// 每次随机数都是相同
+	r := rand.Float32()
+	if r > 0.5 {
+		return "tails"
+	}
+
+	if r == 0.5 {
+		return "edge"
+	}
+	return "heads"
+}
+```
+
+不同的分支之间，默认不会自动进入。
+
+`switch` 并非必需操作数。它可以仅仅列举各种 cases，每个 case 都是一个布尔值。
+
+```go
+func Signum(x int) int {
+	switch {
+	case x > 0:
+		return +1
+	default:
+		return 0
+	case x < 0:
+		return -1
+	}
+}
+```
+
+这种格式称为 *tagless switch*；它相当于 `switch true`。
+
+就像 `for` 和 `if` 语句一样，`switch` 可能包含一个可选的简单语句 --- 一个简短变量声明，一个自增或赋值语句，或者一个函数调用 --- 可以在测试前设置变量。
+
+`break` 和 `continue` 语句可以改变流程走向。
+
+**命名类型**
+
+// TODO http://www.gopl.io/ch1.pdf 43/59
 
 ## 程序结构
 
