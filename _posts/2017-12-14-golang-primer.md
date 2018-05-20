@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Golang 入门
+title: 《Go 编程语言》读书笔记
 date: 2017/12/14
 ---
 
@@ -582,7 +582,7 @@ func main() {
 }
 ```
 
-**习题 1.8** 如果 URL 没有协议头 `http://`，就增加必要到协议头。用到的方法有 `strings.HasPrefix`。
+**习题 1.8** 如果 URL 无协议头 `http://`，就增加 `http://`。可能会使用 `strings.HasPrefix` 方法。
 
 ```go
 // Fetch prints the content found at URL
@@ -624,6 +624,147 @@ func needPrefix(url string) bool {
 		return false
 	}
 	return true
+}
+```
+
+**习题 1.9** 打印 HTTP 状态码，`resp.Status` 提供。
+
+```diff
+// ...
++ fmt.Println(resp.StatusCode)
+fmt.Printf("%s", b)
+```
+
+### 并发获取 URL
+
+并发编程是 Go 编程的一个有趣而又创新的特性。这是一个很大的话题，这里只是对 Go 的主要并发机制、goroutines 和 channels 稍作介绍。
+
+下一个程序 `fetchall`，作用和 `fetch` 一样，也是读取网络数据，但是会并发同时请求。`fetchall` 会打印每个请求的时间和响应大小。
+
+```go
+// Fetchall fetches URLs in parallel and reports their times and sizes
+package main
+
+import (
+	"fmt"
+	"io"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"time"
+)
+
+func main() {
+	start := time.Now()
+	ch := make(chan string)
+	for _, url := range os.Args[1:] {
+		go fetch(url, ch) // start a goroutine
+	}
+	for range os.Args[1:] {
+		fmt.Println(<-ch) // receive from channel ch
+	}
+	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
+}
+
+func fetch(url string, ch chan<- string) {
+	start := time.Now()
+	resp, err := http.Get(url)
+	if err != nil {
+		ch <- fmt.Sprint(err) // Send to channel ch
+		return
+	}
+	nbytes, err := io.Copy(ioutil.Discard, resp.Body)
+	resp.Body.Close() // don't leak resources
+	if err != nil {
+		ch <- fmt.Sprintf("while reading %s: %v", url, err)
+		return
+	}
+	secs := time.Since(start).Seconds()
+	ch <- fmt.Sprintf("%.2f %7d %s", secs, nbytes, url)
+}
+```
+
+`goroutine` 表示一个并发程序，而 `channel` 是 goroutine 间的通信机制。main 函数在 goroutine 中执行，`go` 语句可以创建新的 goroutine。
+
+main 函数使用 `make` 创建 channel。
+
+当一个 goroutine 尝试从 channel 发送或接收数据时，它会一直堵塞，直到有其他 goroutine 向该 channel 接受或发送数据，此时数据转移，所有 goroutine 继续。在本例中，每个 `fetch` 向 channel 发送数据（`ch <- expression`），main 函数全部接收它们（`<-ch`）。
+
+**习题 1.10** 修改 `fetchall`，将输出内容保存到文件中，以备后期检查。
+
+暂时不知如何解答。
+
+**习题 1.11** 尝试增大命令行参数长度，比如读取 alexa.com 排名前 100 万的网站，如果有些网站没有响应，如何处理？
+
+暂时不知如何解答。
+
+### 网络服务器
+
+使用 Go 的库编写服务器很轻松。我们将编写一个简单服务器，可以返回 URL 的路径部分。比如，请求 `http://localhost:8000/hello`，将返回 `/hello`。
+
+```go
+// Server1 is a minimal "echo" server
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func main() {
+	http.HandleFunc("/", handler) // each request calls handler
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
+}
+```
+
+main 函数将监听函数绑定到一个路径 `/`，即监听所有路径。请求用 `http.Request` struct 表示，它包含很多字段，其中就有 `URL`。
+
+然后就可以在后台运行服务器，如果是 Linux 或 macOS，只要在命令后增加 `&` 即可。
+
+```sh
+$ go run path/to/server1.go &
+```
+
+给服务器增加功能也很简单。比如增加一个 `/count` 路由，用于统计请求次数（剔除 `/count` 请求次数）。
+
+```go
+// Server2 is a minimal "echo" and counter server
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+	"sync"
+)
+
+var mu sync.Mutex
+var count int
+
+func main() {
+	http.HandleFunc("/", handler)
+	http.HandleFunc("/count", counter)
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+}
+
+// handler echoes the Path component of the requested URL.
+func handler(w http.ResponseWriter, r *http.Request) {
+	mu.Lock()
+	count++
+	mu.Unlock()
+	fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
+}
+
+// counter echoes the number of calls so far
+func counter(w http.ResponseWriter, r *http.Request) {
+	mu.Lock()
+	fmt.Fprintf(w, "Count %d\n", count)
+	mu.Unlock()
 }
 ```
 
