@@ -444,7 +444,17 @@ func main() {
 }
 ```
 
-// TODO http://www.gopl.io/ch1.pdf 31/59
+`ReadFile` 返回一个字节 slice，必需转换为 `string` 才可被 `strings.Split` 拆分。
+
+`bufio.Scanner`、`ioutil.ReadFile`、`ioutil.WriteFile` 在底层都使用 `*os.File` 的 `Read` 和 `Write` 方法。通常使用高层函数就好。
+
+### GIF 动画
+
+下面介绍 Go 的图形库。我们会创建一系列图像，并将其整合为一个 gif 动画文件。
+
+我们要做的图像名为利萨佐斯图形（*Lissajous figures*），它们由两个维度的简谐振动叠加而成。
+
+// TODO http://www.gopl.io/ch1.pdf 33/59
 
 ## 程序结构
 
