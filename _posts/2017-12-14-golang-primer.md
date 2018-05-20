@@ -768,6 +768,52 @@ func counter(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
+server 有两个 handler，请求的 URL 决定了执行哪个。请求 `/count` 会执行计数，其余的请求都会执行 `handler` 函数。如果 handler 模式以 `/` 结尾，它可以匹配所有以该模式开头的 URL。
+
+服务器对于每个请求，都会开启独立的 goroutine，因此它可以同时满足并发请求。但是，如果两个并发请求同时尝试修改 `count`，可能会出现不一致的错误；程序会出现一种严重 bug：竞争状态（*race condition*）。为了解决这个问题，我们必需确保同一时间最多只有一个 goroutine 访问变量，这就是 `mu.Lock()` 和 `mu.Unlock()` 的作用。
+
+下面是一个更丰富的 handler 函数，可以打印请求头和表单数据。
+
+```go
+// Server3 is a minimal "echo" and counter server
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func main() {
+	http.HandleFunc("/", handler)
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+}
+
+// handler echoes the HTTP request
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "%s %s %s\n", r.Method, r.URL, r.Proto)
+	for k, v := range r.Header {
+		fmt.Fprintf(w, "Header[%q] = %q\n", k, v)
+	}
+	fmt.Fprintf(w, "Host = %q\n", r.Host)
+	fmt.Fprintf(w, "RemoteAddr = %q\n", r.RemoteAddr)
+	if err := r.ParseForm(); err != nil {
+		log.Print(err)
+	}
+	for k, v := range r.Form {
+		fmt.Fprintf(w, "Form[%q] = %q\n", k, v)
+	}
+}
+```
+
+上面利用 `http.Request` 的 struct 字段打印信息。
+
+注意，`ParseForm` 嵌套在一个 `if` 语句中。
+
+**习题 1.12** 修改 Lissajous 服务器，从 URL 中读取参数。比如，从 `http://localhost:8000/?cycles=20` 设置 cycles 为 20。使用 `strconv.Atoi` 将字符串转换为整数。
+
+待解决。
+
 // TODO http://www.gopl.io/ch1.pdf 33/59
 
 ## 程序结构
