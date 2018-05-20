@@ -9,7 +9,7 @@ date: 2017/12/14
 
 > Go is an open source programming language that makes it easy to build simple, reliable, and efficient software
 
-[The Go Programming Language][go-lang] 适合入门阅读。本文是该书的一个读书笔记。
+经典书籍 [The Go Programming Language][go-lang] 适合入门阅读。本文是该书的一个读书笔记。同时，也对习题作出自己的答案。
 
 2007 年 9 月，*Robert Griesemer*、*Rob Pike* 和 *Ken Thompson* 开始构思 Go 语言。2009 年 11 月公布。
 
@@ -453,6 +453,179 @@ func main() {
 下面介绍 Go 的图形库。我们会创建一系列图像，并将其整合为一个 gif 动画文件。
 
 我们要做的图像名为利萨佐斯图形（*Lissajous figures*），它们由两个维度的简谐振动叠加而成。
+
+```go
+package main
+
+import (
+	"image"
+	"image/color"
+	"image/gif"
+	"io"
+	"math"
+	"math/rand"
+	"os"
+)
+
+var palette = []color.Color{color.White, color.Black}
+
+const (
+	whiteIndex = 0 // first color in palette
+	blackIndex = 1 // next color in palette
+)
+
+func main() {
+	lissajous(os.Stdout)
+}
+
+func lissajous(out io.Writer) {
+	const (
+		cycles  = 5     // number of complete x oscillator revolutions
+		res     = 0.001 // angular resolution
+		size    = 100   // image canvas covers [-size..+size]
+		nframes = 128   // number of animation frames
+		delay   = 8     // delay between frames in 10ms units
+	)
+
+	freq := rand.Float64() * 3.0 // relative frequency of y oscillator
+	anim := gif.GIF{LoopCount: nframes}
+	phase := 0.0
+	for i := 0; i < nframes; i++ {
+		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
+		img := image.NewPaletted(rect, palette)
+		for t := 0.0; t < cycles*2*math.Pi; t += res {
+			x := math.Sin(t)
+			y := math.Sin(t*freq + phase)
+			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), blackIndex)
+		}
+		phase += 0.1
+		anim.Delay = append(anim.Delay, delay)
+		anim.Image = append(anim.Image, img)
+	}
+	gif.EncodeAll(out, &anim)
+}
+```
+
+如果 package 名有多个组件，比如 `image/color`，在程序中使用时需要引用最后一个组件，比如 `color.Color`。
+
+`const` 用来声明常量。常量只可以是 number、string 或 boolean。
+
+表达式 `[]color.Color{...}` 和 `gif.GIF{...}` 是**复合字面量**（*composite literals*），这是一种使用变量初始化复合类型的简洁表示法。此处第一个是 slice，第二个是 struct。
+
+`gif.GIF` 是一个 struct 类型。`anim` 是一个 `gif.GIF` 类型的 struct 变量。
+
+### 获取 URL
+
+Go 提供的网络相关包，都位于 `net` 名下。
+
+下面的 `fetch` 程序，用于获取网络资源。
+
+```go
+// Fetch prints the content found at URL
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"os"
+)
+
+func main() {
+	for _, url := range os.Args[1:] {
+		resp, err := http.Get(url)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
+			os.Exit(1)
+		}
+		b, err := ioutil.ReadAll(resp.Body)
+		resp.Body.Close()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
+			os.Exit(1)
+		}
+		fmt.Printf("%s", b)
+	}
+}
+```
+
+程序引入两个包，`net/http` 和 `io/ioutil`。`http.Get` 用来发起 HTTP 请求，如果没有错误，返回响应内容 `resp`。`resp` 的 `Body` 字段包含服务器响应消息，是可读流的形式。`ioutil.ReadAll` 读取所有的响应，结果储存到 `b`。Body 流需要关闭，以避免内存泄漏。
+
+**习题 1.7** 使用 `io.Copy(dst, src)` 替代 `ioutil.ReadAll()`。
+
+```go
+// Fetch2 prints the content found at URL
+// use io.Copy(dst, src) instead of ioutil.ReadAll
+package main
+
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+)
+
+func main() {
+	for _, url := range os.Args[1:] {
+		resp, err := http.Get(url)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
+			os.Exit(1)
+		}
+		_, err = io.Copy(os.Stdout, resp.Body)
+		resp.Body.Close()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
+			os.Exit(1)
+		}
+	}
+}
+```
+
+**习题 1.8** 如果 URL 没有协议头 `http://`，就增加必要到协议头。用到的方法有 `strings.HasPrefix`。
+
+```go
+// Fetch prints the content found at URL
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"strings"
+)
+
+func main() {
+	for _, url := range os.Args[1:] {
+		if needPrefix(url) {
+			url = "http://" + url
+		}
+		resp, err := http.Get(url)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
+			os.Exit(1)
+		}
+		b, err := ioutil.ReadAll(resp.Body)
+		resp.Body.Close()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "fetch: reading %s: %v\n", url, err)
+			os.Exit(1)
+		}
+		fmt.Printf("%s", b)
+	}
+}
+
+func needPrefix(url string) bool {
+	if strings.HasPrefix(url, "http://") == true {
+		return false
+	}
+	if strings.HasPrefix(url, "https://") == true {
+		return false
+	}
+	return true
+}
+```
 
 // TODO http://www.gopl.io/ch1.pdf 33/59
 
