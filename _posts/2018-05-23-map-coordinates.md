@@ -71,7 +71,11 @@ WGS 的最新版本为 WGS 84（也称作 WGS 1984、EPSG:4326），1984年定�
 
 - 国际标准，谷歌国外地图、osm 地图等国外的地图一般都是这个
 
-## REF
+### 微信小程序
+
+微信小程序属于腾讯系，所以同样使用 GCJ02 坐标系，使用腾讯地图的[坐标拾取器]可以得到匹配的经纬度。
+
+使用[百度地图的拾取器][tool.baidu]得到的经纬度，需要经过[转换][bd90]后，才可以在微信小程序中使用。
 
 [comp]: https://developers.weixin.qq.com/miniprogram/dev/component/map.html#map
 [api]: https://developers.weixin.qq.com/miniprogram/dev/api/location.html#wxopenlocationobject
@@ -80,3 +84,5 @@ WGS 的最新版本为 WGS 84（也称作 WGS 1984、EPSG:4326），1984年定�
 [baidu.gcj02]: https://baike.baidu.com/item/GCJ-02
 [bd90]: http://lbsyun.baidu.com/index.php?title=coordinate
 [wandergis]: https://github.com/wandergis/coordtransform
+[tool.baidu]: http://api.map.baidu.com/lbsapi/getpoint/index.html
+[tool.qq]: http://lbs.qq.com/tool/getpoint/index.html
