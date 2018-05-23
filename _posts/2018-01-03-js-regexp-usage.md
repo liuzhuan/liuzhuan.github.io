@@ -251,6 +251,14 @@ if (result) {
 
 ⚠️ 注意，将非全局搜索的正则表达式（即不设置 `g` 标志位）传递给 `match()` 函数，相当于把该字符串传递给 `RegExp` 的 `exec()` 方法。返回的数组均有 `index` 和 `input` 两个属性。其中的 `index` 表示匹配子串在原串的位置索引，`input` 就是原始字符串。
 
+再比如，Mock.js 中的 [`src/mock/util.js`](https://github.com/nuysoft/Mock/blob/1.0.1-beta3/src/mock/util.js#L59-L61) 用于判断参数类型的代码：
+
+```js
+Util.type = function type(obj) {
+  return (obj === null || obj === undefined) ? String(obj) : Object.prototype.toString().call(obj).match(/\[object (\w+)\]/)[1].toLowerCase()
+}
+```
+
 ### split()
 
 `split` 只有一个参数，用作分隔符。它的作用是将字符串按照给定的模式拆分为多个字符串。比如：
