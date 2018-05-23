@@ -11,7 +11,7 @@ date: 2018-05-23
 
 > `map` 组件使用的经纬度是火星坐标系，调用 `wx.getLocation` 接口需要指定 `type` 为 `gcj02`
 
-它的相关 API 文档也有相关介绍。比如，`wx.getLocation(OBJECT)` 的 `type` 属性释义：
+它的相关 API 文档也有类似介绍。比如，`wx.getLocation(OBJECT)` 的 `type` 属性：
 
 > 默认为 `wgs84` 返回 gps 坐标，`gcj02` 返回可用于 `wx.openLocation` 的坐标
 
