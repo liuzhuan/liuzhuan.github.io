@@ -883,9 +883,103 @@ func Signum(x int) int {
 
 **命名类型**
 
-// TODO http://www.gopl.io/ch1.pdf 43/59
+type 声明可以为现有类型创建新名。由于 struct 类型通常较长，它们几乎总是要重命名。比如，2D 图形坐标系统的 Point 类型：
+
+```go
+type Point struct {
+	X, Y int
+}
+var p Point
+```
+
+**指针**
+
+Go 提供指针，即包含变量地址的数值。在 C 中，指针的使用几乎不受任何限制，在某些语言中，指针被称为“引用”类型，除了传值别无它用。Go 对于指针的态度位于两个极端中间地带。指针可见，`&` 可获取变量地址，`*` 可获取指针指向的变量，但却不支持指针运算。
+
+**方法和接口**
+
+方法是与命名类型绑定的函数。在放荡不羁的 Go 中，方法几乎可以和任意命名类型捆绑。
+
+接口是一种抽象类型，可以将不同的实际类型，根据它们共有的方法，抽象为一种通用类型。至于它们内部是如何定义或实现的，这都不打紧。
+
+**包**
+
+Go 自带许多实用工具包，Go 社区也在不断贡献新的包。
+
+开始编写代码钱，最好先看看，是不是地球的某个地方的好心人，已经帮你实现了你期望的功能。官方的库可以从 [Packages](https://golang.org/pkg/) 页面查找，社区贡献的包可以从 [GoDoc](https://godoc.org/) 获得。`go doc` 命令可以轻易从命令行获取每个函数方法的含义。
+
+```sh
+$ go doc http.ListenAndServe
+package http // import "net/http"
+
+func ListenAndServe(addr string, handler Handler) error
+    ListenAndServe listens on the TCP network address addr and then calls Serve
+    with handler to handle requests on incoming connections. Accepted
+    connections are configured to enable TCP keep-alives. Handler is typically
+    nil, in which case the DefaultServeMux is used.
+	...
+```
 
 ## 程序结构
+
+### 名字
+
+Go 有 25 个关键词，它们属于语法的一部分，不可以当作变量名。这 25 个娃是：
+
+```
+break		default		func	interface	select
+case		defer		go		map			struct
+chan		else		goto	package		switch
+const		fallthrough	if		range		type
+continue	for			import	return		var
+```
+
+除此之外，还有一些预先声明的变量，用作内置常量、类型和函数。如下：
+
+```
+Constants:	true	false	iota	nil
+
+Types:		int		int8	int16	int32	int64
+			uint	uint8	uint16	uint32	uint64	uintptr
+			float32	float64	complex128	complex64
+			bool	byte	rune	string	error
+
+Functions:	make	len	cap	new	append	copy	close	delete
+			complex	real	img
+			panic	recover
+```
+
+这些名字不是保留字，可以将其重新赋值。但是一定要明白重新赋值带来的蝴蝶效应。
+
+如果实体在函数内部声明，它就属于函数的局部变量。如果在函数体外声明，它将对包内所有文件可见。名称首字母大小写，决定了它是否可以被包外代码看见。如果名称首字母大写，意味着它将被导出，可以被包外代码访问。比如，`fmt.Printf` 。
+
+Go 语言更青睐“驼峰”写法。
+
+### 声明
+
+有四种主要的声明类型：`var`, `const`, `type`, `func`。
+
+### 变量
+
+声明的通用语法如下：
+
+```go
+var name type = expression
+```
+
+`type` 和 `= expression` 两者不可全部缺席，至少保留一份。
+
+如果 `expression` 省略，变量将被赋予 `type` 类型的“零值”。
+
+零值机制可以确保任何时间变量的值都是合法的。在 Go 中，不存在未初始化变量。
+
+包级变量在 main 之前初始化。局部变量在函数执行过程中初始化。
+
+多个变量还可以被返回多值的函数初始化。比如：
+
+```go
+var f, err = os.Open(name)	// os.Open 返回一个文件和错误对象
+```
 
 // TODO
 
