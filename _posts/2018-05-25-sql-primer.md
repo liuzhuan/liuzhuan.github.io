@@ -7,7 +7,7 @@ date: 2018-05-25
 * TOC
 {:toc}
 
-![book](https://img3.doubanio.com/view/subject/l/public/s28341985.jpg)
+![book](/assets/sql-primer.jpg)
 
 ## 了解 SQL
 
