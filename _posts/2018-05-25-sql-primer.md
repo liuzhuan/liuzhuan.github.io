@@ -45,7 +45,61 @@ FROM Product;
 
 多条 SQL 语句必需以分号（`;`）分割。**SQL 语句不区分大小写**，但是表名、列名和值有可能会区分。
 
-TODO
+检索多个列
+
+```sql
+SELECT prod_id, prod_name, prod_price
+FROM Products;
+```
+
+检索所有列
+
+```sql
+SELECT *
+FROM Products;
+```
+
+检索不同的值
+
+`DISTINCT` 关键字指示数据库只返回不同的值。它必需出现在列名的前面。
+
+```sql
+SELECT DISTINCT vend_id
+FROM Products;
+```
+
+限制结果
+
+各种数据库中的实现并不相同：
+
+```sql
+-- SQL Server & Access
+SELECT TOP 5 prod_name
+FROM Products;
+
+-- DB2
+SELECT prod_name
+FROM Products
+FETCH FIRST 5 ROWS ONLY;
+
+-- Oracle
+SELECT prod_name
+FROM Products
+WHERE ROWNUM <= 5;
+
+-- MySQL, MariaDB, PostgreSQL, SQLite
+SELECT prod_name
+FROM Products
+LIMIT 5;
+
+SELECT prod_name
+FROM Products
+LIMIT 5 OFFSET 5;
+```
+
+## 排序检索数据
+
+TODO 96/887
 
 ## REF
 
