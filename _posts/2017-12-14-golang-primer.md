@@ -924,15 +924,7 @@ func ListenAndServe(addr string, handler Handler) error
 
 ### 名字
 
-Go 有 25 个关键词，它们属于语法的一部分，不可以当作变量名。这 25 个娃是：
-
-```
-break		default		func	interface	select
-case		defer		go		map			struct
-chan		else		goto	package		switch
-const		fallthrough	if		range		type
-continue	for			import	return		var
-```
+Go 有 25 个关键词，它们属于语法的一部分，不可以当作变量名。
 
 除此之外，还有一些预先声明的变量，用作内置常量、类型和函数。如下：
 
@@ -981,7 +973,71 @@ var name type = expression
 var f, err = os.Open(name)	// os.Open 返回一个文件和错误对象
 ```
 
-// TODO
+#### 简洁变量声明
+
+简洁变量声明（short variable declaration）常用于局部变量声明。比如：
+
+```go
+anim := gif.GIF{LoopCount: nframes}
+freq := rand.Float64() * 3.0
+```
+
+`var` 声明常用于需要明确类型的变量声明，或者初始值不重要的变量。比如：
+
+```go
+var boiling float64 = 100
+var names []string
+var err error
+```
+
+可以使用一条简洁声明初始化多个变量：
+
+```go
+i, j := 0, 1
+```
+
+注意区分简洁声明（`:=`）和元组赋值（*tuple assignment* `=`）的区别。
+
+⚠️ 注意，如果简洁声明左边的某些元素，在同级作用域中已经声明过，那么对于这些变量，简洁声明将失效，退化为赋值操作。
+
+比如，在下面代码中，首先声明了两个变量 `in` 和 `err`，第二行声明了 `out`，但是并未重新声明 `err`，只是为现存的 `err` 重新赋值而已。
+
+```go
+in, err := os.Open(infile)
+// ...
+out, err := os.Create(outfile)
+```
+
+每条简洁声明需要至少声明一个新变量，否则会报错：
+
+```go
+f, err := os.Open(infile)
+// ...
+f, err := os.Create(outfile) // compile error: no new variables
+```
+
+解决方法是把第二个简洁声明替换为普通的赋值。
+
+#### 指针
+
+指针是变量的地址。使用指针可以间接修改变量。
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 1
+    p := &x
+    fmt.Println(*p)
+    *p = 2
+    fmt.Println(*p)
+
+}
+```
+
+// TODO p32 2.3.2 Pointers
 
 ## 基础数据类型
 
