@@ -50,7 +50,7 @@ $ go run helloworld.go
 $ go build helloworld.go
 ```
 
-这会产生一个 `hellworld` 可执行二进制文件。使用 `go1.8 darwin/amd64` 编译后的文件大约 1.6 MB。
+这会产生一个 `hellworld` 可执行二进制文件。使用 go1.8 darwin/amd64 编译后的文件大约 1.6 MB。
 
 如果想下载依赖项，可以使用 `go get` 命令。比如，下载 *The Go Programming Language* 的实例代码：
 
@@ -62,7 +62,7 @@ Go 代码本身由 package 构成。一个 pacakge 由单个目录下的多个 `
 
 Go 源码拥有超过 100 个 pacakge，用来执行常见任务，比如输入输出，排序和处理文本。比如，`fmt` package 可以格式化输出输入。`Println` 是 `fmt` 的一个基本输出函数。
 
-package `main` 比较特殊，它定义独立可执行程序，而非库。package main 中的 `main` 函数也有特殊地址，它是程序的入口。
+package `main` 比较特殊，它定义独立可执行程序。package main 中的 `main` 函数也有特殊地址，它是程序的入口。
 
 我们必须告知编译器，当前源码需要哪些 package。这是 `import` 声明的职责。
 
@@ -84,11 +84,11 @@ $ go get golang.org/x/tools/cmd/goimports
 
 `os` package 提供了一些函数，用来处理操作系统相关的操作。命令行相关函数位于 `os.Args`。
 
-`os.Args` 变量是一个字符串切片（`slice`）。Slices 是 Go 的一个基础概念。可以把 slice 想象为一个具有动态长度的序列 s，可以通过 `s[i]` 访问当个序列元素，也可以通过 `s[m:n]` 访问序列的一段连续的范围。元素个数可以通过 `len(s)` 获得。
+`os.Args` 变量是一个字符串切片（`slice`）。Slices 是 Go 的一个基础概念。可以把 slice 想象为一个具有动态长度的序列 s，可以通过 `s[i]` 访问单个序列元素，也可以通过 `s[m:n]` 访问序列的一段连续的范围。元素个数可以通过 `len(s)` 获得。
 
 `os.Args` 的第一个参数 `os.Args[0]` 是命令本身。其他元素是命令行参数，可以通过 `os.Args[1:len(os.Args)]` 获取。如果省略 `n`，就会默认取值 `len(s)`，因此可以简化为 `os.Args[1:]`
 
-下面是 Unix `echo` 命令的简单实现，可以输出命令行参数。该程序引用两个 package，使用了一个括号列表。引用顺序不重要，因为 `gofmt` 会按照字母顺序重新排列。
+下面是 Unix `echo` 命令的简单实现，可以输出命令行参数。该程序引用两个 package，使用一个括号列表。引用顺序不重要，因为 `gofmt` 会按照字母顺序重新排列。
 
 ```go
 // Echo1 prints its command-line arguments
@@ -1038,6 +1038,8 @@ func main() {
 ```
 
 所有类型的零值都是 nil。如果指针 p 指向某一变量，则 `p != nil` 是真。
+
+指针对于 `flag` package 的意义非凡。
 
 // TODO p32 2.3.2 Pointers
 
