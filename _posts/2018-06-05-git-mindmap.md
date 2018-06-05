@@ -8,7 +8,7 @@ date: 2018-06-05
 
 详见 [git log][git-log]
 
-![Git Log](/assets/git-log.png)
+![Git Log](/imgs/git-log.png)
 
 ## REF
 
