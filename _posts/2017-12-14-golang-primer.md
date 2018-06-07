@@ -1041,52 +1041,6 @@ func main() {
 
 指针对于 `flag` package 的意义非凡。
 
-// TODO p32 2.3.2 Pointers
-
-## 基础数据类型
-
-// TODO
-
-## 复合数据类型
-
-// TODO
-
-## 函数
-
-// TODO
-
-## 方法
-
-// TODO
-
-## 接口
-
-// TODO
-
-## Goroutines 和 Channels
-
-// TODO
-
-## 共享变量并发
-
-// TODO
-
-## 包和工具
-
-// TODO
-
-## 测试
-
-// TODO
-
-## 反射
-
-// TODO
-
-## 底层编程
-
-// TODO
-
 ## REF
 
 - [The Go Programming Language][go-lang] by *Alan A. A. Donovan* & *Brian W. Kernighan*, 2015/10/26
