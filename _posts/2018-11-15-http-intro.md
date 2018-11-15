@@ -23,6 +23,11 @@ TCP/IP 指与互联网相关联的协议集合。TCP/IP 协议族是分层的。
 
 IP 间的通信仰仗 MAC 地址。ARP 协议可将 IP 地址反查其对应的 MAC 地址。
 
+```js
+ARP = IP => MAC;
+DNS = Domain => IP;
+```
+
 > MAC: Media Access Control Address
 
 为了将数据安全送往目的地，TCP 协议使用三次握手策略。
