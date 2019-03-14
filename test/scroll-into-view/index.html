@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scroll Into View Demo</title>
+    <style>
+        .container {
+            border: 1px solid red;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .cell {
+            display: flex;
+
+            margin-bottom: 200px;
+            font-size: 14px;
+            border: 1px solid green;
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        .cell_bd {
+            flex: 1;
+        }
+
+        .cell_input {
+            border: 1px solid steelblue;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: silver;
+        }
+
+        .item {
+            padding: 10px 20px;
+            border: 1px solid green;
+            display: inline-block;
+            width: 50px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cell">
+            <div class="cell_hd">字段1</div>
+            <div class="cell_bd">
+                <input type="text" class="cell_input" />
+            </div>
+        </div>
+
+        <div class="cell">
+            <div class="cell_hd">字段2</div>
+            <div class="cell_bd">
+                <input type="text" class="cell_input" />
+            </div>
+        </div>
+
+        <div class="cell">
+            <div class="cell_hd">字段3</div>
+            <div class="cell_bd">
+                <input type="text" class="cell_input" />
+            </div>
+        </div>
+
+        <div class="cell">
+            <div class="cell_hd">字段4</div>
+            <div class="cell_bd">
+                <input type="text" class="cell_input" />
+            </div>
+        </div>
+
+        <div class="cell">
+            <div class="cell_hd">字段5</div>
+            <div class="cell_bd">
+                <input type="text" class="cell_input" />
+            </div>
+        </div>
+
+        <div class="cell">
+            <div class="cell_hd">字段6</div>
+            <div class="cell_bd">
+                <input type="text" class="cell_input" />
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="item">字段1</div>
+        <div class="item">字段2</div>
+        <div class="item">字段3</div>
+        <div class="item">字段4</div>
+        <div class="item">字段5</div>
+        <div class="item">字段6</div>
+    </div>
+
+    <script>
+        var $panel = document.querySelector('.panel');
+        $panel.addEventListener('click', onPanelClick);
+
+        var $items = toArray(document.querySelectorAll('.panel .item'));
+        var $inputs = toArray(document.querySelectorAll('.cell input'));
+
+        function onPanelClick(e) {
+            var idx = $items.indexOf(e.target);
+            var $input = $inputs[idx];
+            var top = getItemTop($input);
+            window.scrollTo({
+                top: top,
+                behavior: 'smooth',
+            });
+        }
+
+        function toArray(items) {
+            return Array.prototype.slice.call(items, 0, items.length);
+        }
+
+        
+        function getItemTop(el) {
+            // https://blog.csdn.net/liangklfang/article/details/50377754
+            var rect = el.getBoundingClientRect();
+            return rect.top + window.pageYOffset || document.documentElement.scrollTop;
+        } 
+    </script>
+</body>
+</html>
