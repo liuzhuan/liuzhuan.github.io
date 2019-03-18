@@ -42,6 +42,11 @@
             var referrer = document.referrer || 'empty';
             document.querySelector('#referrer').textContent = referrer;
 
+            tick();
+            setInterval(tick, 1000);
+        }
+
+        function tick() {
             count++;
             document.querySelector('#count').textContent = count;
         }
