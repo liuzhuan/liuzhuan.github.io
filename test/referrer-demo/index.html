@@ -30,6 +30,9 @@
     <div>
         with pageshow <code>count:</code> <span id="count"></span>
     </div>
+    <div>
+        <code>persisted:</code><span id="p"></span>
+    </div>
     <nav>
         <a href="a.html">A</a> | 
         <a href="b.html">B</a> | 
@@ -48,9 +51,10 @@
 
         window.addEventListener('pageshow', onPageShow);
 
-        function onPageShow() {
+        function onPageShow(e) {
             count = 0;
             tick();
+            document.querySelector('#p').textContent = e.persisted;
         }
 
         function tick() {
