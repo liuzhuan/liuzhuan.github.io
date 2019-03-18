@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pushstate vs pageshow</title>
+    <style>
+        #output p {
+            border: 1px solid #CCC;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>pushState V.S. pageShow</h1>
+    <p>主要用于验证 pushState 是否会导致 pageshow 事件。</p>
+    <div id="output"></div>
+    <script>
+        var output = document.querySelector('#output');
+
+        init();
+
+        function init() {
+            history.pushState({ step: 1 }, '', '');
+            history.pushState({ step: 2 }, '', '');
+
+            window.onpopstate = function(e) {
+                var info = '开始页面';
+                if (e && e.state && e.state.step) {
+                    info = '第  ' + e.state.step + ' 步';
+                }
+                addLine(info);
+            }
+
+            window.onpageshow = function(e) {
+                var info = 'onpageshow';
+                if (e.persisted) {
+                    info = 'onpageshow && persisted = true';
+                }
+                addLine(info);
+            }
+        }
+
+        function addLine(str) {
+            var p = document.createElement('p');
+            p.textContent = str;
+            output.appendChild(p);
+        }
+    </script>
+</body>
+</html>
