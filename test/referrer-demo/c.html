@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>c - inferrer demo</title>
+    <style>
+        span {
+            color: red;
+            font-weight: bold;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        a {
+            padding: 4px 10px;
+            margin: 4px;
+            background: steelblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <code>document.referrer:</code> <span id="referrer"></span>
+    </div>
+    <nav>
+        <a href="a.html">A</a> | 
+        <a href="b.html">B</a> |
+        <a href="index.html">Index</a>
+    </nav>
+
+    <script>
+        window.onload = function() {
+            var referrer = document.referrer || 'empty';
+            document.querySelector('#referrer').textContent = referrer;
+        }
+    </script>
+</body>
+</html>
