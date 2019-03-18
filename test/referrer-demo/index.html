@@ -28,7 +28,7 @@
         <code>document.referrer:</code> <span id="referrer"></span>
     </div>
     <div>
-        <code>count:</code> <span id="count"></span>
+        with pageshow <code>count:</code> <span id="count"></span>
     </div>
     <nav>
         <a href="a.html">A</a> | 
@@ -44,6 +44,13 @@
 
             tick();
             setInterval(tick, 1000);
+        }
+
+        window.addEventListener('pageshow', onPageShow);
+
+        function onPageShow() {
+            count = 0;
+            tick();
         }
 
         function tick() {
