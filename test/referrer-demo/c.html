@@ -38,13 +38,13 @@
 
     <script>
         var count = 0;
-        
+
         window.onload = function() {
             var referrer = document.referrer || 'empty';
             document.querySelector('#referrer').textContent = referrer;
 
             count++;
-            document.querySelector('#count').textCount = count;
+            document.querySelector('#count').textContent = count;
         }
     </script>
 </body>
