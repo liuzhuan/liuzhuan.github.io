@@ -27,6 +27,9 @@
     <div>
         <code>document.referrer:</code> <span id="referrer"></span>
     </div>
+    <div>
+        <code>count:</code> <span id="count"></span>
+    </div>
     <nav>
         <a href="index.html">Index</a> | 
         <a href="b.html">B</a> | 
@@ -34,9 +37,14 @@
     </nav>
 
     <script>
+        var count = 0;
+        
         window.onload = function() {
             var referrer = document.referrer || 'empty';
             document.querySelector('#referrer').textContent = referrer;
+
+            count++;
+            document.querySelector('#count').textCount = count;
         }
     </script>
 </body>
