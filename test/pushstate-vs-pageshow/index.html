@@ -15,7 +15,7 @@
 </head>
 <body>
     <h1>pushState V.S. pageShow</h1>
-    <p>主要用于验证 pushState 是否会导致 pageshow 事件。</p>
+    <p>主要用于验证 pushState 是否会导致 pageshow 事件。结论是 pushState 不会触发 pageshow。</p>
     <div id="output"></div>
     <script>
         var output = document.querySelector('#output');
@@ -23,6 +23,7 @@
         init();
 
         function init() {
+            addLine('start...');
             history.pushState({ step: 1 }, '', '');
             history.pushState({ step: 2 }, '', '');
 
