@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tag A Who Replaces Location</title>
+</head>
+<body>
+    <a href="http://swift.org/">Swift Programming Language</a>
+    <script>
+        var tagA = document.querySelector('a');
+        tagA.addEventListener('click', clickHandler);
+
+        function clickHandler(e) {
+            e.preventDefault();
+            
+            var nextPage = e.target.href;
+            if (!nextPage) return;
+            location.replace(nextPage);
+        }
+    </script>
+</body>
+</html>
