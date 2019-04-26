@@ -50,6 +50,20 @@
             font-size: 14px;
             color: #333;
         }
+
+        .btn-copy {
+            font-size: 16px;
+            padding: 4px 10px;
+            float: right;
+            border: 1px solid #333;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn-copy:hover {
+            background: #333;
+            color: white;
+        }
     </style>
 </head>
 
@@ -64,7 +78,7 @@
             </div>
         </div>
         <div class="section section--target">
-            <div class="section__title">Target WXML</div>
+            <div class="section__title">Target WXML <div class="btn-copy js-copy-btn">Copy</div></div>
             <div class="section__content">
                 <textarea class="section__input js-target" rows="50"
                     placeholder="Generated wxml code is here"></textarea>
@@ -89,18 +103,37 @@
     </div>
 
     <script>
-        const $sourceEl = document.querySelector('.js-source');
-        const $targetEl = document.querySelector('.js-target');
+        init();
 
-        $sourceEl.addEventListener('input', debounce(onSourceInput, 500));
+        function init() {
+            const $sourceEl = document.querySelector('.js-source');
+            const $copyBtn = document.querySelector('.js-copy-btn')
+
+            $sourceEl.addEventListener('input', debounce(onSourceInput, 500));
+            $copyBtn.addEventListener('click', onCopyHandler);
+        }
 
         function onSourceInput(e) {
+            const $targetEl = document.querySelector('.js-target');
+
             const source = e.target.value;
             const target = transform(source);
             $targetEl.value = target;
+        }
 
+        function onCopyHandler(e) {
+            const $targetEl = document.querySelector('.js-target');
+            const target = $targetEl.value;
+            if (!target || /^\s*$/.test(target)) {
+                return;
+            }
+            
             $targetEl.select();
-            document.execCommand("copy");
+            document.execCommand('Copy');
+
+            setTimeout(() => {
+                alert('Copy into clipboard successfully!');
+            }, 100);
         }
 
         /**
@@ -116,7 +149,7 @@
                 .replace(/<\/(ul|ol|li|p|strong|h[1-6])\b/g, '</view')
                 .replace(/(<\/?)span\b/g, '$1text')
                 .replace(/<br\s*>/g, '<view class="br"></view>')
-                .replace(/<img\b([^>]*)\/?>/g, '<image$1/>')
+                .replace(/<img\b([^>\/]*)\/?>/g, '<image$1/>')
                 .replace(/@click/g, 'bindtap')
                 .replace(/@change/g, 'bindinput')
                 .replace(/v-(if|show)="([^"]+)"/g, 'wx:if="{{ $2 }}"')
