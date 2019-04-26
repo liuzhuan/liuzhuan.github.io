@@ -98,6 +98,9 @@
             const source = e.target.value;
             const target = transform(source);
             $targetEl.value = target;
+
+            $targetEl.select();
+            document.execCommand("copy");
         }
 
         /**
