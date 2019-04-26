@@ -92,7 +92,7 @@
         const $sourceEl = document.querySelector('.js-source');
         const $targetEl = document.querySelector('.js-target');
 
-        $sourceEl.addEventListener('input', onSourceInput);
+        $sourceEl.addEventListener('input', debounce(onSourceInput, 500));
 
         function onSourceInput(e) {
             const source = e.target.value;
@@ -113,7 +113,7 @@
                 .replace(/<\/(ul|ol|li|p|strong|h[1-6])\b/g, '</view')
                 .replace(/(<\/?)span\b/g, '$1text')
                 .replace(/<br\s*>/g, '<view class="br"></view>')
-                .replace(/<img\b([^>]+)\/?>/g, '<image$1/>')
+                .replace(/<img\b([^>]*)\/?>/g, '<image$1/>')
                 .replace(/@click/g, 'bindtap')
                 .replace(/@change/g, 'bindinput')
                 .replace(/v-(if|show)="([^"]+)"/g, 'wx:if="{{ $2 }}"')
@@ -124,6 +124,28 @@
                 .replace(/v-model([^=]+)="([^"]+)"/g, 'data-name="$2"')
                 .replace(/\bv-([^=]+)='([^']+)'/g, "data-$1='$2'")
                 .replace(/\bv-([^=]+)="([^"]+)"/g, 'data-$1="$2"')
+        }
+
+        function debounce(fn, delay) {
+            var timer, context, args
+
+            var execute = function () {
+                fn.apply(context, args)
+            }
+
+            return function () {
+                context = this
+                args = arguments
+
+                if (timer) {
+                    clearTimeout(timer)
+                    timer = null
+                }
+
+                timer = setTimeout(() => {
+                    execute()
+                }, delay)
+            }
         }
     </script>
 </body>
