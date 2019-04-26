@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML-2-WXML Converter</title>
+    <style>
+        body {
+            background: #f6f7f8;
+        }
+
+        .container {
+            padding: 10px 15px;
+            background: #fff;
+            margin: 10px 0;
+        }
+
+        .container--flex {
+            display: flex;
+        }
+
+        .section {
+            flex: 1 0 0;
+            padding: 10px 15px;
+        }
+
+        .section__title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .section__content {
+            margin-top: 10px;
+        }
+
+        .section__input {
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid #E7E7E7;
+            resize: none;
+            font-size: 16px;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+        }
+
+        .rules {
+            white-space: pre-line;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>HTML-2-WXML Converter</h1>
+    <div class="container container--flex">
+        <div class="section section--source">
+            <div class="section__title">Source HTML</div>
+            <div class="section__content">
+                <textarea class="section__input js-source" rows="50"
+                    placeholder="Please enter the source html code here"></textarea>
+            </div>
+        </div>
+        <div class="section section--target">
+            <div class="section__title">Target WXML</div>
+            <div class="section__content">
+                <textarea class="section__input js-target" rows="50"
+                    placeholder="Generated wxml code is here"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section__title">Convert Rules</div>
+        <code class="rules">
+            1. The tags including ul, ol, li, p, strong, h1~h6 and br, are converted into view with the corresponding tag as class Name. Such as &lt;ul&gt; is converted into &lt;view class="ul"&gt;.
+            2. The span is converted into text.
+            3. The img is converted into image.
+            4. The @click is converted into bindtap.
+            5. The @change is converted into bindinput.
+            6. The v-if, v-show is converted into wx:if.
+            7. The v-else-if is converted into wx:elif.
+            8. The v-else is converted into wx:else.
+            9. The v-model is converted into data-name.
+            10. The other v-* directive is converted into data-*.
+        </code>
+    </div>
+
+    <script>
+        const $sourceEl = document.querySelector('.js-source');
+        const $targetEl = document.querySelector('.js-target');
+
+        $sourceEl.addEventListener('input', onSourceInput);
+
+        function onSourceInput(e) {
+            const source = e.target.value;
+            const target = transform(source);
+            $targetEl.value = target;
+        }
+
+        /**
+        * transform html into wxml
+        * 
+        * @param {string} content 
+        */
+        function transform(content) {
+            if (!content) return '';
+
+            return content.replace(/(<\/?)div\b/g, '$1view')
+                .replace(/<(ul|ol|li|p|strong|h[1-6])\b/g, '<view class="$1"')
+                .replace(/<\/(ul|ol|li|p|strong|h[1-6])\b/g, '</view')
+                .replace(/(<\/?)span\b/g, '$1text')
+                .replace(/<br\s*>/g, '<view class="br"></view>')
+                .replace(/<img\b([^>]+)\/?>/g, '<image$1/>')
+                .replace(/@click/g, 'bindtap')
+                .replace(/@change/g, 'bindinput')
+                .replace(/v-(if|show)="([^"]+)"/g, 'wx:if="{{ $2 }}"')
+                .replace(/v-(if|show)='([^']+)'/g, 'wx:if="{{ $2 }}"')
+                .replace(/v-else-if="([^"]+)"/g, 'wx:elif="{{ $1 }}"')
+                .replace(/v-else-if='([^']+)'/g, 'wx:elif="{{ $1 }}"')
+                .replace(/\bv-else\b/g, 'wx:else')
+                .replace(/v-model([^=]+)="([^"]+)"/g, 'data-name="$2"')
+                .replace(/\bv-([^=]+)='([^']+)'/g, "data-$1='$2'")
+                .replace(/\bv-([^=]+)="([^"]+)"/g, 'data-$1="$2"')
+        }
+    </script>
+</body>
+
+</html>
