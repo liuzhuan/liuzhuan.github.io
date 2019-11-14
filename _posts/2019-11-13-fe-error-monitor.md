@@ -42,6 +42,6 @@ To Be Continue
 
 ## REF
 
-1. [GlobalEventHandlers.onerror | MDN][1]
+1. [GlobalEventHandlers.onerror - MDN][1]
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror "GlobalEventHandlers.onerror | MDN"
+[1]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror "GlobalEventHandlers.onerror - MDN"
