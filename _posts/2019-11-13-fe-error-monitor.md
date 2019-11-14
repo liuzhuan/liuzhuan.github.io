@@ -36,12 +36,10 @@ window.onerror = function(message, source, lineno, colno, error) {
 a = a / 2;
 ```
 
-## 跨域导致的报错详情丢失
-
-To Be Continue
-
 ## REF
 
 1. [GlobalEventHandlers.onerror - MDN][1]
+1. [JS错误监控总结][2]，*深蓝一人*，2018-04-30
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror "GlobalEventHandlers.onerror - MDN"
+[2]: https://segmentfault.com/a/1190000014672384 "JS错误监控总结"
