@@ -1,4 +1,8 @@
-# 百度 Echarts 使用手册
+---
+layout: post
+title: 百度 Echarts 使用指南
+date: 2019/05/14
+---
 
 ## 5 分钟上手
 
