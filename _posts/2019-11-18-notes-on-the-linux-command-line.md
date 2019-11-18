@@ -20,7 +20,49 @@ date: 2019/11/18
 
 ## 1. 什么是 Shell？
 
-page 26 of 555
+Shell 是程序员和操作系统沟通的桥梁。在图形界面中，通常使用终端模拟器运行 shell 命令。
+
+常见的简单命令：
+
+```sh
+$ date
+Tue Nov 19 07:35:50 CST 2019
+
+$ cal
+   November 2019
+Su Mo Tu We Th Fr Sa
+                1  2
+ 3  4  5  6  7  8  9
+10 11 12 13 14 15 16
+17 18 19 20 21 22 23
+24 25 26 27 28 29 30
+
+# 查看磁盘剩余空间
+$ df
+Filesystem    512-blocks      Used Available Capacity iused      ifree %iused  Mounted on
+/dev/disk1s5   976695384  20936568 666579888     4%  483729 4882993191    0%   /
+devfs                391       391         0   100%     677          0  100%   /dev
+/dev/disk1s1   976695384 281378848 666579888    30% 2611081 4880865839    0%   /System/Volumes/Data
+/dev/disk1s4   976695384   6293544 666579888     1%       4 4883476916    0%   /private/var/vm
+map auto_home          0         0         0   100%       0          0  100%   /System/Volumes/Data/home
+/dev/disk1s3   976695384   1032312 666579888     1%      34 4883476886    0%   /Volumes/Recovery
+
+# 查看可用内存情况 (macOS 没有此命令)
+$ free
+
+# 结束终端会话
+$ exit
+```
+
+## 2. 导航
+
+主要命令如下：
+
+1. pwd - 打印当前目录名
+1. cd - 切换目录
+1. ls - 展示目录内容
+
+> page 32 of 555
 
 ## REF
 
