@@ -62,7 +62,34 @@ $ exit
 1. cd - 切换目录
 1. ls - 展示目录内容
 
-> page 32 of 555
+## 3. 探索系统
+
+主要命令如下：
+
+1. ls - 展示目录内容
+1. file - 查看文件类型
+1. less - 查看文件内容
+
+```sh
+# ls 可以同时展示多个目录
+$ ls ~ /usr
+
+# 查看详细信息，并按照时间排序
+$ ls -lt /usr
+
+# 倒序排列 macOS
+$ ls -ltr
+# linux
+$ ls -lt --reverse
+```
+
+大部分的 shell 命令格式：
+
+```sh
+$ command -options arguments
+```
+
+> page 40 of 555
 
 ## REF
 
