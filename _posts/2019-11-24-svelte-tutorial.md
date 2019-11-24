@@ -17,7 +17,7 @@ Svelte 与其他主流 UI 框架（React, Vue, Angular）最大的不同在于�
 
 学习 Svelte 语法的最佳去处是 [Svelte Tutorial][7]。这是一个交互式的练习场，有许多循序渐进的小练习。
 
-### 模板
+### 基础
 
 Svelte 组件后缀是 `.svelte` ，其中可以包含任意合法的 HTML 片段。比如：
 
@@ -25,7 +25,7 @@ Svelte 组件后缀是 `.svelte` ，其中可以包含任意合法的 HTML 片�
 <h1>Hello World!</h1>
 ```
 
-### 状态
+状态
 
 ```html
 <script>
@@ -36,7 +36,7 @@ Svelte 组件后缀是 `.svelte` ，其中可以包含任意合法的 HTML 片�
 <h2>Hello, {name.toUpperCase()}!</h2>
 ```
 
-### 动态属性
+动态属性
 
 ```html
 <script>
@@ -52,7 +52,7 @@ Svelte 组件后缀是 `.svelte` ，其中可以包含任意合法的 HTML 片�
 <img {src} alt="A man dances.">
 ```
 
-### 样式
+样式
 
 ```html
 <style>
@@ -66,7 +66,7 @@ p {
 
 注意，这些样式默认是局部有效，不会影响其他组件。
 
-### 嵌套组件
+嵌套组件
 
 ```html
 <script>
@@ -77,7 +77,7 @@ p {
 <Nested />
 ```
 
-### HTML 标记
+HTML 标记
 
 使用特殊标记 `{@html ...}` 引入 HTML 标记。
 
@@ -85,7 +85,7 @@ p {
 <p>{@html string}</p>
 ```
 
-### 创建应用
+创建应用
 
 ```js
 import App from './App.svelte';
@@ -102,6 +102,8 @@ const app = new App({
 
 ### Reactivity
 
+赋值
+
 ```html
 <button on:click={handleClick}>
     Click {count} times.
@@ -115,7 +117,7 @@ const app = new App({
 </script>
 ```
 
-### Reactive 声明
+声明
 
 该声明作用类似 Vue.js 中的计算属性。
 
@@ -126,7 +128,7 @@ const app = new App({
 </script>
 ```
 
-### Reactive 语句
+语句
 
 ```html
 <script>
@@ -143,9 +145,70 @@ const app = new App({
 </script>
 ```
 
-### 更新数组和对象
+更新数组和对象
 
-[TODO](https://svelte.dev/tutorial/updating-arrays-and-objects)
+由于 Svelte 的 reactivity 是通过赋值触发的，数组方法 `push` 和 `splice` 无法自动更新页面数据。
+
+惯用的解决方法如下：
+
+```js
+function addNumber() {
+    numbers = [...numbers, numbers.length + 1];
+}
+```
+
+### 属性
+
+使用 `export` 关键字，可以声明属性。
+
+```html
+<!-- Nested.svelte -->
+<script>
+    export let answer;
+</script>
+
+<p>The answer is {answer}</p>
+
+<!-- App.svelte -->
+<script>
+    import Nested from './Nested.svelte';
+</script>
+
+<Nested answer={42} />
+```
+
+指定默认属性很简单：
+
+```js
+export let answer = 'a mystery';
+```
+
+如果你有一个属性对象，可以将它在组件中展开。这样就不必依次指定各个属性。
+
+```html
+<!-- Info.svelte -->
+<script>
+export let name;
+export let version;
+</script>
+
+{name}: {version}
+
+<!-- App.svelte -->
+<script>
+import Info from './Info.svelte';
+const pkg = {
+    name: 'svelte',
+    version: 3,
+}
+</script>
+
+<Info {...pkg} />
+```
+
+### 逻辑
+
+[If 块](https://svelte.dev/tutorial/if-blocks)
 
 ## REF
 
