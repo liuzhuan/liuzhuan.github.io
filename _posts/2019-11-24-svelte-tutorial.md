@@ -208,7 +208,65 @@ const pkg = {
 
 ### 逻辑
 
-[If 块](https://svelte.dev/tutorial/if-blocks)
+if 块
+
+```html
+{#if user.loggedIn}
+    <button on:click={toggle}>
+        Logout
+    </button>
+{/if}
+```
+
+else 块
+
+```html
+{#if user.loggedIn}
+    ...
+{:else}
+    ...
+{/if}
+```
+
+在 Svelte 中，`#` 表示开始，`/` 表示结束，`:` 表示中间环节。
+
+`else if` 块
+
+```html
+{#if x > 10}
+    ...
+{:else if 5 > x}
+    ...
+{:else}
+    ...
+{/if}
+```
+
+Each 块
+
+```html
+{#each cats as cat}
+    <li>{cat.name}</li>
+{/each}
+
+{#each cats as cat, i}
+    <li>{i+1}. {cat.name}</li>
+{/each}
+
+{#each cats as {id, name}}
+    <li>{id+1}. {name}</li>
+{/each}
+```
+
+指定键值
+
+```html
+{#each things as thing (thing.id)}
+    <Thing current={thing.color} />
+{/each}
+```
+
+[Await blocks](https://svelte.dev/tutorial/await-blocks)
 
 ## REF
 
