@@ -34,16 +34,6 @@ date: 2019-11-30
 | :#,#s/old/new/g | #,# 是行号，替换两行之间的文本 |
 | :%s/old/new/g | 全文范围内查找替换 |
 | :%s/old/new/gc | 全文范围内查找替换，每次替换前需用户确定 |
-
-> Many commands that change text are made from an operator and a motion.
-
-很多修改文本的命令，通常包含一个操作符和一个动作。常见的动作如下表所示：
-
-| KEY | MOTION |
-| --- | --- |
-| w | 直到下一个单词开始，不包含它的第一个字符 |
-| e | 直到当前单词结尾，包含最后一个字符 |
-| $ | 直到行尾，包含最后一个字符 |
 | !<cmd> | 执行外部命令 |
 | :w FILENAME | 保存文件 |
 | v | 开启可视化选择模式 |
@@ -64,3 +54,13 @@ date: 2019-11-30
 | :help vimrc-intro | 查看 vim 配置文件的文档介绍 |
 | :set nocp | 进入非兼容模式 |
 | Ctrl-D and <TAB> | 自动补全命令 |
+
+> Many commands that change text are made from an operator and a motion.
+
+很多修改文本的命令，通常包含一个操作符和一个动作。常见的动作如下表所示：
+
+| KEY | MOTION |
+| --- | --- |
+| w | 直到下一个单词开始，不包含它的第一个字符 |
+| e | 直到当前单词结尾，包含最后一个字符 |
+| $ | 直到行尾，包含最后一个字符 |
