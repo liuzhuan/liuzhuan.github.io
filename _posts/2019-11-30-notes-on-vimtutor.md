@@ -7,7 +7,7 @@ date: 2019-11-30
 对于 Vim 新手，一般从 vimtutor 教程入门。以下是教程的要点笔记。
 
 
-> As you go through this tutor, do not try to memorize, learn by usage.
+> [As you go through this tutor, do not try to memorize, learn by usage.][1]
 
 不要用大脑记忆，要用肌肉记忆。
 
@@ -34,7 +34,7 @@ date: 2019-11-30
 | :#,#s/old/new/g | #,# 是行号，替换两行之间的文本 |
 | :%s/old/new/g | 全文范围内查找替换 |
 | :%s/old/new/gc | 全文范围内查找替换，每次替换前需用户确定 |
-| !<cmd> | 执行外部命令 |
+| !`<cmd>` | 执行外部命令 |
 | :w FILENAME | 保存文件 |
 | v | 开启可视化选择模式 |
 | :r FILENAME | 在当前位置插入文件内容 retrieve |
@@ -53,7 +53,7 @@ date: 2019-11-30
 | :r $VIMRUNTIME/vimrc_example.vim | 插入 vim 配置文件示例 |
 | :help vimrc-intro | 查看 vim 配置文件的文档介绍 |
 | :set nocp | 进入非兼容模式 |
-| Ctrl-D and <TAB> | 自动补全命令 |
+| Ctrl-D and `<TAB>` | 自动补全命令 |
 
 > Many commands that change text are made from an operator and a motion.
 
@@ -64,3 +64,5 @@ date: 2019-11-30
 | w | 直到下一个单词开始，不包含它的第一个字符 |
 | e | 直到当前单词结尾，包含最后一个字符 |
 | $ | 直到行尾，包含最后一个字符 |
+
+[1]: https://translate.google.cn/translate_tts?ie=UTF-8&q=As%20you%20go%20through%20this%20tutor%2C%20do%20not%20try%20to%20memorize%2C%20learn%20by%20usage.&tl=en&total=1&idx=0&textlen=69&tk=726994.899780&client=webapp "speech"
