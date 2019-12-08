@@ -15,7 +15,14 @@ Svelte 与其他主流 UI 框架（React, Vue, Angular）最大的不同在于�
 
 ## 语法
 
-学习 Svelte 语法的最佳去处是 [Svelte Tutorial][7]。这是一个交互式的练习场，有许多循序渐进的小练习。
+学习 Svelte 语法的最佳去处是 [Svelte Tutorial][7]。这是一个交互式的练习场，有许多循序渐进的小练习。如果想在本地开发，可以使用 [degit][9]。具体命令如下：
+
+```sh
+$ npx degit sveltejs/template my-svelte-project
+$ cd my-svelte-project
+$ npm install
+$ npm run dev
+```
 
 ### 基础
 
@@ -283,3 +290,4 @@ Each 块
 [6]: https://svelte.dev/blog/svelte-3-rethinking-reactivity "Svelte 3: Rethinking reactivity"
 [7]: https://svelte.dev/tutorial/basics "Svelte Tutorial"
 [8]: https://github.com/rollup/rollup-plugin-svelte "rollup-plugin-svelte"
+[9]: https://github.com/Rich-Harris/degit "Straightforward project scaffolding"
