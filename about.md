@@ -2,7 +2,7 @@
 layout: default
 ---
 
-我是程序员，用代码解决问题。
+我是一个程序员，用代码解决问题。
 
 我的 [Github](https://github.com/liuzhuan)。
 
