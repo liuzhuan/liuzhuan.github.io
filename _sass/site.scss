@@ -10,10 +10,14 @@ $font-stack: -apple-system, "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial,
 body {
     background: white;
     font-family: $font-stack;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
     background: white;
+    flex: 1;
 }
 
 .main-content {
@@ -89,6 +93,7 @@ body {
 }
 
 .main-footer {
+    flex: 0;
     background: $brand-color;
     color: white;
     .copyright {
