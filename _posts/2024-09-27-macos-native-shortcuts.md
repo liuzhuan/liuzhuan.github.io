@@ -1,6 +1,6 @@
 ---
 layout: post
-title: macOS 原生的快捷方式
+title: macOS 原生的快捷键
 date: 2024-09-27
 ---
 
