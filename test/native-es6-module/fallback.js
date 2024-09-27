@@ -1,1 +1,0 @@
-document.querySelector('.nomodule').hidden = false;

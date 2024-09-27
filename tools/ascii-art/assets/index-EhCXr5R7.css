@@ -1,1 +1,0 @@
-:root{--gray: #ccc}:root{--canvas-border-color: var(--gray)}canvas{border:1px solid var(--canvas-border-color)}.output{white-space:pre;line-height:1;font-family:monospace;font-size:12px}

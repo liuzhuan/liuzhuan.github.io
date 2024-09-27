@@ -1,9 +1,0 @@
-{
-  "name": "native-es6-module",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "devDependencies": {
-    "anywhere": "^1.4.0"
-  }
-}
