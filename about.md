@@ -1,16 +1,13 @@
 ---
-layout: default
+layout: page
+title: 关于
+permalink: /about/
 ---
 
-我是一个程序员，用代码解决问题。
+一个软件工程师，分享开发知识。
 
-我的 [Github](https://github.com/liuzhuan)。
+微信扫一扫，关注微信公众号
 
-## 书籍
-- [JavaScript 简明教程](http://www.1zh.tech/hello-js/)
-- [Hello Webpack](https://www.gitbook.com/book/liuzhuan/hello-webpack/details)
-- [微信小程序简明教程](http://www.1zh.tech/hello-wxapp/)
-- [Vue 简明教程](http://www.1zh.tech/hello-vue/)
+![qrcode][qrcode]
 
-## 培训材料
-- [ES6 培训](https://github.com/liuzhuan/es6-training)
+[qrcode]: https://mp.weixin.qq.com/mp/qrcode?scene=10000004&size=102&__biz=MzAxMjIyNDM5NQ==&mid=2455885707&idx=1&sn=297e08bc7be0592ee68709a3d069698c&send_time=
