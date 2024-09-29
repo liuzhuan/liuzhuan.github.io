@@ -66,7 +66,7 @@ window.addEventListener('storage', (e) => {
 })
 ```
 
-## 数据限额
+## 数据限额 {#quota}
 
 根据 MDN 的[描述][quota]，浏览器对于 Web Storage 的数据限额是 10MiB，其中 `sessionStorage` 占 5MiB，`localStorage` 占据 5MiB。
 
