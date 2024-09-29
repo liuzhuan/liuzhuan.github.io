@@ -25,7 +25,15 @@ pygame 附赠了许多游戏例子，路径位于 `pygame/examples` 中。如果
 $ python3 -m pygame.examples.aliens
 ```
 
-## 游戏主循环
+## 基本概念 {#concepts}
+
+- **Surface**（表面）：[Surface][surface] 是绘制图像的二维平面。使用 `pygame.display.set_mode(size)` 创建的 `Surface` 是游戏主窗口
+- **Rect**（矩形）：[Rect][rect] 表示二维矩形，游戏元素的定位、碰撞检测都离不开它
+- **Sprite**（精灵）：[Sprite][sprite] 表示位置可以变化的游戏元素
+- **Group**（群组）：[Group][group] 是 `Sprite` 的容器，方便批量管理和渲染多个 `Sprite`
+- **帧率**：指的是每秒播放多少帧，帧率越快，画面越平滑，同时也更加消耗 CPU。通常游戏的帧率设定为 60fps。在 pygame 中，使用 [pygame.time.Clock][clock] 实例控制帧率
+
+## 游戏主循环 {#main-loop}
 
 pygame 游戏的基本框架包括初始化和游戏主循环，主要的游戏逻辑在主循环中定义。
 
@@ -59,7 +67,7 @@ while running:
 pygame.quit()
 ```
 
-## 加载图像
+## 加载图像 {#image}
 
 使用 [`pygame.image.load()`][image.load] 加载图像素材。返回值是 [Surface][surface] 类型。
 
@@ -80,10 +88,63 @@ def load_image(file):
 
 上面的 [`convert()`][convert] 函数用于转换图像的**像素格式**（*pixel format*），也就是把图像文件的原始格式转换为 Surface 支持的格式。提前转换像素格式，可以提高应用性能。对于包含透明度通道的图像格式，如 `.png` 等，可以使用 [`convert_alpha()`][convert_alpha] 函数。
 
-## Sprite 和 Group
+## Sprite 和 Group {#sprite}
 
-pygame 1.3 引入的 [`pygame.sprite`][sprite] 模块，善于处理运动的游戏物体。它包含两个主要的类：`Sprite` 和 `Group`。
+pygame 1.3 引入的 [`pygame.sprite`][sprite] 模块，用于处理移动的游戏物体。它包含两个主要的类：`Sprite` 和 `Group`。
 
+使用 `Sprite` 的做法一般是：
+
+1. 创建自定义类，使其继承 `Sprite` 类
+2. 在自定义构造函数中定义两个属性：`image`（精灵的外观）和 `rect`（精灵的位置）
+3. 覆盖父类方法 `update()`，改变精灵外观或位置
+
+```python
+from pygame import Sprite
+
+class Alien(Sprite):
+    def __init__(self, *group):
+        super().__init__(*group)
+        self.image = load_image('images/alien.png')
+        self.rect = self.image.get_rect()
+
+    def update(self):
+        # 每次更新，垂直向下移动一个像素
+        self.rect.move_ip(0, 1)
+```
+
+`Group` 类用于容纳和渲染 `Sprite`，它的常用方法有：
+
+- `add(*sprites)` 在当前群组添加多个 `Sprite` 实例
+- `remove(*sprites)` 移除多个 `Sprite` 实例
+- `update()` 会调用群组内的所有 `Sprite` 实例的 `update()` 方法
+- `draw(surface)` 在 `surface` 表面绘制群组内所有精灵，使用 `Sprite` 的 `image` 和 `rect` 当作外观和位置
+
+```python
+import pygame
+from pygame.sprite import Sprite, Group
+
+pygame.init()
+screen = pygame.display.set_mode((550, 400))
+clock = pygame.time.Clock()
+
+aliens = Group() # 新建 Group 群组
+
+# 向群组添加 10 个 Sprite
+for i in range(10):
+    new_alien = Alien()
+    new_alien.rect.move_ip(i * 60, 0)
+    aliens.add(new_alien)
+
+# 游戏主循环
+while True:
+    # ...
+
+    aliens.update() # 更新所有 Sprite 的外观和位置信息
+    aliens.draw(screen) # 渲染所有的 Sprite
+
+    pygame.display.flip() # 重绘整个画面
+    clock.tick(60)
+```
 
 **完**
 
@@ -96,4 +157,7 @@ pygame 1.3 引入的 [`pygame.sprite`][sprite] 模块，善于处理运动的游
 [convert]: https://www.pygame.org/docs/ref/surface.html#pygame.Surface.convert
 [convert_alpha]: https://www.pygame.org/docs/ref/surface.html#pygame.Surface.convert_alpha
 [sprite]: https://www.pygame.org/docs/ref/sprite.html "pygame.sprite"
-[sprite-module]: https://www.pygame.org/docs/tut/SpriteIntro.html "Sprite Module Introduction"
+[rect]: https://www.pygame.org/docs/ref/rect.html "pygame.Rect"
+[group]: https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Group "pygame.sprite.Group"
+[clock]: https://www.pygame.org/docs/ref/time.html#pygame.time.Clock "pygame.time.Clock"
+[sprite-intro]: https://www.pygame.org/docs/tut/SpriteIntro.html "Sprite Module Introduction"
