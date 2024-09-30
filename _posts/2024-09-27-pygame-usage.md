@@ -67,6 +67,30 @@ while running:
 pygame.quit()
 ```
 
+## 颜色 {#color}
+
+使用 [`pygame.Color`][color] 类定义颜色。颜色可以只包含 RGB 三原色，也可以包含 RGBA，其中 A 表示透明度 alpha。每个通道的取值范围都是 `[0, 255]`。
+
+```python
+red = pygame.Color(255, 0, 0)
+```
+
+另外，pygame 还提供了[命名颜色][named-colors]（named colors），比如 `white`、`black`、`aqua`、`azure` 等常见颜色。
+
+## 绘制图形 {#draw}
+
+[`pygame.draw`][pygame.draw] 模块提供了绘制基本几何图形的功能。比如：
+
+- `line(surface, color, start_pos, end_pos, width=1)` 绘制直线
+- `aaline(surface, color, start_pos, end_pos)` 绘制抗锯齿的直线
+- `lines(surface, color, closed, points)` 绘制折线
+- `aalines(surface, color, closed, points)` 绘制抗锯齿的折线
+- `rect(surface, color, rect)` 绘制矩形
+- `polygon(surface, color, points)` 绘制多边形
+- `circle(surface, color, center, radius)` 绘制圆形
+- `ellipse(surface, color, rect)` 绘制椭圆
+- `arc(surface, color, rect, start_angle, stop_angle)` 绘制椭圆圆弧，角度单位是弧度
+
 ## 加载图像 {#image}
 
 使用 [`pygame.image.load()`][image.load] 加载图像素材。返回值是 [Surface][surface] 类型。
@@ -175,3 +199,6 @@ while True:
 [clock]: https://www.pygame.org/docs/ref/time.html#pygame.time.Clock "pygame.time.Clock"
 [sprite-intro]: https://www.pygame.org/docs/tut/SpriteIntro.html "Sprite Module Introduction"
 [surface.blit]: https://www.pygame.org/docs/ref/surface.html#pygame.Surface.blit "pygame.Surface.blit"
+[color]: https://www.pygame.org/docs/ref/color.html "pygame.Color"
+[named-colors]: https://www.pygame.org/docs/ref/color_list.html "Named Colors"
+[pygame.draw]: https://www.pygame.org/docs/ref/draw.html "pygame.draw"
