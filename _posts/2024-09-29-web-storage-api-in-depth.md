@@ -26,7 +26,7 @@ date: 2024-09-29
 
 两者只能存储字符串类型的数据，如果你想存储复杂的数据结构，需要提前转换为字符串，比如使用 `JSON.stringify()` 方法。
 
-它俩还有一个不太常用的方法，`key(index)`，可以返回指定索引的键名。有一个不常用的属性 `length`，可以获取当前的键值对个数。
+它俩还有一个不太常用的方法 `key(index)`，可以返回指定索引的键名。有一个不常用的属性 `length`，可以获取当前的键值对个数。
 
 因此，如果想读取当前 origin 的所有键名，可以这么写：
 
@@ -39,16 +39,16 @@ getStorageKeys(window.localStorage)
 getStorageKeys(window.sessionStorage)
 ```
 
-## storage 事件 {#event}
+## storage 事件 {#storageevent}
 
-当某个页面的 `localStorage` 数据发生变化，**其他页面**的 `window` 会接收到 `storage` 事件。这个事件一般用于本地缓存数据的同步。
+当某个页面的 `localStorage` 数据发生变化，**其他页面**的 `window` 会监听到 `storage` 事件。这个事件常用于本地缓存数据的同步。
 
 这里有两点需要注意：
 
 1. `sessionStorage` 的数据变化不会触发 `storage` 事件
 2. 引发 `localStorage` 数据变化的页面，监听不到本次改变触发的 `storage` 事件
 
-这个事件的类型是 [StorageEvent][storage-event]，它有如下属性：
+这个事件的类型是 [`StorageEvent`][storage-event]，它有如下属性：
 
 - `key`：受影响的键名
 - `newValue`：数据新值
@@ -72,19 +72,19 @@ window.addEventListener('storage', (e) => {
 
 注意，上述限额针对的是同源下的数据限额，不同源之间数据隔离，互不影响，不会叠加。
 
-如果数据超过上限，继续增加数据，会触发 `QuotaExceededError` 异常。
+如果数据达到存储上限，继续增加数据，会触发 `QuotaExceededError` 异常。
 
-如果你对 MDN 的说法存疑，可以动手检验一下。
+如果你对 MDN 的说法存疑，最好动手检验一下。
 
-首先，访问任意一个页面，打开开发者工具。
+首先，访问任意页面，启动开发者工具，切换到【控制台】标签。下面的操作均在【控制台】中进行。
 
-然后，借助字符串的 [`repeat()`][string.repeat] 方法构建一个 1MiB 的字符串。
+使用字符串的 [`repeat()`][string.repeat] 方法，生成 1MiB 的字符串常量。
 
 ```js
 const mib = 'a'.repeat(1024 * 1024)
 ```
 
-然后，随便打开一个页面，先清空本地缓存，然后依次手动写入多次缓存数据。观察是否会出现报错。
+然后，清空本地缓存，依次手动写入多条缓存数据。观察是否抛出异常。
 
 ```js
 // 清空本地缓存
@@ -94,16 +94,22 @@ localStorage.setItem('1', mib)
 localStorage.setItem('2', mib)
 localStorage.setItem('3', mib)
 localStorage.setItem('4', mib)
-localStorage.setItem('5', mib) // <- 通常进行到这一步就报错了
+localStorage.setItem('5', mib) // <- 进行到这里将抛出异常
 ```
 
-为什么还没到 5MiB，刚过 4MiB 就报错了？因为键名也会消耗数据限额，如果想榨干 5MiB 的每一个字节，需要从最后一个 `mib` 字符串中剔除 5 个键名占用的空间。
+为什么还没到 5MiB，刚过 4MiB 就报错了？因为键名也会消耗数据限额，上面的 5 个键名总共占据 5 个字节。
+
+如果想榨干 5MiB 的每一个字节，需要从最后一个 `mib` 字符串中剔除 5 个键名占用的空间：
 
 ```js
 localStorage.setItem('5', mib.slice(0, -5)) // 这次正常执行
 ```
 
-此后，再增加一个字节，都会触发配额超限的异常 `QuotaExceededError`。看来，MDN 说的是真的。
+此后，再增加一个字节，都会触发配额超限的异常 `QuotaExceededError`。
+
+看来，MDN 说的是真的。
+
+**完**
 
 
 [storage-api]: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API "Web Storage API"
