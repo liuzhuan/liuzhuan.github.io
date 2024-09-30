@@ -125,6 +125,24 @@ while True:
     screen.blit(ship, ship_rect) # 绘制图像
 ```
 
+## 绘制文本 {#font}
+
+绘制文本需要使用 [`pygame.font`][pygame.font] 模块。
+
+首先使用 `pygame.font.SysFont(name, size, bold=False, italic=False) -> Font` 从系统字体中创建字体对象。
+
+然后，使用 `Font.render(text, antialias, color, background=None) -> Surface` 将文字渲染为 Surface 表面。
+
+最后，使用 `screen.blit(surface, rect)` 绘制到屏幕。
+
+```python
+font = pygame.font.SysFont('verdana', 48)
+text = font.render('Hello, Font!', True, 'red', 'green')
+screen.blit(text, text.get_rect())
+```
+
+如果想显示中文，需要使用中文字体。执行 `pygame.font.get_fonts()` 可以查看所有字体。
+
 ## Sprite 和 Group {#sprite}
 
 pygame 1.3 引入的 [`pygame.sprite`][sprite] 模块，用于处理移动的游戏物体。它包含两个主要的类：`Sprite` 和 `Group`。
@@ -202,3 +220,4 @@ while True:
 [color]: https://www.pygame.org/docs/ref/color.html "pygame.Color"
 [named-colors]: https://www.pygame.org/docs/ref/color_list.html "Named Colors"
 [pygame.draw]: https://www.pygame.org/docs/ref/draw.html "pygame.draw"
+[pygame.font]: https://www.pygame.org/docs/ref/font.html "pygame.font"
