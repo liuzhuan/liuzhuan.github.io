@@ -88,6 +88,19 @@ def load_image(file):
 
 上面的 [`convert()`][convert] 函数用于转换图像的**像素格式**（*pixel format*），也就是把图像文件的原始格式转换为 Surface 支持的格式。提前转换像素格式，可以提高应用性能。对于包含透明度通道的图像格式，如 `.png` 等，可以使用 [`convert_alpha()`][convert_alpha] 函数。
 
+图像加载完毕，使用 [`Surface.blit()`][surface.blit] 将其绘制到屏幕上。
+
+```python
+screen = pygame.display.set_mode((550, 400))
+
+ship = load_image('ship.png')
+ship_rect = ship.get_rect()
+
+while True:
+    # ...
+    screen.blit(ship, ship_rect) # 绘制图像
+```
+
 ## Sprite 和 Group {#sprite}
 
 pygame 1.3 引入的 [`pygame.sprite`][sprite] 模块，用于处理移动的游戏物体。它包含两个主要的类：`Sprite` 和 `Group`。
@@ -146,7 +159,7 @@ while True:
     clock.tick(60)
 ```
 
-**完**
+**未完待续**
 
 [pygame]: https://www.pygame.org/
 [sdl]: https://www.libsdl.org/ "Simple DirectMedia Layer"
@@ -161,3 +174,4 @@ while True:
 [group]: https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Group "pygame.sprite.Group"
 [clock]: https://www.pygame.org/docs/ref/time.html#pygame.time.Clock "pygame.time.Clock"
 [sprite-intro]: https://www.pygame.org/docs/tut/SpriteIntro.html "Sprite Module Introduction"
+[surface.blit]: https://www.pygame.org/docs/ref/surface.html#pygame.Surface.blit "pygame.Surface.blit"
