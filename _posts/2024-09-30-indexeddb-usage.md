@@ -4,7 +4,7 @@ title: IndexedDB 的用法
 date: 2024-09-30 12:16:00 +0800
 ---
 
-*TOC
+* TOC
 {:toc}
 
 [IndexedDB][indexeddb] 是一种大容量客户端存储方案，它可以存储结构化数据，包括 [`File`][file] 和 [`Blob`][blob] 等二进制数据，比如图片、视频等。
