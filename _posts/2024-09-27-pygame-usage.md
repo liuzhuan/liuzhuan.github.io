@@ -213,7 +213,35 @@ while True:
 
 1. 执行 `load(filename)` 方法加载音乐文件
 1. 执行 `set_volume(volume)` 设定音量，音量 `volume` 是 `[0.0, 1.0]` 区间的浮点数
-1. 执行 `play(loops)` 方法播放文件，可以指定循环次数
+1. 执行 `play(loops)` 方法播放文件，可以指定循环次数。默认是 `0`，表示不重复播放。设为 `-1`，表示无限循环播放
+
+举个例子，按 P 键播放音乐，按 S 键停止音乐：
+
+```python
+import pygame as py
+
+py.init()
+screen = py.display.set_mode((550, 400))
+# 加载背景音乐
+py.mixer.music.load('sound/bgmusic.mp3')
+
+running = True
+while running:
+    for event in py.event.get():
+        if event.type == py.QUIT:
+            running = False
+        if event.type == py.KEYDOWN:
+            if event.key == py.K_q:
+                running = False
+            # 按 P 键，播放音乐
+            elif event.key == py.K_p:
+                py.mixer.music.play(-1) # 无限循环播放
+            # 按 S 键，停止播放音乐
+            elif event.key == py.K_s:
+                py.mixer.music.stop()
+    screen.fill('purple')
+    py.display.flip()
+```
 
 **未完待续**
 
