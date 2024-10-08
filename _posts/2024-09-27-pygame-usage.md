@@ -201,6 +201,20 @@ while True:
     clock.tick(60)
 ```
 
+## 声音 {#sound}
+
+游戏中的声音分两种，一种是背景音乐，一种是动作音效。前者循环反复播放，后者一般和事件绑定。
+
+[`pygame.mixer.music`][music] 模块提供了背景音乐的播放功能。背景音乐使用流媒体方式加载，即一边下载一边播放，有较短的启动速度。
+
+较早的 pygame 在 Mac 和 Linux 平台上对于 MP3 格式的支持有限，pygame v2.0.2 增强了 MP3 的支持。如果你需要更好的压缩效果，可以使用 [OGG][ogg] 格式代替 MP3。
+
+播放背景音乐的一般步骤如下：
+
+1. 执行 `load(filename)` 方法加载音乐文件
+1. 执行 `set_volume(volume)` 设定音量，音量 `volume` 是 `[0.0, 1.0]` 区间的浮点数
+1. 执行 `play(loops)` 方法播放文件，可以指定循环次数
+
 **未完待续**
 
 [pygame]: https://www.pygame.org/
@@ -221,3 +235,6 @@ while True:
 [named-colors]: https://www.pygame.org/docs/ref/color_list.html "Named Colors"
 [pygame.draw]: https://www.pygame.org/docs/ref/draw.html "pygame.draw"
 [pygame.font]: https://www.pygame.org/docs/ref/font.html "pygame.font"
+[music]: https://www.pygame.org/docs/ref/music.html "pygame.mixer.music"
+[mixer]: https://www.pygame.org/docs/ref/mixer.html "pygame.mixer"
+[ogg]: https://www.xiph.org/ogg/ "Ogg 容器格式"
