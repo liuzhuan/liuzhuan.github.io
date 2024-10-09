@@ -65,6 +65,40 @@ os.environ.get('PAGER')
 - `os.system(command)` 在子 shell 中执行 `command` 命令
 - `os.fork()` 分叉一个子进程（child process）。子进程返回 `0`，父进程返回 PID
 
+## random
+
+[`random`][random] 模块用于生成伪随机数。
+
+伪随机数的生成依赖**梅森旋转算法**（[*Mersenne Twister*][mersenne]），这种算法久经考验，速度够快，适合一般场景用途，不适合密码安全领域。
+
+- `random.choice(seq)` 从非空序列中随机取一个值
+- `random.randrange(start, stop[, step])` 生成序列中的某一个数字。作用类似于 `choice(range(start, stop, step))`，但是支持任意大的范围，并且对一般场景做了优化
+- `random.randint(a, b)` 返回一个随机整数 N，N 满足 `a <= N <= b`。相当于 `randrange(a, b+1)` 的别名
+- `random.shuffle(x)` 对序列原地随机调整顺序
+- `random.sample(population, k)` 从序列中随机提取 `k` 个元素，原序列不受影响
+
+```python
+import random
+
+random.choice([1, 2, 3, 4, 5, 6]) # 3
+random.choice('abc') # 'c'
+
+random.randrange(1, 99, 2) # 95
+
+random.randint(1, 6) # 6
+
+a_list = [1, 2, 3, 4, 5, 6]
+random.shuffle(a_list)
+a_list # [4, 3, 2, 1, 6, 5]
+
+a_list = [1, 2, 3, 4, 5, 6]
+result = random.sample(a_list, 3)
+a_list # [1, 2, 3, 4, 5, 6]
+result # [5, 2, 1]
+```
+
+
+
 ## sys {#sys}
 
 [`sys`][sys] 模块主要和 Python 解释器交互。
@@ -88,4 +122,6 @@ sys.byteorder
 
 [os]: https://docs.python.org/3/library/os.html "Miscellaneous operating system interfaces"
 [os.path]: https://docs.python.org/3/library/os.path.html "Common pathname manipulations"
+[random]: https://docs.python.org/3/library/random.html "Generate pseudo-random numbers"
 [sys]: https://docs.python.org/3/library/sys.html "System-specific parameters and functions"
+[mersenne]: https://dl.acm.org/doi/10.1145/272991.272995 "Mersenne twister"
