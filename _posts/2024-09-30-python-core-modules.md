@@ -7,11 +7,11 @@ date: 2024-09-30 19:07:00 +0800
 * TOC
 {:toc}
 
-## os
+## os {#os}
 
 [`os`][os] 模块主要和操作系统交互。
 
-### 文件和目录操作
+### 文件和目录操作 {#os-file}
 
 - `os.getcwd()` 获取当前的工作目录
 - `os.chdir(path)` 改变当前工作目录
@@ -23,10 +23,11 @@ date: 2024-09-30 19:07:00 +0800
 - `os.rename(src, dst)` 重命名文件或目录
 - `os.stat(path)` 获取文件的元数据
 
-### 路径管理
+### 路径管理 {#os.path}
 
 [`os.path`][os.path] 模块用于处理常见的路径操作。
 
+- `os.path.abspath(path)` 返回路径对应的绝对路径
 - `os.path.exists(path)` 检测路径是否存在
 - `os.path.join(a, *p)` 拼接多个路径片段
 - `os.path.split(p)` 把路径拆解为 `(head, tail)` 元组，其中 `tail` 是最后一个斜线之后的内容
@@ -39,13 +40,18 @@ date: 2024-09-30 19:07:00 +0800
 - `os.path.sep` 路径分隔符，在 macOS 上是 `/`
 
 ```python
+os.path.abspath('a') # '/Users/codeman/a'
+
+os.path.join('a', 'b', 'c') # 'a/b/c'
+
 os.path.dirname('a/b/c.txt') # 'a/b'
 os.path.basename('a/b/c.txt') # 'c.txt'
+
 os.path.split('a/b/c.txt') # ('a/b', 'c.txt')
 os.path.splitext('a/b/c.txt') # ('a/b/c', '.txt')
 ```
 
-### 环境变量
+### 环境变量 {#os.environ}
 
 - `os.environ` 访问和修改操作系统的环境变量
 
@@ -54,12 +60,12 @@ os.environ.get('PAGER')
 # 'less'
 ```
 
-### 进程管理
+### 进程管理 {#os-process}
 
 - `os.system(command)` 在子 shell 中执行 `command` 命令
 - `os.fork()` 分叉一个子进程（child process）。子进程返回 `0`，父进程返回 PID
 
-## sys
+## sys {#sys}
 
 [`sys`][sys] 模块主要和 Python 解释器交互。
 
