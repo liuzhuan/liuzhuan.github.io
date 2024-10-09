@@ -157,9 +157,11 @@ text = font.render('得分', True, 'red')
 screen.blit(text, text.get_rect())
 ```
 
-## Sprite 和 Group {#sprite}
+## sprite 模块 {#sprite-module}
 
 pygame 1.3 引入的 [`pygame.sprite`][sprite] 模块，用于处理移动的游戏物体。它包含两个主要的类：`Sprite` 和 `Group`。
+
+### Sprite
 
 使用 `Sprite` 的做法一般是：
 
@@ -180,6 +182,17 @@ class Alien(Sprite):
         # 每次更新，垂直向下移动一个像素
         self.rect.move_ip(0, 1)
 ```
+
+`Sprite` 的常用方法包括：
+
+- `update()` 控制精灵外观的更新方法，需要在子类中覆盖。当执行 `Group.update()` 时，群组内所有精灵的 `update()` 方法均会被自动调用
+- `add(*groups)` 添加精灵至指定群组
+- `remove(*groups)` 从群组中移除精灵
+- `kill()` 从所有群组中移除精灵
+- `alive() -> bool` 判断精灵是否属于任何群组
+- `groups() -> group_list` 返回所有包含此精灵的群组
+
+### Group
 
 `Group` 类用于容纳和渲染 `Sprite`，它的常用方法有：
 
