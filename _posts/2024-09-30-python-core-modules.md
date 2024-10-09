@@ -30,12 +30,19 @@ date: 2024-09-30 19:07:00 +0800
 - `os.path.exists(path)` 检测路径是否存在
 - `os.path.join(a, *p)` 拼接多个路径片段
 - `os.path.split(p)` 把路径拆解为 `(head, tail)` 元组，其中 `tail` 是最后一个斜线之后的内容
+- `os.path.splitext(p)` 把路径拆分成 `(root, ext)` 元组，其中 `ext` 是文件扩展名
 - `os.path.getsize(filename)` 返回文件大小，以字节为单位
 - `os.path.isfile(path)` 判断路径是否普通文件
 - `os.path.isdir(s)` 判断路径是否现存目录
+- `os.path.dirname(p)` 获取路径中的目录部分
+- `os.path.basename(p)` 获取路径中的文件部分
+- `os.path.sep` 路径分隔符，在 macOS 上是 `/`
 
 ```python
+os.path.dirname('a/b/c.txt') # 'a/b'
+os.path.basename('a/b/c.txt') # 'c.txt'
 os.path.split('a/b/c.txt') # ('a/b', 'c.txt')
+os.path.splitext('a/b/c.txt') # ('a/b/c', '.txt')
 ```
 
 ### 环境变量
