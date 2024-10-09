@@ -215,6 +215,19 @@ while True:
     clock.tick(60)
 ```
 
+### 碰撞检测 {#collision-detection}
+
+碰撞检测是 sprite 模块提供的一个重要功能。主要函数如下：
+
+- `spritecollide(sprite, group, dokill) -> Sprite_list` 检测精灵和群组是否发生碰撞，返回值是和精灵碰撞的群组内精灵组成的列表。`dokill` 是布尔值，如果为 `True`，发生碰撞的精灵会从群组中移除
+- `spritecollideany(sprite, group) -> Sprite` 测试精灵是否和群组发生碰撞，比 `spritecollide()` 函数稍快
+- `collide_rect(left, right) -> bool` 基于矩形的精灵碰撞检测，要求两个精灵实例必须包含 `rect` 属性
+- `collide_rect_ratio(ratio) -> collided_callable` 基于缩放矩形的精灵碰撞检测
+- `collide_circle(left, right) -> bool` 基于圆形的精灵碰撞，要求两个精灵拥有 `rect` 属性，可以拥有 `radius` 属性
+- `collide_circle_ratio(ratio) -> collided_callable` 基于缩放圆形的碰撞检测
+- `collide_mask(sprite1, sprite2) -> (int, int)` 基于遮罩的碰撞检测
+- `groupcollide(group1, group2, dokill1, dokill2) -> Sprite_dict` 两个群组之间的碰撞检测
+
 ## 声音 {#sound}
 
 游戏中的声音分两种，一种是背景音乐，一种是动作音效。前者循环反复播放，后者一般和事件绑定。
