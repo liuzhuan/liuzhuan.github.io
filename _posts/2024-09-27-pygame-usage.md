@@ -129,7 +129,11 @@ while True:
 
 绘制文本需要使用 [`pygame.font`][pygame.font] 模块。
 
-首先使用 `pygame.font.SysFont(name, size, bold=False, italic=False) -> Font` 从系统字体中创建字体对象。
+绘制文本前先创建字体。创建字体有两种办法，一种从系统字体中创建，一种从字体文件中创建。
+
+### 系统字体 {#sysfont}
+
+首先使用 `pygame.font.SysFont(name, size) -> Font` 从系统字体中创建字体对象。
 
 然后，使用 `Font.render(text, antialias, color, background=None) -> Surface` 将文字渲染为 Surface 表面。
 
@@ -142,6 +146,16 @@ screen.blit(text, text.get_rect())
 ```
 
 如果想显示中文，需要使用中文字体。执行 `pygame.font.get_fonts()` 可以查看所有字体。
+
+### 字体文件 {#fontfile}
+
+使用 [`pygame.font.Font()`](https://www.pygame.org/docs/ref/font.html#pygame.font.Font "pygame.font.Font") 函数从字体文件中创建字体。
+
+```python
+font = pygame.font.Font('lxgw.ttf', 48)
+text = font.render('得分', True, 'red')
+screen.blit(text, text.get_rect())
+```
 
 ## Sprite 和 Group {#sprite}
 
