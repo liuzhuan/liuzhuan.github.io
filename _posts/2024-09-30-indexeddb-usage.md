@@ -11,7 +11,7 @@ date: 2024-09-30 12:16:00 +0800
 
 `localStorage` 最多存储 5MiB 的容量，IndexedDB 的容量要大得多。按照 [MDN 的说法][storage]，Chrome 浏览器可用的存储容量是总磁盘的 60%。假如你的硬盘总容量是 1TB，那么可用的 IndexedDB 上限是 600GB。
 
-IndexedDB 是一种键值数据库，它属于非关系型数据库。它通过简单的键值对（key-value）存储数据，存取灵活，性能高。
+IndexedDB 是一种键值数据库，属于非关系型数据库。它通过简单的键值对（key-value）存储数据，存取灵活，性能高。
 
 IndexedDB 的 API 多为异步风格，好处是不会阻塞界面渲染，坏处是可读性差，写起来费劲。
 
@@ -19,7 +19,7 @@ IndexedDB 的 API 多为异步风格，好处是不会阻塞界面渲染，坏�
 
 使用数据库的第一步是打开数据库。
 
-使用 [`window.indexedDB.open(name, version)`][IDBFactory.open] 方法打开数据库。`name` 表示数据库的名称，`version` 表示数据库的版本。返回值是一个 [`IDBOpenDBRequest`][IDBOpenDBRequest] 类型的实例。
+使用 [`indexedDB.open(name, version)`][IDBFactory.open] 方法打开数据库。`name` 表示数据库的名称，`version` 表示数据库的版本。返回值是一个 [`IDBOpenDBRequest`][IDBOpenDBRequest] 类型的实例。
 
 ```js
 const dbName = 'codeman'
@@ -63,6 +63,8 @@ req.onsuccess = (e) => {
 }
 ```
 
+数据库连接对象很重要，无论是创建对象存储，还是使用事务，都离不开它。通常会把它存储为独立的变量（如上文中的 `db`）。
+
 ## 创建对象存储 {#object-stores}
 
 在关系型数据库中，一个数据库可以包含多个表格（Table）。在 IndexedDB 中，一个数据库可以包含多个**对象存储**（[object store][IDBObjectStore]）。可以把对象存储想象成一个超大的数组，其中可以存储对象类型的数据。
@@ -92,7 +94,7 @@ function createStore(db) {
 
 ### 添加数据 {#add-item}
 
-在 IndexedDB 中添加数据必须使用**事务**（transaction）。
+在 IndexedDB 中添加数据必须使用**事务**（transaction）。事实上，所有的 IndexedDB 操作（增删改查）都离不开事务。
 
 事务是一个数据库术语，它指的是一系列数据库操作，这些操作要么全部执行，要么全部不执行，是一个不可分割的工作单位。事务的主要目的是确保数据库的一致性和完整性。
 
@@ -156,9 +158,9 @@ function addItem(db) {
 
 ### 查询数据 {#query}
 
-查询数据和添加数据的主流程基本一致，但是需要调整工作模式为 `"readonly"`。如果你想查询所有的数据，可以使用对象存储实例的 [`getAll()`][getAll] 方法。
+查询数据和添加数据的主流程基本一致，但是需要调整工作模式为 `"readonly"`。
 
-查询结果在 `onsuccess` 回调函数中，通过 `e.target.result` 获取。
+如果你想查询所有的数据，可以使用对象存储实例的 [`getAll()`][getAll] 方法。查询结果在 `onsuccess` 回调函数中，通过 `e.target.result` 获取。
 
 ```js
 req.onsuccess = (e) => {
@@ -195,7 +197,7 @@ const getReq = objectStore.get(1)
 
 ### 更新数据 {#update}
 
-更新数据，使用对象存储实例的 [`put(value)`][put] 方法。它和 `add()` 的用法类似，只不过会安装键更新原有数据，而非新增数据。
+更新数据，使用对象存储实例的 [`put(value)`][put] 方法。它和 `add()` 的用法类似，只不过会按照键更新原有数据，而非新增数据。
 
 ```js
 const putReq = objectStore.put({
