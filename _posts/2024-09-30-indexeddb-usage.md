@@ -88,7 +88,9 @@ function createStore(db) {
 }
 ```
 
-## 添加数据 {#add-item}
+## 增删改查 {#curd}
+
+### 添加数据 {#add-item}
 
 在 IndexedDB 中添加数据必须使用**事务**（transaction）。
 
@@ -152,7 +154,7 @@ function addItem(db) {
 }
 ```
 
-## 查询数据 {#query}
+### 查询数据 {#query}
 
 查询数据和添加数据的主流程基本一致，但是需要调整工作模式为 `"readonly"`。如果你想查询所有的数据，可以使用对象存储实例的 [`getAll()`][getAll] 方法。
 
@@ -191,7 +193,7 @@ const getReq = objectStore.get(1)
 // 略
 ```
 
-## 更新数据 {#update}
+### 更新数据 {#update}
 
 更新数据，使用对象存储实例的 [`put(value)`][put] 方法。它和 `add()` 的用法类似，只不过会安装键更新原有数据，而非新增数据。
 
@@ -203,7 +205,7 @@ const putReq = objectStore.put({
 })
 ```
 
-## 删除数据 {#delete}
+### 删除数据 {#delete}
 
 如果想根据键删除某个数据，可以使用 [`delete(key)`][delete] 方法。
 
