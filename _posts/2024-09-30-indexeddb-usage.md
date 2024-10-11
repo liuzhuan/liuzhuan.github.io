@@ -221,6 +221,20 @@ const deleteReq = objectStore.delete(1)
 const clearReq = objectStore.clear(1)
 ```
 
+## 索引 {#index}
+
+pass
+
+## 游标 {#cursor}
+
+pass
+
+## Dixie.js
+
+[Dixie.js](https://dexie.org/ "A Minimalistic Wrapper for IndexedDB") 是一个 IndexedDB 的封装库，体积不大 25k。
+
+pass
+
 [indexeddb]: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API "IndexedDB API"
 [blob]: "https://developer.mozilla.org/en-US/docs/Web/API/Blob" "Blob"
 [file]: https://developer.mozilla.org/en-US/docs/Web/API/File "File"
