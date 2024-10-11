@@ -76,6 +76,36 @@ pass
 
 [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection) 是元素构成的集合，它是活的（live）。
 
+## HTMLElement
+
+pass
+
+## HTMLMediaElement
+
+[`HTMLMediaElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) 控制媒体元素相关的功能。父类是 [`HTMLElement`](#htmlelement)。
+
+```
+HTMLElement <-- HTMLMediaElement
+```
+
+属性
+
+- `currentTime` 浮点数，单位是秒，控制当前播放时间点
+- `duration` 媒体总是长，单位秒
+- `volume` 音量，区间 `[0.0, 1.0]`
+
+方法
+
+pass
+
+## HTMLAudioElement
+
+[`HTMLAudioElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement) 用于控制 `<audio>` 元素。父类是 [`HTMLMediaElement`](#htmlmediaelement)
+
+```
+HTMLMediaElement <-- HTMLAudioElement
+```
+
 ## Document
 
 [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) 代表网页文档。它的父类是 [`Node`](#node)。
