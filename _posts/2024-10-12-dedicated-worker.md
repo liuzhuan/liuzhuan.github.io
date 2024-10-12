@@ -37,17 +37,17 @@ fib(<input id="input" type="number" />) = <span id="output">?</span>
 
 **工作线程**（Web Worker）是一种在浏览器运行的后台线程，执行它的脚本不会影响页面性能。工作线程和主线程拥有各自的全局上下文，它俩相互隔离，彼此之间通过消息（message）传递信息。
 
-工作线程有一些使用限制，它不能直接修改 DOM 元素，也不能访问 `window` 上的变量和方法。
+为了线程安全，工作线程有一些使用限制，它不能直接修改 DOM 元素，也不能访问 `window` 上的变量和方法。
 
 工作线程按照用途分为三类：
 
-1. **专用工作线程**（Dedicated workers），只能被一个脚本使用，允许开发者在浏览器后台线程中执行计算密集型任务，即使执行长时间运行的同步任务，用户界面也能保持流畅。
+1. **专用工作线程**（Dedicated workers），只能被一个脚本使用，可以在后台执行计算密集型任务，即使执行长时间运行的同步任务，用户界面也能保持流畅。
 2. **共享工作线程**（Shared workers），可以被多个页面的多个脚本调用，它允许多个浏览器上下文（例如不同的标签页、iframe 或其他 workers）共享一个后台线程，方便多页面共享数据。
-3. **服务工作线程**（Service workers），它像一个代理服务器，可以拦截浏览器请求，控制页面缓存，实现离线体验等功能。常用于 PWA 应用。
+3. **服务工作线程**（Service workers），它像一个代理服务器，可以拦截浏览器请求，控制页面缓存，实现离线体验等功能，常用于 [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps "Progressive web apps") 渐进式 web 应用。
 
-本文只介绍专用工作线程，它是最简单的一种。
+本文只介绍专用工作线程，它最简单。
 
-主线程和工作线程通过消息交换数据。发送数据使用 `postMessage(value)` 方法，接收数据需要监听 `message` 事件（数据在事件对象的 `data` 属性中）。
+主线程和工作线程通过消息交换数据。发送数据使用 `postMessage(value)` 方法，接收数据需要监听 `message` 事件（数据在事件实例的 `data` 属性中）。
 
 工作线程的代码要写在一个单独的文件中，比如 `worker.js`。
 
@@ -59,7 +59,8 @@ onmessage = (e) => {
     // 接收主线程发来的数据
     const data = e.data
 
-    // 进行一些复杂的计算
+    // 执行复杂运算
+    const result = expensiveCompute()
 
     // 向主线程返回计算结果
     postMessage(result)
@@ -67,7 +68,7 @@ onmessage = (e) => {
 ```
 
 
-在主线程中，使用 `Worker(url)` 构造函数创建专用工作线程的实例。其中 `url` 是工作线程代码所在的脚本地址，比如上面的 `worker.js`。然后通过实例发送和接收消息。
+在主线程中，使用 [`Worker(url)`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) 构造函数创建专用工作线程的实例。其中 `url` 是工作线程代码所在的脚本地址，比如上面的 `worker.js`。然后通过实例发送和接收消息。
 
 ```js
 // 创建工作线程实例
@@ -90,7 +91,15 @@ worker.postMessage(someData)
 const worker = new Worker(new URL('worker.js', import.meta.url))
 ```
 
-如果使用专用工作线程改造一开始的例子，代码会这么写：
+当你不再使用工作线程，可以调用 [`terminate()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/terminate) 方法立即停止它。
+
+```js
+worker.terminate()
+```
+
+## 使用工作线程
+
+如果使用专用工作线程改造一开始的例子，代码可以这么写：
 
 ```html
 <!-- index.html -->
