@@ -160,8 +160,14 @@ onconnect = e => {
 }
 ```
 
-## 调试共享工作线程
+## 调试共享工作线程 {#debug}
 
 共享工作线程的调试和主线程是独立的，有自己的开发者工具。这意味着，你在工作线程的报错信息、`console.log()` 控制台命令，在主线程的开发者工具是看不到的。
 
 在 Chrome 浏览器，可以访问 `chrome://inspect/#workers` 标签页，打开共享工作线程的开发者工具。Edge 浏览器的地址是 `edge://inspect/#workers`。
+
+## 兼容性 {#compa}
+
+根据 [caniuse.com](https://caniuse.com/mdn-api_sharedworker) 网站统计，`SharedWorker` API 的全球覆盖率为 44.99%。主要是移动端的覆盖率只有 21.01%，相比之下，桌面端的覆盖率高达 96.38%。
+
+如果你的 web 应用无需考虑移动端，现在就可以使用 SharedWorker。否则，最好再等一等。
