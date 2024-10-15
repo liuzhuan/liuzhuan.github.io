@@ -138,3 +138,5 @@ function fib(n) {
 ```
 
 使用 worker 改造后的例子，尽管计算时间依然很长，但是不会造成页面卡顿。
+
+下一篇：[JS 中的共享工作线程](https://www.1zh.tech/2024/10/14/sharedworker.html)

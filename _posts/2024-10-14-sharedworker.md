@@ -12,7 +12,7 @@ date: 2024-10-14 15:10:00 +0800
 
 共享工作线程多用于页面间的数据共享和状态同步。
 
-使用 [`SharedWorker(url)`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker) 构造函数创建共享工作线程。不同页面（同源页面）创建的线程，指向的是同一个线程。
+使用 [`SharedWorker(url)`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker) 构造函数创建共享工作线程。不同页面（同源页面）创建的实例，指向同一个线程。
 
 ```js
 const myWorker = new SharedWorker('worker.js')
@@ -22,7 +22,7 @@ const myWorker = new SharedWorker('worker.js')
 
 启动 `port` 连接需要执行 `start()` 函数。当使用 `onmessage` 事件回调时，会暗中执行 `start()` 函数，此时无需手动调用它。如果通过 `addEventListener()` 方法监听 `message` 事件，就需要手动调用 `start()` 函数。
 
-从主线程向工作线程发送消息时，这么使用 `port` 属性：
+从主线程向工作线程发送消息，代码如下：
 
 ```js
 const myWorker = new SharedWorker('worker.js')
@@ -42,7 +42,7 @@ myWorker.port.onmessage = (e) => {
 // file: worker.js
 
 onconnect = (e) => {
-    // 获取 port 实例
+    // 获取 port 实例，port 的另一头是包含主线程的页面
     const port = e.ports[0]
 
     // 接收主线程的消息
@@ -54,13 +54,15 @@ onconnect = (e) => {
 }
 ```
 
-每次有新的页面连接共享工作线程，就会触发它的 `onconnect` 回调方法。
+每次有新页面连接共享工作线程，会触发它的 `onconnect` 回调方法。
 
 ## 一个例子：简单的数字同步 {#demo-num}
 
-我们编写一个工作线程 `worker.js`，其中包含一个简单数字 `num`。如果主线程传递的消息是 `"update"`，则 `num` 加一。
+我们编写一个工作线程 `worker.js`，其中包含一个简单数字 `num`。如果主线程传递的消息是 `"update"`，则 `num` 加一，并通知主线程新的数值。
 
 ```js
+// file: worker.js
+
 let num = 0
 
 onconnect = e => {
@@ -75,7 +77,7 @@ onconnect = e => {
 }
 ```
 
-新建两个页面 `index.html` 和 `index2.html`，功能都是点击按钮，向工作线程发送消息。并接收线程消息，更新页面显示内容。
+新建两个页面 `index.html` 和 `index2.html`，两者内容几乎一模一样，都是点击按钮，向工作线程发送消息 `"update`。接收线程消息，更新页面显示内容。
 
 ```html
 <div>num: <span id="output"></span></div>
@@ -101,7 +103,7 @@ onconnect = e => {
 
 尽管我们实现了两个页面的数据同步，但是需要手动点击才能看到最新数据，这不够简单。如何让两个页面自动实时同步？
 
-可以在工作线程中把所有的 `port` 储存在一个数组中，当数值变化时，遍历数组，通知所有关联页面。类似一个简易的发布订阅模型。
+可以在工作线程中把所有的 `port` 储存在一个数组中，当数值变化时，遍历数组，通知所有关联页面。类似一个简易的观察者模式。
 
 ```js
 // file: worker.js
@@ -112,19 +114,20 @@ let ports = []
 
 onconnect = e => {
   const port = e.ports[0]
+  // 把新来的 port 存起来
   ports.push(port)
 
   port.onmessage = e => {
     if (e.data === 'update') {
       num++
-      // 遍历数组通知所有页面
+      // 遍历 port 通知所有页面
       ports.forEach(p => p.postMessage(num))
     }
   }
 }
 ```
 
-上面的实现有一个缺点。当页面关闭时，对应的 `port` 的依然在数组中，这会造成一些浪费。最好，在页面关闭前，通知工作线程，把配套的 `port` 移除。
+上面的实现有一个缺点：当页面关闭时，对应的 `port` 依然残留在数组中，这会造成浪费。最好在页面关闭前，通知工作线程，把配套的 `port` 删了。
 
 监听页面关闭，可以使用 `window` 的 [`beforeunload`](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) 事件。
 
@@ -135,7 +138,7 @@ window.addEventListener('beforeunload', () => {
 })
 ```
 
-在工作线程的代码，如果发现 `bye` 消息，则移除对应的 `port`：
+在工作线程的代码，如果发现 `"bye"` 消息，则移除对应的 `port`：
 
 ```js
 let num = 0
@@ -149,7 +152,7 @@ onconnect = e => {
     if (e.data === 'update') {
       num++
       ports.forEach(p => p.postMessage(num))
-    } else if ((e.data = 'bye')) {
+    } else if ((e.data === 'bye')) {
       // 移除即将关闭页面的 port
       ports = ports.filter(p => p !== port)
     }
