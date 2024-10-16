@@ -171,3 +171,5 @@ onconnect = e => {
 根据 [caniuse.com](https://caniuse.com/mdn-api_sharedworker) 网站统计，`SharedWorker` API 的全球覆盖率为 44.99%。主要是移动端的覆盖率只有 21.01%，相比之下，桌面端的覆盖率高达 96.38%。
 
 如果你的 web 应用无需考虑移动端，现在就可以使用 SharedWorker。否则，最好再等一等。
+
+下一篇：[JS 中的服务工作线程](https://www.1zh.tech/2024/10/16/service-workers.html)
