@@ -32,6 +32,14 @@ sudo apt install jekyll
 
 可以使用 `bundle show <theme>` 查看主题所在的文件夹。比如：`bundle show minima`。
 
+`minima` 主题自带 [jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag) 插件，可以在页面中使用如下 [YAML front matter 字段](https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md)，以提升搜索效果：
+
+- `title`
+- `description`
+- `image`
+- `author`
+- `locale`
+
 ## 数学公式
 
 Inline math: $$2^3=8$$
