@@ -2,6 +2,7 @@
 layout: post
 title: JS 中的服务工作线程
 date: 2024-10-16 18:37:00 +0800
+image: /codeman.png
 ---
 
 前情提要
