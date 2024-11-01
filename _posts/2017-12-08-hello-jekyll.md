@@ -44,12 +44,52 @@ sudo apt install jekyll
 
 在网页显示数学公式，有两种方案：
 
-- [MathJax](https://www.mathjax.org/)，排版质量高，符号全面
-- [KaTeX](https://katex.org/)，渲染速度快
+- [MathJax](https://www.mathjax.org/)，排版质量高，功能丰富，符号全面
+- [KaTeX](https://katex.org/)，渲染速度快，功能不如 MathJax 全面
 
-GitHub 仅支持 MathJax。
+GitHub Pages 仅支持 MathJax。如果想在 GitHub Pages 中使用 MathJax，首先在根目录下创建 `_includes/mathjax.html` 文件，内容如下：
 
-使用两个美元符号包裹公式。既可以使用内联公式，比如：\\(2^3=8\\)。也可以使用块级公式，比如：
+```html
+<script>
+MathJax = {
+    tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [
+            ['$$', '$$'],
+            ['\\[', '\\]']
+        ]
+    }
+}
+</script>
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+```
+
+如果你用的是 Minima 主题，可以创建 `_includes/head.html` 文件，内容如下：
+
+```html
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo -%}
+
+  {%- if page.use_math -%}
+  {%- include mathjax.html -%}
+  {%- endif -%}
+
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  {%- feed_meta -%}
+  {%- if jekyll.environment == 'production' and site.google_analytics -%}
+    {%- include google-analytics.html -%}
+  {%- endif -%}
+</head>
+```
+
+在需要数学公式的文章顶部，设置 `use_math: true`  front matter。
+
+行内函数使用 `\\(` 和 `\\)` 包裹，比如：\\(2^3=8\\)。
+
+块级公式使用 `\\[` 和 `\\]` 包裹，也可以使用 `$$` 包裹，比如：
 
 $$
 \int_m^n{(a + b)}dt = c
