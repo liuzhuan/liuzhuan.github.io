@@ -47,13 +47,13 @@ sudo apt install jekyll
 - [MathJax](https://www.mathjax.org/)，排版质量高，符号全面
 - [KaTeX](https://katex.org/)，渲染速度快
 
-以 KaTeX 为例。使用 Jekyll 插件 [\(\jektex\)](https://github.com/yagarea/jektex) 可以在 Jekyll 中使用 KaTeX 渲染数学公式。
+以 KaTeX 为例。使用插件 [kramdown-math-katex](https://kramdown.gettalong.org/math_engine/katex.html) 可以在 Jekyll 中使用 KaTeX 渲染数学公式。
 
-首先，将 \(\jektex\) 添加到 `Gemfile` 中：
+首先，将这个插件添加到 `Gemfile` 中：
 
 ```ruby
 group :jekyll_plugins do
-    gem "jektex"
+    gem "kramdown-math-katex"
 end
 ```
 
@@ -62,8 +62,9 @@ end
 安装成功后，在 `_config.yml` 配置文件中启用插件：
 
 ```yml
-plugins:
-    - jektex
+markdown: kramdown
+kramdown:
+  math_engine: katex
 ```
 
 最后，在页面 `<head>` 中添加 CSS 样式文件：
