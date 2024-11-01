@@ -42,7 +42,37 @@ sudo apt install jekyll
 
 ## 数学公式
 
-Inline math: $$2^3=8$$
+在网页显示数学公式，有两种方案：
+
+- [MathJax](https://www.mathjax.org/)，排版质量高，符号全面
+- [KaTeX](https://katex.org/)，渲染速度快
+
+以 KaTeX 为例。使用 Jekyll 插件 [\(\jektex\)](https://github.com/yagarea/jektex) 可以在 Jekyll 中使用 KaTeX 渲染数学公式。
+
+首先，将 \(\jektex\) 添加到 `Gemfile` 中：
+
+```ruby
+group :jekyll_plugins do
+    gem "jektex"
+end
+```
+
+然后，执行 `bundle install` 安装依赖。
+
+安装成功后，在 `_config.yml` 配置文件中启用插件：
+
+```yml
+plugins:
+    - jektex
+```
+
+最后，在页面 `<head>` 中添加 CSS 样式文件：
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/katex@0.16.11/dist/katex.min.css">
+```
+
+使用两个美元符号包裹公式。既可以使用内联公式，比如：$$2^3=8$$。也可以使用块级公式，比如：
 
 $$
 \int_m^n{(a + b)}dt = c
