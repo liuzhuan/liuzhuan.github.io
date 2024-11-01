@@ -2,7 +2,7 @@
 layout: post
 title: Hello Jekyll
 date: 2017-12-08
-math: true
+use_math: true
 ---
 
 * TOC
@@ -49,17 +49,11 @@ sudo apt install jekyll
 
 GitHub 仅支持 MathJax。
 
-使用两个美元符号包裹公式。既可以使用内联公式，比如：$2^3=8$。也可以使用块级公式，比如：
+使用两个美元符号包裹公式。既可以使用内联公式，比如：\\(2^3=8\\)。也可以使用块级公式，比如：
 
 $$
 \int_m^n{(a + b)}dt = c
 $$
-
-使用 `math` 代码块：
-
-```math
-\int_m^n{(a + b)}dt = c
-```
 
 ## 网站地图
 
