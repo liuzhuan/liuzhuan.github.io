@@ -1,7 +1,8 @@
 ---
-layout: post
 title: JavaScript 的正则表达式
 date: 2018-01-03
+jektex: false
+layout: post
 ---
 
 * TOC
