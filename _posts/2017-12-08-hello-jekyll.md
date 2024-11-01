@@ -64,26 +64,7 @@ MathJax = {
 <script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
 ```
 
-如果你用的是 Minima 主题，可以创建 `_includes/head.html` 文件，内容如下：
-
-```html
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  {%- seo -%}
-
-  {%- if page.use_math -%}
-  {%- include mathjax.html -%}
-  {%- endif -%}
-
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  {%- feed_meta -%}
-  {%- if jekyll.environment == 'production' and site.google_analytics -%}
-    {%- include google-analytics.html -%}
-  {%- endif -%}
-</head>
-```
+然后将 `mathjax.html` 按需引入到布局文件中。比如，当 `use_math` 为 `true` 时，才包含这个文件。
 
 在需要数学公式的文章顶部，设置 `use_math: true`  front matter。
 
