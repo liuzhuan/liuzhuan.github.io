@@ -40,7 +40,7 @@ sudo apt install jekyll
 - `author`
 - `locale`
 
-## 数学公式
+## 数学公式 {#math}
 
 在网页显示数学公式，有两种方案：
 
