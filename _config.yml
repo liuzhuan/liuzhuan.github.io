@@ -30,9 +30,6 @@ logo: /codeman.png
 
 # Build settings
 theme: minima
-markdown: kramdown
-kramdown:
-  math_engine: katex
 plugins:
   - jekyll-feed
 # Exclude from processing.

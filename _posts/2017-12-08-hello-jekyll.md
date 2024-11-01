@@ -47,37 +47,19 @@ sudo apt install jekyll
 - [MathJax](https://www.mathjax.org/)，排版质量高，符号全面
 - [KaTeX](https://katex.org/)，渲染速度快
 
-以 KaTeX 为例。使用插件 [kramdown-math-katex](https://kramdown.gettalong.org/math_engine/katex.html) 可以在 Jekyll 中使用 KaTeX 渲染数学公式。
+GitHub 仅支持 MathJax。
 
-首先，将这个插件添加到 `Gemfile` 中：
-
-```ruby
-group :jekyll_plugins do
-    gem "kramdown-math-katex"
-end
-```
-
-然后，执行 `bundle install` 安装依赖。
-
-安装成功后，在 `_config.yml` 配置文件中启用插件：
-
-```yml
-markdown: kramdown
-kramdown:
-  math_engine: katex
-```
-
-最后，在页面 `<head>` 中添加 CSS 样式文件：
-
-```html
-<link rel="stylesheet" href="https://unpkg.com/katex@0.16.11/dist/katex.min.css">
-```
-
-使用两个美元符号包裹公式。既可以使用内联公式，比如：$$2^3=8$$。也可以使用块级公式，比如：
+使用两个美元符号包裹公式。既可以使用内联公式，比如：$2^3=8$。也可以使用块级公式，比如：
 
 $$
 \int_m^n{(a + b)}dt = c
 $$
+
+使用 `math` 代码块：
+
+```math
+\int_m^n{(a + b)}dt = c
+```
 
 ## 网站地图
 
