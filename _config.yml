@@ -30,9 +30,11 @@ logo: /codeman.png
 
 # Build settings
 theme: minima
+markdown: kramdown
+kramdown:
+  math_engine: katex
 plugins:
   - jekyll-feed
-  - jektex
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
@@ -52,5 +54,3 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-jektex:
-  ignore: ["*.xml", "README.md"]
