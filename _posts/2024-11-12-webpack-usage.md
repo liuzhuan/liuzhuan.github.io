@@ -121,3 +121,30 @@ module.exports = merge(commonConfig, {
   }
 }
 ```
+
+## 插件 {#plugins}
+
+### html-webpack-plugin
+
+[`html-webpack-plugin`](https://github.com/jantimon/html-webpack-plugin) 可以简化 HTML 页面的创建。
+
+```sh
+pnpm add -D html-webpack-plugin
+```
+
+修改公共配置文件 `webpack.common.config.cjs`：
+
+```diff
++ const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  ...
++  plugins: [new HtmlWebpackPlugin()],
+}
+```
+
+`html-webpack-plugin` 的选项支持一些常见的参数：
+
+- `title` 页面标题
+- `filename` 输出的 HTML 文件名，默认是 `index.html`
+- `template` 模板文件路径，默认是 `src/index.ejs`（如果存在的话）
