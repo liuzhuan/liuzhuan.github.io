@@ -67,3 +67,57 @@ module.exports = {
 ```js
 (()=>{"use strict";console.log("I am foo"),console.log(7)})();
 ```
+
+## 拆解配置文件 {#split-config}
+
+建议把生产环境和开发环境的配置文件分开，把可以复用的参数提取到公共的配置文件。
+
+使用 [webpack-merge](https://github.com/survivejs/webpack-merge) 将多个配置项合并为一个。
+
+```sh
+pnpm add -D webpack-merge
+```
+
+```js
+// webpack.common.config.cjs 公共配置
+const path = require('node:path')
+
+module.exports = {
+  entry: './src/main.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].bundle.js',
+  },
+}
+```
+
+```js
+// webpack.dev.config.cjs
+const { merge } = require('webpack-merge')
+const commonConfig = require('./webpack.common.config.cjs')
+
+module.exports = merge(commonConfig, {
+  mode: 'development',
+})
+```
+
+```js
+// webpack.prod.config.cjs
+const { merge } = require('webpack-merge')
+const commonConfig = require('./webpack.common.config.cjs')
+
+module.exports = merge(commonConfig, {
+  mode: 'production',
+})
+```
+
+修改 `package.json` 的脚本：
+
+```json
+{
+  "scripts": {
+    "dev": "webpack --config webpack.dev.config.cjs",
+    "build": "webpack --config webpack.prod.config.cjs",
+  }
+}
+```
