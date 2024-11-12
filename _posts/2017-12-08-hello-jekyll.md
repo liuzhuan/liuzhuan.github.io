@@ -40,6 +40,8 @@ sudo apt install jekyll
 - `author`
 - `locale`
 
+如果要升级 minima 版本，可以在 `Gemfile` 中修改，然后执行 `bundle` 安装新版本。
+
 ## 数学公式 {#math}
 
 在网页显示数学公式，有两种方案：
