@@ -4,9 +4,10 @@ title: Rollup.js 入门
 date: 2017-12-13
 ---
 
-Rollup 是一个 ES6 模块打包器，开发者 [Rich Harris][rollup-interview]。
+* TOC
+{:toc}
 
-Rich Harris 是纽约时报的图形编辑，既做新闻，也做开发。
+[Rollup](https://rollupjs.org/) 是一个 ES6 模块打包器，开发者 [*Rich Harris*][rollup-interview]。*Rich Harris* 曾是纽约时报的图形编辑，既做新闻，也做开发。
 
 Rollup 适合构建库文件，目前使用它的库有 [vue.js][vue-rollup]、[react][react-rollup]、D3、Three.js、Redux 等。
 
@@ -18,13 +19,13 @@ Rollup 适合构建库文件，目前使用它的库有 [vue.js][vue-rollup]、[
 
 ```sh
 # 对于浏览器，编译成 IIFE 函数
-rollup main.js --o bundle.js --f iife
+rollup main.js --file bundle.js --format iife
 
 # 对于 Node.js，编译为 CommonJS 模块
-rollup main.js --o bundle.js --f cjs
+rollup main.js --file bundle.js --format cjs
 
 # 为了兼容浏览器和 Node.js，编译为 umd 格式
-rollup main.js --o bundle.js -f umd --name "myBundle"
+rollup main.js --file bundle.js --format umd --name "myBundle"
 ```
 
 ## 使用配置文件
@@ -245,7 +246,7 @@ Rollup 可以通过 [rollup-plugin-commonjs][rollup-plugin-commonjs] 插件引�
 
 ## 工作原理
 
-首先，Rollup 使用 Acorn 解析器读取入口文件，分析后产生抽象语法树（AST）。通过 AST 就能得到很多信息，比如模块的依赖和导出变量。
+首先，Rollup 使用 [Acorn](https://github.com/acornjs/acorn) 解析器读取入口文件，分析后产生抽象语法树（AST）。通过 AST 就能得到很多信息，比如模块的依赖和导出变量。
 
 如果发现依赖模块，就加载模块、读其内容、拆其 Token、产生AST。递归深入，直到汇集所有模块。
 
