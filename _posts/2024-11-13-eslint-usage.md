@@ -15,3 +15,9 @@ permalink: /eslint/
 ```sh
 npm init @eslint/config@latest
 ```
+
+此后，对任意文件执行 ESLint 校验：
+
+```sh
+npx eslint yourfile.js
+```
