@@ -5,7 +5,27 @@ theme = 'papermod'
 
 [params]
 ShowToc = true
+author = 'Codeman'
+dateFormat = '2006-01-02'
+showCodeCopyButtons = true
+
+[params.fuseOpts]
+isCaseSensitive = false
+shouldSort = true
+location = 0
+distance = 1000
+threshold = 0.4
+minMatchCharLength = 0
+keys = ['title', 'permalink', 'summary', 'content']
 
 [caches]
 [caches.images]
 dir = ':cacheDir/images'
+
+[outputs]
+home = ['HTML', 'RSS', 'JSON']
+
+[[menu.main]]
+name = 'Search'
+url = 'search'
+weight = 10
