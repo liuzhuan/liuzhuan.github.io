@@ -1,0 +1,4 @@
+baseURL = 'https://www.1zh.tech/'
+languageCode = 'zh-CN'
+title = 'Codeman 的数字笔记'
+theme = 'papermod'
