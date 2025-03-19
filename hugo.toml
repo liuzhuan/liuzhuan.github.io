@@ -5,3 +5,7 @@ theme = 'papermod'
 
 [params]
 ShowToc = true
+
+[caches]
+[caches.images]
+dir = ':cacheDir/images'
