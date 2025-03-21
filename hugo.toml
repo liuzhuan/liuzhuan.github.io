@@ -29,3 +29,8 @@ home = ['HTML', 'RSS', 'JSON']
 name = 'Search'
 url = 'search'
 weight = 10
+
+[[menu.main]]
+name = 'About'
+url = 'about'
+weight = 8
