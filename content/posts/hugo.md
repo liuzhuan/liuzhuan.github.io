@@ -39,6 +39,8 @@ $ git init
 $ git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/papermod
 ```
 
+PaperMod 主题的作者是 [_Aditya Telange_](https://adityatelange.in/about/)。
+
 配置文件 `hugo.toml` 可以设定网站级别的参数，比如修改基本路径、语言编码和主题等。
 
 ```toml
