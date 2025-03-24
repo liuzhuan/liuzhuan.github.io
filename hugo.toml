@@ -18,6 +18,11 @@ threshold = 0.4
 minMatchCharLength = 0
 keys = ['title', 'permalink', 'summary', 'content']
 
+[params.editPost]
+URL = 'https://github.com/liuzhuan/liuzhuan.github.io/edit/main/content'
+Text = '纠错'
+appendFilePath = true
+
 [caches]
 [caches.images]
 dir = ':cacheDir/images'
