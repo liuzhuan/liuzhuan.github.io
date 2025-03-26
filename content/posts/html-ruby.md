@@ -1,6 +1,5 @@
 +++
 date = '2025-03-26T22:02:48+08:00'
-draft = true
 title = '在网页中显示汉语拼音'
 summary = '使用 `<ruby>` 元素在网页中显示汉语拼音'
 tags = ['html']
