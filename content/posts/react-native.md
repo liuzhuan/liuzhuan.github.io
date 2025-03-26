@@ -10,11 +10,11 @@ tags = ['react native', 'react']
 
 ```jsx
 function HomeScreen() {
-    return (
-        <View>
-            <Text>Hello World 🖐️ 🌍!</Text>
-        </View>
-    )
+  return (
+    <View>
+      <Text>Hello World 🖐️ 🌍!</Text>
+    </View>
+  )
 }
 ```
 
