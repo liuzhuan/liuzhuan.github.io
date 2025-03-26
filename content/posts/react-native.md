@@ -24,6 +24,22 @@ React Native 只专注视图层，不包含路由管理、平台 API 等其他�
 
 2024 年 10 月 23 日，React Native 0.76 使用了[全新架构][new-arch]。新架构对 React 特性支持度更好，包括 [Suspense][suspense], [Transitions][transitions], [自动批处理][auto-batch]和 [`useLayoutEffect`][useLayoutEffect] 等。新架构还包括 [Native Module][native-modules] 和 [Native Components][native-components] 系统，无需桥接，直接访问原生接口。
 
+## 使用 Expo 创建新项目 {#expo-new-project}
+
+官方推荐的创建 Expo 项目命令是 `npx create-expo-app@latest`，我实际使用的体验是这个安装速度太慢，不如换成 `pnpm create expo`。
+
+下一步是[设置本地开发环境][setup-env]。Expo Go 是一个沙箱应用，适合快速尝试 Expo。
+
+下载 Expo Go App，
+
+## 启动开发服务器 {#start-dev-server}
+
+执行如下命令启动开发服务器：
+
+```sh
+npx expo start
+```
+
 [reactnative]: https://reactnative.dev/
 [expo]: https://expo.dev/
 [new-arch]: https://reactnative.dev/blog/2024/10/23/the-new-architecture-is-here
@@ -33,3 +49,4 @@ React Native 只专注视图层，不包含路由管理、平台 API 等其他�
 [useLayoutEffect]: https://react.dev/reference/react/useLayoutEffect
 [native-modules]: https://reactnative.dev/docs/next/turbo-native-modules-introduction
 [native-components]: https://reactnative.dev/docs/next/fabric-native-components-introduction
+[setup-env]: https://docs.expo.dev/get-started/set-up-your-environment
