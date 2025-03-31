@@ -42,6 +42,12 @@ ssh-add -l
 
 在某些操作系统中，会自动进行添加私钥的动作，此时你不必手动执行 `eval "$(ssh-agent -s)"` 和 `ssh-add xxx` 这两条命令。
 
+另外，在 Fedora 等采用 Wayland 显示协议的 GNOME 桌面系统中，可以使用如下命令将文件内容直接拷贝至系统剪贴板：
+
+```sh
+wl-copy < filename
+```
+
 ## 设置多个 SSH {#multi-ssh}
 
 你可能使用多个 Git 服务器，比如一个是 GitHub，另一个是 Gitee，可以为每个服务器设置独立的 SSH 密钥。
@@ -114,7 +120,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
 ## 修改仓库地址 {#set-url}
 
-通过 HTTPS 连接的仓库地址模式是 `https://github.com/username/repo.git`，而通过 SSH 连接的仓库地质模式为 `git@github.com:username/repo.git`。
+通过 HTTPS 连接的仓库地址模式是 `https://github.com/username/repo.git`，而通过 SSH 连接的仓库地址模式为 `git@github.com:username/repo.git`。
 
 如果你原来使用 HTTPS 的方式克隆的 Git 仓库，可以通过以下命令改为 SSH 连接方式：
 
