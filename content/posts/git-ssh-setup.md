@@ -40,6 +40,8 @@ ssh-add -l
 
 注意，复制 Fedora Linux 终端文字的快捷键是 `Ctrl+Shift+C`，而不是 `Ctrl+C`。因为 `Ctrl+C` 快捷键的作用是中断命令的执行。
 
+在某些操作系统中，会自动进行添加私钥的动作，此时你不必手动执行 `eval "$(ssh-agent -s)"` 和 `ssh-add xxx` 这两条命令。
+
 ## 设置多个 SSH {#multi-ssh}
 
 你可能使用多个 Git 服务器，比如一个是 GitHub，另一个是 Gitee，可以为每个服务器设置独立的 SSH 密钥。
