@@ -96,6 +96,18 @@ ssh -T git@github.com
 ssh -T git@gitee.com
 ```
 
+当你第一次测试服务端连接时，会出现如下信息：
+
+```sh
+$ ssh -T git@github.com
+The authenticity of host 'github.com (20.205.243.166)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+
+上面打印的密钥指纹，可以和 GitHub 提供的[官方文档][fingerprint]作比对，如果数据一致，输入 "yes"，那么 GitHub 的信息就会存储在 `~/.ssh/known_hosts` 文件中。
+
 如果认证成功，将出现字样：`Hi username! You've successfully authenticated...`。
 
 ## 修改仓库地址 {#set-url}
@@ -109,3 +121,4 @@ git remote set-url origin git@github.com:username/repo.git
 ```
 
 [personal-access-token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens
+[fingerprint]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints
