@@ -1,7 +1,6 @@
 +++
 date = '2025-03-30T10:17:28+08:00'
-draft = true
-title = 'Git Ssh Setup'
+title = '使用 SSH 连接 Git 仓库'
 summary = '如何设置 Git 仓库的 SSH 连接？'
 tags = ['git', 'ssh']
 +++
