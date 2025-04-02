@@ -28,6 +28,9 @@ vim.opt.expandtab = true
 
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "80"
+vim.opt.wrap = true -- 启用自动换行
+vim.opt.linebreak = true -- 在单词边界换行（避免单词被截断）
+vim.opt.breakindent = true -- 换行后保持缩进
 ```
 
 [neovim]: https://neovim.io/
