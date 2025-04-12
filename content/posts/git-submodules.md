@@ -68,9 +68,9 @@ $ cat .git/config
         active = true
 ```
 
-`.gitmodules` 配置文件非常重要，它需要提交到仓库。只有这样，才能保证其他人和你本地到子模块保持一致。
+`.gitmodules` 配置文件非常重要，它需要提交到仓库。只有这样，才能保证其他人和你本地的子模块保持一致。
 
-这里只有一个条目，因为我只用了一个 submodule。如果你添加了多个 submodule，配置文件中会出现相应的多个条目。
+这里只有一个子模块条目，因为我只用了一个 submodule。如果你添加了多个 submodule，配置文件中会出现相应的多个条目。
 
 如果使用 `git diff` 查看变更的具体内容，会发现 `modules/foo` 的变更内容有些特殊，它是 commit hash（提交哈希值），而不是普通的文本行：
 
@@ -94,7 +94,7 @@ index 0000000..6b93dd2
 +Subproject commit 6b93dd2deb54c096e73358123669a51e9442a2f5
 ```
 
-可以把子模块的 commit hash 想象成 C 语言的指针，它指向另一个仓库的具体实际内容。
+可以把子模块的 commit hash 想象成 C 语言的指针，它的值是一个地址，它指向的才是具体的实际代码。
 
 使用 `--submodule` 选项，可以让变更内容稍微简洁一些：
 
@@ -102,7 +102,7 @@ index 0000000..6b93dd2
 git diff --cached --submodule
 ```
 
-将变更提交至仓库后，你会看到子模块专属的 `160000` 模式，它和普通目录（040000）或文件（100644）的模式不同。
+将变更提交至仓库后，你会看到子模块专属的 `160000` 模式，注意它和普通目录（040000）或文件（100644）的模式不同。
 
 ```sh
 $ git commit -v
@@ -119,5 +119,15 @@ git push origin master
 ```
 
 ## 克隆带有子模块的 Git 仓库 {#clone-repo-with-submodules}
+
+如果一个仓库包含子模块，当你使用普通的 `git clone` 命令克隆到本地，会发现子模块所在目录（modules/foo）为空。
+
+```sh
+$ git clone git@gitee.com:liuz2/main-app.git
+$ cd main-app
+$ ls modules/foo
+<空空如也>
+```
+
 
 [submodules]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
