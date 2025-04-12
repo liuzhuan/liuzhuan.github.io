@@ -33,5 +33,11 @@ vim.opt.linebreak = true -- 在单词边界换行（避免单词被截断）
 vim.opt.breakindent = true -- 换行后保持缩进
 ```
 
+## 终端 {#terminal}
+
+执行 `:term` 命令进入终端。在终端里，输入插入命令（如 `i`）后，可以输入命令。
+
+如果要从终端的插入模式退出，执行 `Ctrl+\ Ctrl+N`。
+
 [neovim]: https://neovim.io/
 [download]: https://github.com/neovim/neovim/releases/latest
