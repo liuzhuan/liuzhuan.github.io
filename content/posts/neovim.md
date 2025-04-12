@@ -7,6 +7,8 @@ summary = 'Neovim 入门指南'
 
 [Neovim][neovim] 是一款基于 Vim 的文本编辑器，可以从[这里][download]下载最新稳定版。Neovim 的安装包很小，比如，macOS x86 安装包仅有 9.1MB。
 
+## 安装和配置 {#install-config}
+
 macOS 下载的 `nvim-macos-x86_64.tar.gz`，可以对其执行 `xattr -c` 命令，清除文件的扩展属性（extended attributes），解除因元数据导致的权限问题。
 
 然后，解压文件，并移动到 `/usr/local` 目录。
@@ -33,11 +35,57 @@ vim.opt.linebreak = true -- 在单词边界换行（避免单词被截断）
 vim.opt.breakindent = true -- 换行后保持缩进
 ```
 
+## 帮助文件 {#help}
+
+执行 `:help` 命令进入帮助文档。在帮助文档中有标签文字，执行 `CTRL-]` 打开标签对应的主题文件。执行 `CTRL-O` 返回原来的位置。
+
 ## 终端 {#terminal}
 
 执行 `:term` 命令进入终端。在终端里，输入插入命令（如 `i`）后，可以输入命令。
 
-如果要从终端的插入模式退出，执行 `Ctrl+\ Ctrl+N`。
+如果要从终端的插入模式退出，执行 `CTRL-\ CTRL-N`。
+
+## 窗口管理 {#windows}
+
+窗口（Window）相关的快捷键多以 `CTRL-W` 为前缀。
+
+执行 `:split` 或 `CTRL-W s` 拆分为上下两个窗口，新窗口在当前窗口上方。
+
+执行 `:vsplit` 或 `CTRL-W v` 拆分为左右两个窗口，新窗口在原窗口左侧。
+
+在不同窗口间移动的命令：
+
+- `CTRL-W k` 移动到上方窗口
+- `CTRL-W j` 移动到下方窗口
+- `CTRL-W h` 移动到左侧窗口
+- `CTRL-W l` 移动到右侧窗口
+
+改变窗口尺寸的命令：
+
+- `CTRL-W +` 增加窗口高度
+- `CTRL-W -` 减小窗口高度
+- `CTRL-W >` 增大窗口宽度
+- `CTRL-W <` 减小窗口宽度
+- `:resize [height]` 设定绝对高度值
+- `:vertical resize [width]` 设定绝对宽度值
+
+移动窗口的命令：
+
+- `CTRL-W r` 向右向下旋转窗口，光标位置保持不变
+- `CTRL-W x` 交换当前窗口和下一个窗口，光标位置也会交换
+
+关闭窗口的命令：
+
+- `CTRL-W c` 关闭当前窗口
+- `:qall` 退出所有窗口
+
+## 标签管理 {#tab}
+
+一个标签可以包含多个窗口。多个标签可以展示不同的项目。
+
+执行 `:tabnew` 或 `:tabe` 创建新标签。`gt` 切换到下一个标签，`gT` 切换到上一个标签。
+
+关闭标签执行 `:tabclose` 或 `tabc`。
 
 [neovim]: https://neovim.io/
 [download]: https://github.com/neovim/neovim/releases/latest
