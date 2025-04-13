@@ -129,5 +129,52 @@ $ ls modules/foo
 <空空如也>
 ```
 
+此时，需要执行 `git submodule init` 初始化子模块，并执行 `git submodule update` 拉取子模块代码。
+
+```sh
+$ git submodule init
+Submodule 'modules/foo' (git@gitee.com:liuz2/foo-module.git) registered for path 'modules/foo'
+
+$ git submodule update
+Cloning into '/Users/codeman/gitee/liuz2/main-app/modules/foo'...
+Submodule path 'modules/foo': checked out '6b93dd2deb54c096e73358123669a51e9442a2f5'
+```
+
+此时的 `modules/foo` 目录下会出现子模块的文件，和你推送时的一样。
+
+当你提前知道一个仓库包含子模块时，在 `git clone` 命令中使用 `--recurse-submodules` 选项，可以简化上述流程，可以在克隆后自动初始化并拉取子模块代码，一步到位。
+
+```sh
+git clone --recurse-submodules git@gitee.com:liuz2/main-app.git
+```
+
+如果子模块中嵌套其他子模块，上述命令也能搞定。
+
+如果克隆时忘记 `--recurse-submodules` 选项，你还可以把 `git submodule init` 和 `git submodule update` 两条命令合二为一，替换为 `git submodule update --init` 一条命令。为了处理嵌套子模块，可以增加 `--recursive` 选项，即 `git submodule update --init --recursive`。
+
+## 拉取子模块的上游更新 {#update-submodule}
+
+当子模块的上游更新后，我们可以进入子模块所在目录，使用 `git fetch` 和 `git merge` 拉取最新代码，并合并到本地：
+
+```sh
+$ git fetch
+$ git merge origin/master
+```
+
+此时，回到主仓库的根目录，执行 `git diff --submodule` 命令，可以看到子模块的更新内容和对应的提交日志。
+
+```sh
+$ git diff --submodule
+Submodule modules/foo 6b93dd2..1d0f686:
+  > feat: add app.js
+```
+
+如果你想在执行 `git diff` 时，默认添加 `--submodule` 选项，可以将 `diff.submodule` 选项设为 `"log"`。
+
+```sh
+git config --global diff.submodule log
+```
+
+这个时候提交变更，便会把子模块内容锁定到新版本。
 
 [submodules]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
