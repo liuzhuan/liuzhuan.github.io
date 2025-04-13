@@ -5,11 +5,13 @@ summary = '如何使用 Git Submodules 管理代码子模块'
 tags = ['git']
 +++
 
-我们在开发项目时，可能会使用别人开发的代码，比如第三方库或者公共子模块。你可以手动把这些代码复制到当前项目，以便添加定制化功能。但是，当上游代码变化时，如何合并这些变化和定制化代码，会变得十分麻烦。此时，你可以尝试 Git Submodules 子模块。
+开发项目时，我们会使用别人的代码，比如第三方库或者公共子模块。如果你只是单纯使用，有很多成熟的包管理工具，比如 npm, cargo 等。
 
-[Git Submodules][submodules] 是 Git 提供的功能，可以让某个 Git 仓库引用其它 Git 仓库。子仓库可以独立开发，父仓库通过分支名、标签或提交哈希值明确引用子仓库的代码版本。 
+如果你需要修改源码，可以手动把这些代码复制到当前项目，然后添加定制化功能。但是，当上游代码变化时，如何处理上游变化和定制化代码，会变得十分麻烦。此时，你可以尝试 Git Submodules 子模块。
 
-为了演示 Git Submodules 的用法，我创建了两个 Git 空仓库：
+[Git Submodules][submodules] 是 Git 提供的功能，可以让某个 Git 仓库引用其它 Git 仓库。被引用的子仓库可以独立开发，父仓库通过分支名、标签或提交哈希值明确引用子仓库的代码版本。 
+
+为了方便描述 Git Submodules 用法，我在 Gitee 创建两个演示用 Git 仓库：
 
 1. `git@gitee.com:liuz2/main-app.git` 主仓库，将通过 Git Submodule 使用子模块
 2. `git@gitee.com:liuz2/foo-module.git` 子仓库，它会作为子模块被 main-app 引用
@@ -37,7 +39,7 @@ Changes to be committed:
         new file:   modules/foo
 ```
 
-配置文件 `.gitmodules` 用于记录子模块远程仓库地址和本地目录的绑定关系。
+配置文件 `.gitmodules` 记录子模块远程仓库地址和本地目录的绑定关系。
 
 ```sh
 $ cat .gitmodules
@@ -68,11 +70,11 @@ $ cat .git/config
         active = true
 ```
 
-`.gitmodules` 配置文件非常重要，它需要提交到仓库。只有这样，才能保证其他人和你本地的子模块保持一致。
+`.gitmodules` 配置文件非常重要，它需要提交到仓库。只有这样，才能保证他人和你本地子模块保持一致。
 
-这里只有一个子模块条目，因为我只用了一个 submodule。如果你添加了多个 submodule，配置文件中会出现相应的多个条目。
+这里只有一个子模块条目，如果添加多个 submodule，配置文件中会出现相应的多个条目。
 
-如果使用 `git diff` 查看变更的具体内容，会发现 `modules/foo` 的变更内容有些特殊，它是 commit hash（提交哈希值），而不是普通的文本行：
+使用 `git diff` 查看变更内容，会发现 `modules/foo` 的变更内容有些特殊，它是 commit hash（提交哈希值），而不是普通的文本行：
 
 ```sh
 $ git diff --cached
@@ -94,7 +96,7 @@ index 0000000..6b93dd2
 +Subproject commit 6b93dd2deb54c096e73358123669a51e9442a2f5
 ```
 
-可以把子模块的 commit hash 想象成 C 语言的指针，它的值是一个地址，它指向的才是具体的实际代码。
+可以把子模块的 commit hash 想象成 C 语言的指针，它的值是一个地址，它指向的才是具体的实际内容。
 
 使用 `--submodule` 选项，可以让变更内容稍微简洁一些：
 
@@ -120,7 +122,7 @@ git push origin master
 
 ## 克隆带有子模块的 Git 仓库 {#clone-repo-with-submodules}
 
-如果一个仓库包含子模块，当你使用普通的 `git clone` 命令克隆到本地，会发现子模块所在目录（modules/foo）为空。
+使用普通 `git clone` 命令克隆带子模块的 Git 仓库到本地，会发现子模块所在目录（modules/foo）为空。
 
 ```sh
 $ git clone git@gitee.com:liuz2/main-app.git
@@ -142,7 +144,7 @@ Submodule path 'modules/foo': checked out '6b93dd2deb54c096e73358123669a51e9442a
 
 此时的 `modules/foo` 目录下会出现子模块的文件，和你推送时的一样。
 
-当你提前知道一个仓库包含子模块时，在 `git clone` 命令中使用 `--recurse-submodules` 选项，可以简化上述流程，可以在克隆后自动初始化并拉取子模块代码，一步到位。
+若你提前已知某个仓库包含子模块，在 `git clone` 命令使用 `--recurse-submodules` 选项，可以简化上述流程，它会在克隆后自动初始化并拉取子模块代码，一步到位。
 
 ```sh
 git clone --recurse-submodules git@gitee.com:liuz2/main-app.git
@@ -154,7 +156,7 @@ git clone --recurse-submodules git@gitee.com:liuz2/main-app.git
 
 ## 拉取子模块的上游更新 {#update-submodule}
 
-当子模块的上游更新后，我们可以进入子模块所在目录，使用 `git fetch` 和 `git merge` 拉取最新代码，并合并到本地：
+当子模块的上游更新后，我们可以进入子模块所在目录，使用 `git fetch` 和 `git merge` 拉取最新代码，合并到本地：
 
 ```sh
 $ git fetch
@@ -204,5 +206,71 @@ git config -f .gitmodules submodule.modules/foo.branch production
 ```sh
 git config --global status.submodulesummary 1
 ```
+
+## 拉取主仓库的更新 {#pull-superproject}
+
+如果你更新了本地的子模块，并推送到远程。你的同事如果在主仓库通过 `git pull` 拉取更新，会发现代码有变更：
+
+```sh
+$ git pull
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   foo (new commits)
+
+Submodules changed but not updated:
+
+* modules/foo 2120145...bfc6d37 (1):
+  < feat: print current date
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+之所以会这样，因为 `git pull` 默认只拉取子模块对应的提交哈希，但不会自动拉取哈希对应的代码。你的同事需要执行 `git submodule update` 命令拉取最新代码。
+
+```sh
+$ git submodule update --init --recursive
+Submodule path 'modules/foo': checked out '2120145c7f5d3b5f031c9199fea8f044d4a02fb4'
+```
+
+为了安全起见，执行以上代码可以保证子模块代码始终最新。
+
+在 `git pull` 中使用 `--recurse-submodules` 选项，可以自动执行 `git submodule update` 命令。
+
+要注意一种特殊情况：当远程主仓库修改了子模块的仓库 URL，无论执行 `git pull --recurse-submodules` 还是 `git submodule update` 执行都会失效。执行 `git submodule sync` 指令可以修复这个问题：
+
+```sh
+$ git submodule sync --recursive
+$ git submodule update --init --recursive
+```
+
+## 处理子模块 {#working-on-submodules}
+
+使用 `git submodule foreach` 命令，可以在每个子模块下执行任意命令：
+
+```sh
+# 暂存每个子模块的变动，以便开启新项目
+git submodule foreach 'git stash'
+
+# 查看主项目和所有子模块的变更
+git diff; git submodule foreach 'git diff'
+```
+
+如果你在某个分支新增了子模块，当切换到其他分支时，建议为 `git checkout` 命令加上 `--recurse-submodules` 选项，它会自动处理不同分支下的子模块代码。
+
+```sh
+$ git checkout -b feature-a
+$ git submodule add git@gitee.com:xxx/xxx.git
+$ git commit -am "Add xxx submodule"
+$ git checkout --recurse-submodules master
+```
+
+注意，以上 `--recurse-submodules` 选项是 Git 2.13+ 引入的特性。在更早的版本中，切换分支需有手动处理子模块的添加和删除。
+
+对于包含子模块的仓库，建议把上述选项设为默认值，只需执行 `git config submodule.recurse true` 即可。
 
 [submodules]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
