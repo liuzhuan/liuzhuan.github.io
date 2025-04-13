@@ -177,4 +177,32 @@ git config --global diff.submodule log
 
 这个时候提交变更，便会把子模块内容锁定到新版本。
 
+拉取子模块更新还有一个更简单的命令，你无需进入每个子模块目录手动拉取代码，只需在主仓库根目录执行 `git submodule update --remote` 即可。
+
+```sh
+$ git submodule update --remote
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 285 bytes | 95.00 KiB/s, done.
+From gitee.com:liuz2/foo-module
+   1d0f686..bfc6d37  master     -> origin/master
+Submodule path 'modules/foo': checked out 'bfc6d37974e1f9fb772638eb26efb6c050ef00da'
+```
+
+这个命令默认拉取子模块远程仓库的默认分支，你可以指定其他分支名。比如，把 `modules/foo` 子模块的分支从默认的 `master` 改为 `production`，并把这个配置储存到 `.gitmodules` 文件。
+
+```sh
+git config -f .gitmodules submodule.modules/foo.branch production
+```
+
+如果没有 `-f .gitmodules` 选项，只有你能看到这个修改，其他人看不到。
+
+如果你想在 `git status` 时，能够看到子模块的具体更新内容，可以设置 `status.submodulesummary` 选项：
+
+```sh
+git config --global status.submodulesummary 1
+```
+
 [submodules]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
