@@ -19,3 +19,19 @@ $ date +%s
 ```
 
 `CST` 表示中国标准时间（China Standard Time），比协调世界时快 8 小时。
+
+## grep
+
+`grep` 是 **Global Regular Expression Print** 的首字母缩写，它的作用是全局查找文本字符串，如果找到了，就打印匹配的行。
+
+`grep` 命令的语法如下：
+
+```sh
+grep <选项> <搜索字符串> <路径>
+```
+
+如果你想在 `main.js` 中搜索 `function` 关键字：
+
+```sh
+grep "function" main.js
+```
